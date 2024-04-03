@@ -65,7 +65,7 @@ export class League extends Document {
   @Prop({
     type: String,
     enum: Object.values(Status),
-    default: Status, // set value
+    default: Status.Active,
   })
   status: string;
 }

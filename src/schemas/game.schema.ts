@@ -79,7 +79,7 @@ export class Game extends Document {
   @Prop({
     type: String,
     enum: Object.values(Status),
-    default: Status, // set value
+    default: Status.Pending,
   })
   status: string;
 
