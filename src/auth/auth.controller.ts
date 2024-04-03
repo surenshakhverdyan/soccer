@@ -4,6 +4,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  Patch,
   Post,
   Req,
   UseGuards,
@@ -39,7 +40,7 @@ export class AuthController {
     return this.authService.forgotPassword(email);
   }
 
-  @Post('password-reset/:token')
+  @Patch('password-reset/:token')
   passwordReset(
     @Body() dto: UserUpdateDto,
     @Param('token') token: string,
