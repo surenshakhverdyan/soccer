@@ -101,7 +101,7 @@ export class AuthService {
 
     const _user = await this.userService.update(dto, sub);
 
-    if (_user === null) throw new HttpException('User update failed', 500);
+    if (!_user) throw new HttpException('User update failed', 500);
 
     return true;
   }
