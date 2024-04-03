@@ -31,7 +31,7 @@ describe('AuthController (e2e)', () => {
       .post('/auth/refresh-token')
       .set({
         'refresh-token':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBkNDM1ZWEzNjhiYzMxZDdlN2ZlYWMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiUlQifQ.iAudVQOwGELNcj3Ft4_garRWGujUrn4vJqMoBrUJT4Q',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBkYWNjYTM3ZGQ1YzBiZDg2OWFiNDYiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiUlQifQ.HAbrO8ShNoa1hYkQVOgj19PdLPRRVgpYQOBIKwqcEec',
       })
       .expect(200);
   });
@@ -45,10 +45,10 @@ describe('AuthController (e2e)', () => {
       .expect(200);
   });
 
-  it('password reset (POST)', () => {
+  it('password reset (PATCH)', () => {
     return request(app.getHttpServer())
-      .post(
-        '/auth/password-reset/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBkNDM1ZWEzNjhiYzMxZDdlN2ZlYWMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiRlBUIn0.hvo_BYfvjY23t8whPRgxKANfQ6eaAFOadvaaAWvFlu8',
+      .patch(
+        '/auth/password-reset/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBkYWNjYTM3ZGQ1YzBiZDg2OWFiNDYiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiRlBUIn0.obrplfoUvZbNkGCX-237VLDXSwfepAgKu5dIrQpIQrU',
       )
       .send({
         password: '156354111',
