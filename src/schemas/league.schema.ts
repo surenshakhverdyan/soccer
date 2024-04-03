@@ -32,6 +32,16 @@ export class League extends Document {
   @Prop({
     type: [
       {
+        type: Types.ObjectId,
+        ref: 'Basket',
+      },
+    ],
+  })
+  baskets: Types.ObjectId[];
+
+  @Prop({
+    type: [
+      {
         team: {
           type: Types.ObjectId,
           ref: 'Team',
