@@ -33,7 +33,7 @@ export class Game extends Document {
       ],
     },
   })
-  team1: {
+  team_1: {
     team: Types.ObjectId;
     players: Types.ObjectId[];
     goals: Array<{ assist: Types.ObjectId; goal: Types.ObjectId }>;
@@ -59,7 +59,7 @@ export class Game extends Document {
       ],
     },
   })
-  team2: {
+  team_2: {
     team: Types.ObjectId;
     players: Types.ObjectId[];
     goals: Array<{ assist: Types.ObjectId; goal: Types.ObjectId }>;
