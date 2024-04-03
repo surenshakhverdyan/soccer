@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
+import { Status } from 'src/enums';
+
 @Schema({ timestamps: true })
 export class Team extends Document {
   @Prop({
@@ -30,6 +32,13 @@ export class Team extends Document {
 
   @Prop({ type: String })
   avatar: string;
+
+  @Prop({
+    type: String,
+    enum: Object.values(Status),
+    default: Status, // set value
+  })
+  status: string;
 
   @Prop({
     type: Types.ObjectId,
