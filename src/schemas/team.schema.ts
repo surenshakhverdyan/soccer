@@ -21,7 +21,7 @@ export class Team extends Document {
     ],
     validate: [
       {
-        validator: (value: any[]) => {
+        validator: (value: Types.ObjectId[]) => {
           return value.length <= 21;
         },
         message: 'The count of players must not exceed 21',
