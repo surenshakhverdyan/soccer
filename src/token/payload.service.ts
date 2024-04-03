@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+
 import { TokenType } from 'src/enums';
 import { User } from 'src/schemas';
 import { IPayload } from './interfaces';
