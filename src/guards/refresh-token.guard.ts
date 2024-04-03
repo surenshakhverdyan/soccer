@@ -14,7 +14,7 @@ export class RefreshTokenGuard implements CanActivate {
 
   canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest();
-    const token = this.tokenService.extractToken(request);
+    const token = request.header('refresh-token');
 
     if (!token) throw new UnauthorizedException();
 
