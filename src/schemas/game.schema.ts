@@ -82,6 +82,12 @@ export class Game extends Document {
     default: Status, // set value
   })
   status: string;
+
+  @Prop({
+    type: Types.ObjectId,
+    ref: 'Basket',
+  })
+  basket: Types.ObjectId;
 }
 
 export const GameSchema = SchemaFactory.createForClass(Game);
