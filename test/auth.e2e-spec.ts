@@ -54,6 +54,6 @@ describe('AuthController (e2e)', () => {
         password: '156354111',
         passwordConfirm: '156354111',
       })
-      .expect(201);
+      .expect(200);
   });
 });
