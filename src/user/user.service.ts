@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 
@@ -13,13 +13,9 @@ export class UserService {
   ) {}
 
   async getByEmail(email: string): Promise<User> {
-    try {
-      const user = await this.userModel.findOne({ email });
+    const _user = await this.userModel.findOne({ email });
 
-      return user;
-    } catch (error: any) {
-      throw new HttpException(error.message, 500);
-    }
+    return _user;
   }
 
   async update(dto: UserUpdateDto, sub: Types.ObjectId): Promise<User> {
