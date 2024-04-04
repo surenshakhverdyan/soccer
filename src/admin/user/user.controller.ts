@@ -7,10 +7,10 @@ import { UserCreateDto } from 'src/users/dto';
 @UseGuards(AdminGuard)
 @Controller('admin')
 export class UserController {
-  constructor(private readonly usersService: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
   @Post('create-user')
   createUser(@Body() dto: UserCreateDto): Promise<boolean> {
-    return this.usersService.createUser(dto);
+    return this.userService.createUser(dto);
   }
 }

@@ -10,7 +10,7 @@ import { UsersService } from 'src/users/users.service';
 @Injectable()
 export class UserService {
   constructor(
-    private readonly userService: UsersService,
+    private readonly usersService: UsersService,
     private readonly mailerService: MailerService,
     private readonly configService: ConfigService,
   ) {}
@@ -21,7 +21,7 @@ export class UserService {
 
     dto.password = hashedPassword;
 
-    await this.userService.create(dto);
+    await this.usersService.create(dto);
 
     await this.mailerService.sendMail({
       from: this.configService.get<string>('EMAIL_ADDRESS'),
