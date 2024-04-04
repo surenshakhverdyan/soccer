@@ -22,12 +22,12 @@ describe('dashboard/team/TeamController (e2e)', () => {
       .post('/team/create-team')
       .set({
         authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBlNGY2Y2Q3OWRmYzJhZTc2N2U0OWIiLCJyb2xlIjoidXNlciIsInR5cGUiOiJBVCJ9.Q0s-_pC6bmUw_wFU1mOYSMiX7cBXSw4OO4sdPTyOALk',
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBlZTBmNDRjOWQ3MWRlMDc3OWY5MTEiLCJyb2xlIjoidXNlciIsInR5cGUiOiJBVCJ9.wdMfHWZD4jLlsJ3jcwpugOoU2gByJN-IDBYQTnUsDhY',
       })
       .field('name', 'Soccer_1')
       .field('players[0][name]', 'Henrik Mkhitaryan')
-      .field('players[0][number]', 10)
-      .field('players[0][position]', 'GK')
+      .field('players[0][number]', '10')
+      .field('players[0][position]', Position.GK)
       .expect(201);
   });
 });
