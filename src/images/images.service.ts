@@ -13,4 +13,8 @@ export class ImagesService {
 
     return fileName;
   }
+
+  async delete(image: string): Promise<void> {
+    fs.promises.unlink(`uploads/${image}`);
+  }
 }
