@@ -31,12 +31,14 @@ export class PlayerService {
     const token = this.tokenService.extractToken(this.request);
     const { sub } = this.tokenService.decode(token);
     const _user = await this.usersService.getById(sub);
+    const images: Array<string> = [];
 
     const session = await this.connection.startSession();
 
     try {
       if (avatar !== undefined) {
         const image = await this.imagesService.upload(avatar);
+        images.push(image);
         dto.avatar = image;
       }
 
@@ -57,6 +59,11 @@ export class PlayerService {
     } catch (error: any) {
       await session.abortTransaction();
       session.endSession();
+
+      for (let i = 0; i < images.length; i++) {
+        const element = images[i];
+        await this.imagesService.delete(element);
+      }
 
       throw new HttpException(error.message, 500);
     }
