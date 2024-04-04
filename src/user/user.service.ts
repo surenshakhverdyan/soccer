@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
 
 import { User } from 'src/schemas';
 import { IUser } from './interfaces';
-import { UserUpdateDto } from './dto';
+import { UserCreateDto, UserUpdateDto } from './dto';
 
 @Injectable()
 export class UserService {
@@ -26,6 +26,16 @@ export class UserService {
     );
 
     return _user;
+  }
+
+  async create(dto: UserCreateDto): Promise<User> {
+    try {
+      const _user = await this.userModel.create(dto);
+
+      return _user;
+    } catch (error: any) {
+      throw new HttpException(error.message, 500);
+    }
   }
 
   generateUserResponse(
