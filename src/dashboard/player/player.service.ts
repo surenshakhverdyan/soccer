@@ -37,7 +37,6 @@ export class PlayerService {
     try {
       if (avatar !== undefined) {
         const image = await this.imagesService.upload(avatar);
-
         dto.avatar = image;
       }
 
@@ -69,7 +68,6 @@ export class PlayerService {
   ): Promise<Player> {
     if (avatar !== undefined) {
       const image = await this.imagesService.upload(avatar);
-
       dto.avatar = image;
     }
 

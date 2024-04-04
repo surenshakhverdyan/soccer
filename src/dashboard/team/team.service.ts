@@ -31,12 +31,14 @@ export class TeamService {
     const token = this.tokenService.extractToken(this.request);
     const { sub } = this.tokenService.decode(token);
     const _user = await this.usersService.getById(sub);
+    const images: Array<string> = [];
 
     if (_user.team)
       throw new HttpException('You have already created the team', 403);
 
     if (avatars['avatar'] !== undefined) {
       const avatar = await this.imagesService.upload(avatars['avatar'][0]);
+      images.push(avatar);
       dto.avatar = avatar;
     }
 
@@ -64,6 +66,7 @@ export class TeamService {
           const avatar = await this.imagesService.upload(
             avatars[`players[${i}][avatar]`][0],
           );
+          images.push(avatar);
           element.avatar = avatar;
         }
 
@@ -84,6 +87,11 @@ export class TeamService {
     } catch (error: any) {
       await session.abortTransaction();
       session.endSession();
+
+      for (let i = 0; i < images.length; i++) {
+        const element = images[i];
+        await this.imagesService.delete(element);
+      }
 
       throw new HttpException(error.message, 500);
     }
