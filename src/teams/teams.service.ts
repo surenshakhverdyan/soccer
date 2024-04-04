@@ -45,4 +45,15 @@ export class TeamsService {
 
     return team;
   }
+
+  async update(avatar: string, teamId: Types.ObjectId): Promise<Team> {
+    const team = await this.teamModel
+      .findByIdAndUpdate(teamId, { $set: { avatar } }, { new: true })
+      .populate({
+        path: 'players',
+        model: 'Player',
+      });
+
+    return team;
+  }
 }
