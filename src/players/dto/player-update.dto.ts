@@ -1,9 +1,12 @@
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { Types } from 'mongoose';
 
-import { Position } from 'src/enums';
+import { Position, Status } from 'src/enums';
 
 export class PlayerUpdateDto {
+  @IsNotEmpty()
+  playerId: Types.ObjectId;
+
   @IsString()
   @IsOptional()
   name?: string;
@@ -18,6 +21,10 @@ export class PlayerUpdateDto {
   @IsString()
   @IsOptional()
   avatar?: string;
+
+  @IsEnum(Status)
+  @IsOptional()
+  status?: string;
 
   @IsOptional()
   team?: Types.ObjectId;
