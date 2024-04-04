@@ -37,6 +37,20 @@ export class TeamsService {
     return team;
   }
 
+  async deletePlayer(
+    teamId: Types.ObjectId,
+    playerId: Types.ObjectId,
+    session?: ClientSession,
+  ): Promise<Team> {
+    const team = await this.teamModel.findByIdAndUpdate(
+      teamId,
+      { $pull: { players: playerId } },
+      { new: true, session },
+    );
+
+    return team;
+  }
+
   async getById(teamId: Types.ObjectId): Promise<Team> {
     const team = await this.teamModel.findById(teamId).populate({
       path: 'players',
