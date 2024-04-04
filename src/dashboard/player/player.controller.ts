@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   FileTypeValidator,
   ParseFilePipe,
   Put,
@@ -13,7 +14,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { PlayerService } from './player.service';
 import { PlayerCreateDto, PlayerUpdateDto } from 'src/players/dto';
 import { AuthGuard } from 'src/guards';
-import { Player } from 'src/schemas';
+import { Player, Team } from 'src/schemas';
 
 @UseGuards(AuthGuard)
 @Controller('team')
@@ -48,5 +49,10 @@ export class PlayerController {
     avatar?: Express.Multer.File,
   ): Promise<Player> {
     return this.playerService.updatePlayer(dto, avatar);
+  }
+
+  @Delete('delete-player')
+  deletePlayer(@Body() dto: PlayerUpdateDto): Promise<Team> {
+    return this.playerService.deletePlayer(dto);
   }
 }

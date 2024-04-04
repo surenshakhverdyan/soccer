@@ -11,6 +11,7 @@ import { Player, Team } from 'src/schemas';
 import { TeamsService } from 'src/teams/teams.service';
 import { TokenService } from 'src/token/token.service';
 import { UsersService } from 'src/users/users.service';
+import { Status } from 'src/enums';
 
 @Injectable()
 export class PlayerService {
@@ -85,5 +86,34 @@ export class PlayerService {
     const player = await this.playersService.update(dto, dto.playerId);
 
     return player;
+  }
+
+  async deletePlayer(dto: PlayerUpdateDto): Promise<Team> {
+    const session = await this.connection.startSession();
+
+    try {
+      const player = await this.playersService.getById(dto.playerId);
+      dto.status = Status.Deleted;
+
+      session.startTransaction();
+
+      await this.playersService.update(dto, player._id, session);
+
+      const team = await this.teamsService.deletePlayer(
+        player.team,
+        player._id,
+        session,
+      );
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return team;
+    } catch (error: any) {
+      await session.abortTransaction();
+      session.endSession();
+
+      throw new HttpException(error.message, 500);
+    }
   }
 }
