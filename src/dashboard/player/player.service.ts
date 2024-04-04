@@ -74,6 +74,9 @@ export class PlayerService {
     avatar?: Express.Multer.File,
   ): Promise<Player> {
     if (avatar !== undefined) {
+      const _player = await this.playersService.getById(dto.playerId);
+      await this.imagesService.delete(_player.avatar);
+
       const image = await this.imagesService.upload(avatar);
       dto.avatar = image;
     }
