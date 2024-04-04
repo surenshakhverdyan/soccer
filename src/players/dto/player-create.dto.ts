@@ -15,8 +15,6 @@ export class PlayerCreateDto {
   @IsNotEmpty()
   name: string;
 
-  @IsNumber()
-  @ArrayUnique()
   @IsNotEmpty()
   number: number;
 
