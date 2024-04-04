@@ -96,4 +96,21 @@ export class TeamService {
       throw new HttpException(error.message, 500);
     }
   }
+
+  async updateTeam(avatar: Express.Multer.File): Promise<Team> {
+    const token = this.tokenService.extractToken(this.request);
+    const { sub } = this.tokenService.decode(token);
+    const _user = await this.usersService.getById(sub);
+    const image = await this.imagesService.upload(avatar);
+
+    try {
+      const team = await this.teamsService.update(image, _user.team);
+
+      return team;
+    } catch (error: any) {
+      await this.imagesService.delete(image);
+
+      throw new HttpException(error.message, 500);
+    }
+  }
 }
