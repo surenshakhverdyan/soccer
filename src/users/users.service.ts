@@ -18,11 +18,21 @@ export class UsersService {
     return _user;
   }
 
-  async update(dto: UserUpdateDto, sub: Types.ObjectId): Promise<User> {
+  async getById(sub: Types.ObjectId): Promise<User> {
+    const _user = await this.userModel.findById(sub);
+
+    return _user;
+  }
+
+  async update(
+    dto: UserUpdateDto,
+    sub: Types.ObjectId,
+    session?: any,
+  ): Promise<User> {
     const _user = await this.userModel.findByIdAndUpdate(
       sub,
       { $set: dto },
-      { new: true },
+      { new: true, session },
     );
 
     return _user;
