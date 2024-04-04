@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import { ClientSession, Model, Types } from 'mongoose';
 
 import { User } from 'src/schemas';
 import { IUser } from './interfaces';
@@ -27,7 +27,7 @@ export class UsersService {
   async update(
     dto: UserUpdateDto,
     sub: Types.ObjectId,
-    session?: any,
+    session?: ClientSession,
   ): Promise<User> {
     const _user = await this.userModel.findByIdAndUpdate(
       sub,

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import { ClientSession, Model, Types } from 'mongoose';
 
 import { Team } from 'src/schemas';
 import { TeamCreateDto } from './dto';
@@ -12,7 +12,7 @@ export class TeamsService {
     @InjectModel(Team.name) private readonly teamModel: Model<Team>,
   ) {}
 
-  async create(dto: TeamCreateDto, session?: any): Promise<Team> {
+  async create(dto: TeamCreateDto, session?: ClientSession): Promise<Team> {
     const [team] = await this.teamModel.create([dto], { session });
 
     return team;
@@ -23,16 +23,11 @@ export class TeamsService {
     teamId: Types.ObjectId,
     session?: any,
   ): Promise<Team> {
-    const team = await this.teamModel
-      .findByIdAndUpdate(
-        teamId,
-        { $addToSet: { players: { $each: players } } },
-        { new: true, session },
-      )
-      .populate({
-        path: 'players',
-        model: 'Player',
-      });
+    const team = await this.teamModel.findByIdAndUpdate(
+      teamId,
+      { $addToSet: { players: { $each: players } } },
+      { new: true, session },
+    );
 
     if (team.players.length > 8) {
       team.status = Status.Active;

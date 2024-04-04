@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { ClientSession, Model } from 'mongoose';
 
 import { Player } from 'src/schemas';
 import { PlayerCreateDto } from './dto';
@@ -11,8 +11,8 @@ export class PlayersService {
     @InjectModel(Player.name) private readonly playerModel: Model<Player>,
   ) {}
 
-  async create(dto: PlayerCreateDto, session?: any): Promise<Player> {
-    const [player] = await this.playerModel.create([dto], session);
+  async create(dto: PlayerCreateDto, session?: ClientSession): Promise<Player> {
+    const [player] = await this.playerModel.create([dto], { session });
 
     return player;
   }
