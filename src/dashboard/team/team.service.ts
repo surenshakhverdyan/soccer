@@ -101,9 +101,12 @@ export class TeamService {
     const token = this.tokenService.extractToken(this.request);
     const { sub } = this.tokenService.decode(token);
     const _user = await this.usersService.getById(sub);
+    const _team = await this.teamsService.getById(_user.team);
     const image = await this.imagesService.upload(avatar);
 
     try {
+      if (_team.avatar) await this.imagesService.delete(_team.avatar);
+
       const team = await this.teamsService.update(image, _user.team);
 
       return team;

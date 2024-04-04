@@ -75,7 +75,8 @@ export class PlayerService {
   ): Promise<Player> {
     if (avatar !== undefined) {
       const _player = await this.playersService.getById(dto.playerId);
-      await this.imagesService.delete(_player.avatar);
+
+      if (_player.avatar) await this.imagesService.delete(_player.avatar);
 
       const image = await this.imagesService.upload(avatar);
       dto.avatar = image;
