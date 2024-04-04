@@ -4,7 +4,7 @@ import * as request from 'supertest';
 
 import { AppModule } from '../src/app.module';
 
-describe('admin/users/UsersController (e2e)', () => {
+describe('dashboard/team/TeamController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -16,7 +16,7 @@ describe('admin/users/UsersController (e2e)', () => {
     await app.init();
   });
 
-  it('create-user (POST)', () => {
+  it('create user (POST)', () => {
     return request(app.getHttpServer())
       .post('/admin/create-user')
       .set({
