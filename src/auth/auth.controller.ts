@@ -13,9 +13,9 @@ import { Request } from 'express';
 
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto';
-import { IUser } from 'src/user/interfaces';
+import { IUser } from 'src/users/interfaces';
 import { RefreshTokenGuard } from 'src/guards';
-import { UserUpdateDto } from 'src/user/dto';
+import { UserUpdateDto } from 'src/users/dto';
 
 @Controller('auth')
 export class AuthController {

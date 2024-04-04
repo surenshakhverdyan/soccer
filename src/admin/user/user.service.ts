@@ -4,13 +4,13 @@ import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 
 import { welcomeTemplate } from 'src/templates';
-import { UserCreateDto } from 'src/user/dto';
-import { UserService } from 'src/user/user.service';
+import { UserCreateDto } from 'src/users/dto';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
-    private readonly userService: UserService,
+    private readonly userService: UsersService,
     private readonly mailerService: MailerService,
     private readonly configService: ConfigService,
   ) {}

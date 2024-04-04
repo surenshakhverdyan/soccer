@@ -7,7 +7,7 @@ import { IUser } from './interfaces';
 import { UserCreateDto, UserUpdateDto } from './dto';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
   ) {}

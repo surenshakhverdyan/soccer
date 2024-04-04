@@ -4,7 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
 import { TokenModule } from './token/token.module';
-import { UserModule } from './user/user.module';
+import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { AdminModule } from './admin/admin.module';
 
@@ -35,7 +35,7 @@ import { AdminModule } from './admin/admin.module';
       }),
     }),
     TokenModule,
-    UserModule,
+    UsersModule,
     AuthModule,
     AdminModule,
   ],

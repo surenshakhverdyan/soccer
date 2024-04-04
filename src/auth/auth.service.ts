@@ -10,16 +10,16 @@ import * as bcrypt from 'bcrypt';
 
 import { PayloadService } from 'src/token/payload.service';
 import { TokenService } from 'src/token/token.service';
-import { UserService } from 'src/user/user.service';
+import { UsersService } from 'src/users/users.service';
 import { SignInDto } from './dto';
 import { TokenType } from 'src/enums';
 import { passwordResetTemplate } from 'src/templates';
-import { UserUpdateDto } from 'src/user/dto';
+import { UserUpdateDto } from 'src/users/dto';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly userService: UserService,
+    private readonly userService: UsersService,
     private readonly tokenService: TokenService,
     private readonly payloadService: PayloadService,
     private readonly mailerService: MailerService,

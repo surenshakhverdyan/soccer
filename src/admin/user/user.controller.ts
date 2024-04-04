@@ -1,13 +1,13 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 
 import { AdminGuard } from 'src/guards';
-import { UsersService } from './users.service';
-import { UserCreateDto } from 'src/user/dto';
+import { UserService } from './user.service';
+import { UserCreateDto } from 'src/users/dto';
 
 @UseGuards(AdminGuard)
 @Controller('admin')
-export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+export class UserController {
+  constructor(private readonly usersService: UserService) {}
 
   @Post('create-user')
   createUser(@Body() dto: UserCreateDto): Promise<boolean> {
