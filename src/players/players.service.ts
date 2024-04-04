@@ -26,11 +26,12 @@ export class PlayersService {
   async update(
     dto: PlayerUpdateDto,
     playerId: Types.ObjectId,
+    session?: ClientSession,
   ): Promise<Player> {
     const player = await this.playerModel.findByIdAndUpdate(
       playerId,
       { $set: dto },
-      { new: true },
+      { new: true, session },
     );
 
     return player;
