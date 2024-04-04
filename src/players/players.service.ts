@@ -17,6 +17,12 @@ export class PlayersService {
     return player;
   }
 
+  async getById(playerId: Types.ObjectId): Promise<Player> {
+    const player = this.playerModel.findById(playerId);
+
+    return player;
+  }
+
   async update(
     dto: PlayerUpdateDto,
     playerId: Types.ObjectId,
