@@ -1,13 +1,13 @@
 import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
 import { InjectConnection } from '@nestjs/mongoose';
-import { Request } from 'express';
 import { Connection } from 'mongoose';
+import { Request } from 'express';
 
 import { ImagesService } from 'src/images/images.service';
-import { PlayerCreateDto } from 'src/players/dto';
+import { PlayerCreateDto, PlayerUpdateDto } from 'src/players/dto';
 import { PlayersService } from 'src/players/players.service';
-import { Team } from 'src/schemas';
+import { Player, Team } from 'src/schemas';
 import { TeamsService } from 'src/teams/teams.service';
 import { TokenService } from 'src/token/token.service';
 import { UsersService } from 'src/users/users.service';
@@ -61,5 +61,20 @@ export class PlayerService {
 
       throw new HttpException(error.message, 500);
     }
+  }
+
+  async updatePlayer(
+    dto: PlayerUpdateDto,
+    avatar?: Express.Multer.File,
+  ): Promise<Player> {
+    if (avatar !== undefined) {
+      const image = await this.imagesService.upload(avatar);
+
+      dto.avatar = image;
+    }
+
+    const player = await this.playersService.update(dto, dto.playerId);
+
+    return player;
   }
 }

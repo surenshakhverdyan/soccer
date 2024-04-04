@@ -11,8 +11,9 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 
 import { PlayerService } from './player.service';
-import { PlayerCreateDto } from 'src/players/dto';
+import { PlayerCreateDto, PlayerUpdateDto } from 'src/players/dto';
 import { AuthGuard } from 'src/guards';
+import { Player } from 'src/schemas';
 
 @UseGuards(AuthGuard)
 @Controller('team')
@@ -32,5 +33,20 @@ export class PlayerController {
     avatar?: Express.Multer.File,
   ) {
     return this.playerService.addPlayer(dto, avatar);
+  }
+
+  @Put('update-player')
+  @UseInterceptors(FileInterceptor('avatar'))
+  updatePlayer(
+    @Body() dto: PlayerUpdateDto,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [new FileTypeValidator({ fileType: 'jpg|jpeg|png' })],
+        fileIsRequired: false,
+      }),
+    )
+    avatar?: Express.Multer.File,
+  ): Promise<Player> {
+    return this.playerService.updatePlayer(dto, avatar);
   }
 }
