@@ -22,6 +22,10 @@ export class UserUpdateDto {
   @IsOptional()
   passwordConfirm?: string;
 
+  @IsString()
+  @IsOptional()
+  currentPassword?: string;
+
   @IsOptional()
   team?: Types.ObjectId;
 }
