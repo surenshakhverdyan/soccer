@@ -6,10 +6,12 @@ import { UsersModule } from 'src/users/users.module';
 import { TokenModule } from 'src/token/token.module';
 import { ProfileController } from './profile/profile.controller';
 import { ProfileService } from './profile/profile.service';
+import { CronController } from './cron/cron.controller';
+import { CronsModule } from 'src/crons/crons.module';
 
 @Module({
-  imports: [UsersModule, TokenModule],
-  controllers: [UserController, ProfileController],
+  imports: [UsersModule, TokenModule, CronsModule],
+  controllers: [UserController, ProfileController, CronController],
   providers: [UserService, ProfileService],
 })
 export class AdminModule {}
