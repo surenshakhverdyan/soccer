@@ -11,6 +11,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { TeamsModule } from './teams/teams.module';
 import { PlayersModule } from './players/players.module';
 import { ImagesModule } from './images/images.module';
+import { CronsModule } from './crons/crons.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { ImagesModule } from './images/images.module';
     TeamsModule,
     PlayersModule,
     ImagesModule,
+    CronsModule,
   ],
 })
 export class AppModule {}
