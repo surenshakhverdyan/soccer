@@ -3,8 +3,9 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 
 import { AppModule } from '../src/app.module';
+import { Position } from 'src/enums';
 
-describe('dashboard/user/UserController (e2e)', () => {
+describe('dashboard/player/PlayerController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
@@ -16,32 +17,33 @@ describe('dashboard/user/UserController (e2e)', () => {
     await app.init();
   });
 
-  it('update profile (PUT)', () => {
+  it('add player (PUT)', () => {
     return request(app.getHttpServer())
-      .put('/user/update-profile')
+      .put('/team/add-player')
       .set({
         authorization:
           'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBlNGY2Y2Q3OWRmYzJhZTc2N2U0OWIiLCJyb2xlIjoidXNlciIsInR5cGUiOiJBVCJ9.Q0s-_pC6bmUw_wFU1mOYSMiX7cBXSw4OO4sdPTyOALk',
       })
       .send({
-        name: 'user_2',
-        email: 'user_2@email.com',
-        phone: '+37411222223',
+        name: 'Arthur',
+        number: '22',
+        position: Position.LM,
       })
       .expect(200);
   });
 
-  it('password update (PATCH)', () => {
+  it('update player (PUT)', () => {
     return request(app.getHttpServer())
-      .patch('/user/password-update')
+      .put('/team/update-player')
       .set({
         authorization:
           'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBlNGY2Y2Q3OWRmYzJhZTc2N2U0OWIiLCJyb2xlIjoidXNlciIsInR5cGUiOiJBVCJ9.Q0s-_pC6bmUw_wFU1mOYSMiX7cBXSw4OO4sdPTyOALk',
       })
       .send({
-        currentPassword: '156354111',
-        password: '156354111',
-        passwordConfirm: '156354111',
+        name: 'Karen',
+        number: '15',
+        position: Position.ST,
+        playerId: '660f9f416307a97a35ced524',
       })
       .expect(200);
   });
