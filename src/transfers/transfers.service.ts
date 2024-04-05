@@ -37,4 +37,10 @@ export class TransfersService {
 
     return transfers;
   }
+
+  async getAll(): Promise<Transfer[]> {
+    const transfers = await this.transferModel.find();
+
+    return transfers;
+  }
 }
