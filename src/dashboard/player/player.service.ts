@@ -83,7 +83,7 @@ export class PlayerService {
       dto.avatar = image;
     }
 
-    const player = await this.playersService.update(dto, dto.playerId);
+    const player = await this.playersService.update(dto);
 
     return player;
   }
@@ -97,7 +97,7 @@ export class PlayerService {
 
       session.startTransaction();
 
-      await this.playersService.update(dto, player._id, session);
+      await this.playersService.update(dto, session);
 
       const team = await this.teamsService.deletePlayer(
         player.team,

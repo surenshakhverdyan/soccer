@@ -8,10 +8,18 @@ import { ProfileController } from './profile/profile.controller';
 import { ProfileService } from './profile/profile.service';
 import { CronController } from './cron/cron.controller';
 import { CronsModule } from 'src/crons/crons.module';
+import { TransferController } from './transfer/transfer.controller';
+import { TransferService } from './transfer/transfer.service';
+import { TransfersModule } from 'src/transfers/transfers.module';
 
 @Module({
-  imports: [UsersModule, TokenModule, CronsModule],
-  controllers: [UserController, ProfileController, CronController],
-  providers: [UserService, ProfileService],
+  imports: [UsersModule, TokenModule, CronsModule, TransfersModule],
+  controllers: [
+    UserController,
+    ProfileController,
+    CronController,
+    TransferController,
+  ],
+  providers: [UserService, ProfileService, TransferService],
 })
 export class AdminModule {}

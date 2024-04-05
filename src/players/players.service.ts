@@ -23,13 +23,9 @@ export class PlayersService {
     return player;
   }
 
-  async update(
-    dto: PlayerUpdateDto,
-    playerId: Types.ObjectId,
-    session?: ClientSession,
-  ): Promise<Player> {
+  async update(dto: PlayerUpdateDto, session?: ClientSession): Promise<Player> {
     const player = await this.playerModel.findByIdAndUpdate(
-      playerId,
+      dto.playerId,
       { $set: dto },
       { new: true, session },
     );
