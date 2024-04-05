@@ -1,8 +1,8 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Types } from 'mongoose';
 
 import { AuthGuard } from 'src/guards';
 import { TransferService } from './transfer.service';
-import { Types } from 'mongoose';
 
 @UseGuards(AuthGuard)
 @Controller('transfer')

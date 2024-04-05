@@ -1,5 +1,6 @@
 import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
+import { Types } from 'mongoose';
 import { Request } from 'express';
 
 import { TransfersService } from 'src/transfers/transfers.service';
@@ -8,7 +9,6 @@ import { Transfer } from 'src/schemas';
 import { TokenService } from 'src/token/token.service';
 import { UsersService } from 'src/users/users.service';
 import { PlayersService } from 'src/players/players.service';
-import { Types } from 'mongoose';
 
 @Injectable()
 export class TransferService {
