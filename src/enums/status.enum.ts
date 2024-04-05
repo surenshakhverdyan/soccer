@@ -3,7 +3,6 @@ export enum Status {
   Inactive = 'inactive',
   Deleted = 'deleted',
   Accepted = 'accepted',
-  Rejected = 'rejected',
   Archived = 'archived',
   Pending = 'pending',
   Ended = 'ended',
