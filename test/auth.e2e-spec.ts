@@ -48,7 +48,7 @@ describe('AuthController (e2e)', () => {
   it('password reset (PATCH)', () => {
     return request(app.getHttpServer())
       .patch(
-        '/auth/password-reset/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBkYWNjYTM3ZGQ1YzBiZDg2OWFiNDYiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiRlBUIn0.obrplfoUvZbNkGCX-237VLDXSwfepAgKu5dIrQpIQrU',
+        '/auth/password-reset/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBlNGY2Y2Q3OWRmYzJhZTc2N2U0OWIiLCJyb2xlIjoidXNlciIsInR5cGUiOiJGUFQifQ.h7Ts3Qp-v0MKwiLRHDWvHHipWYY0AJVm8eZxu94Ppj0',
       )
       .send({
         password: '156354111',

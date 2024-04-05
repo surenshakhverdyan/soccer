@@ -17,17 +17,28 @@ describe('dashboard/team/TeamController (e2e)', () => {
     await app.init();
   });
 
-  it('create-team (POST)', () => {
+  it('create team (POST)', () => {
     return request(app.getHttpServer())
       .post('/team/create-team')
       .set({
         authorization:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBlZTBmNDRjOWQ3MWRlMDc3OWY5MTEiLCJyb2xlIjoidXNlciIsInR5cGUiOiJBVCJ9.wdMfHWZD4jLlsJ3jcwpugOoU2gByJN-IDBYQTnUsDhY',
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBlNGY2Y2Q3OWRmYzJhZTc2N2U0OWIiLCJyb2xlIjoidXNlciIsInR5cGUiOiJBVCJ9.Q0s-_pC6bmUw_wFU1mOYSMiX7cBXSw4OO4sdPTyOALk',
       })
       .field('name', 'Soccer_1')
       .field('players[0][name]', 'Henrik Mkhitaryan')
       .field('players[0][number]', '10')
       .field('players[0][position]', Position.GK)
       .expect(201);
+  });
+
+  it('update team (PATCH)', () => {
+    return request(app.getHttpServer())
+      .patch('/team/update-team')
+      .set({
+        authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBlNGY2Y2Q3OWRmYzJhZTc2N2U0OWIiLCJyb2xlIjoidXNlciIsInR5cGUiOiJBVCJ9.Q0s-_pC6bmUw_wFU1mOYSMiX7cBXSw4OO4sdPTyOALk',
+      })
+      .attach('avatar', 'uploads/test.png')
+      .expect(200);
   });
 });

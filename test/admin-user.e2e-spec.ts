@@ -4,7 +4,7 @@ import * as request from 'supertest';
 
 import { AppModule } from '../src/app.module';
 
-describe('dashboard/team/TeamController (e2e)', () => {
+describe('admin/user/UserController (e2e)', () => {
   let app: INestApplication;
 
   beforeEach(async () => {
