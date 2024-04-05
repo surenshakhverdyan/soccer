@@ -16,7 +16,7 @@ describe('dashboard/transfer/TransferController (e2e)', () => {
     await app.init();
   });
 
-  it('update profile (POST)', () => {
+  it('create transfer (POST)', () => {
     return request(app.getHttpServer())
       .post('/transfer/create-transfer')
       .set({
