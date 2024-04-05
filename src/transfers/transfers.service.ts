@@ -1,0 +1,40 @@
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { ClientSession, Model, Types } from 'mongoose';
+
+import { Transfer } from 'src/schemas';
+import { TransferCreateDto } from './dto';
+import { Status } from 'src/enums';
+
+@Injectable()
+export class TransfersService {
+  constructor(
+    @InjectModel(Transfer.name) private readonly transferModel: Model<Transfer>,
+  ) {}
+
+  async create(dto: TransferCreateDto): Promise<Transfer> {
+    const transfer = await this.transferModel.create(dto);
+
+    return transfer;
+  }
+
+  async update(
+    transferId: Types.ObjectId,
+    status: Status,
+    session?: ClientSession,
+  ): Promise<Transfer> {
+    const transfer = await this.transferModel.findByIdAndUpdate(
+      transferId,
+      { $set: { status } },
+      { new: true, session },
+    );
+
+    return transfer;
+  }
+
+  async getAllPending(): Promise<Transfer[]> {
+    const transfers = await this.transferModel.find({ status: Status.Pending });
+
+    return transfers;
+  }
+}
