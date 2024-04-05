@@ -70,4 +70,14 @@ export class TeamsService {
 
     return team;
   }
+
+  async delete(teamId: Types.ObjectId, session?: ClientSession): Promise<Team> {
+    const team = await this.teamModel.findByIdAndUpdate(
+      teamId,
+      { $set: { status: Status.Deleted } },
+      { new: true, session },
+    );
+
+    return team;
+  }
 }

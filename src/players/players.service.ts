@@ -4,6 +4,7 @@ import { ClientSession, Model, Types } from 'mongoose';
 
 import { Player } from 'src/schemas';
 import { PlayerCreateDto, PlayerUpdateDto } from './dto';
+import { Status } from 'src/enums';
 
 @Injectable()
 export class PlayersService {
@@ -31,5 +32,16 @@ export class PlayersService {
     );
 
     return player;
+  }
+
+  async deleteMany(
+    teamId: Types.ObjectId,
+    session?: ClientSession,
+  ): Promise<void> {
+    await this.playerModel.updateMany(
+      { team: teamId },
+      { $set: { status: Status.Deleted } },
+      { session },
+    );
   }
 }
