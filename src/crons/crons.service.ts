@@ -24,4 +24,10 @@ export class CronsService {
 
     return cron;
   }
+
+  async get(): Promise<Cron> {
+    const cron = await this.cronModel.findOne();
+
+    return cron;
+  }
 }
