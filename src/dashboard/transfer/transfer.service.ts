@@ -34,7 +34,7 @@ export class TransferService {
       const _user = await this.usersService.getById(sub);
       const player = await this.playersService.getById(playerId);
       const payload = {
-        player: playerId,
+        player: new Types.ObjectId(playerId),
         fromTeam: player.team,
         toTeam: _user.team,
       };
