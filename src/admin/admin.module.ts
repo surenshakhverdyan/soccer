@@ -13,6 +13,9 @@ import { TransferService } from './transfer/transfer.service';
 import { TransfersModule } from 'src/transfers/transfers.module';
 import { TeamsModule } from 'src/teams/teams.module';
 import { PlayersModule } from 'src/players/players.module';
+import { JoinController } from './join/join.controller';
+import { JoinService } from './join/join.service';
+import { JoinsModule } from 'src/joins/joins.module';
 
 @Module({
   imports: [
@@ -22,13 +25,15 @@ import { PlayersModule } from 'src/players/players.module';
     TransfersModule,
     TeamsModule,
     PlayersModule,
+    JoinsModule,
   ],
   controllers: [
     UserController,
     ProfileController,
     CronController,
     TransferController,
+    JoinController,
   ],
-  providers: [UserService, ProfileService, TransferService],
+  providers: [UserService, ProfileService, TransferService, JoinService],
 })
 export class AdminModule {}
