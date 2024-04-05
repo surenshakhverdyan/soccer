@@ -3,7 +3,6 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 
 import { AppModule } from '../src/app.module';
-import { Status } from 'src/enums';
 
 describe('admin/transfer/TransferController (e2e)', () => {
   let app: INestApplication;
@@ -36,7 +35,7 @@ describe('admin/transfer/TransferController (e2e)', () => {
       })
       .send({
         transferId: '660febeb9f0098e6c040cb63',
-        status: Status.Transferred,
+        status: false,
       })
       .expect(200);
   });
