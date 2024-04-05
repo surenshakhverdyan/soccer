@@ -13,7 +13,7 @@ import { PlayersModule } from './players/players.module';
 import { ImagesModule } from './images/images.module';
 import { CronsModule } from './crons/crons.module';
 import { TransfersModule } from './transfers/transfers.module';
-import { JoinModule } from './join/join.module';
+import { JoinsModule } from './joins/joins.module';
 
 @Module({
   imports: [
@@ -51,7 +51,7 @@ import { JoinModule } from './join/join.module';
     ImagesModule,
     CronsModule,
     TransfersModule,
-    JoinModule,
+    JoinsModule,
   ],
 })
 export class AppModule {}

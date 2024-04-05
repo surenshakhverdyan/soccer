@@ -6,7 +6,7 @@ import { Join } from 'src/schemas';
 import { JoinCreateDto, JoinUpdateDto } from './dto';
 
 @Injectable()
-export class JoinService {
+export class JoinsService {
   constructor(
     @InjectModel(Join.name) private readonly joinModel: Model<Join>,
   ) {}

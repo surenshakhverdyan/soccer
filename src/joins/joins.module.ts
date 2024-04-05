@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { JoinService } from './join.service';
+import { JoinsService } from './joins.service';
 import { Join, JoinSchema } from 'src/schemas';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Join.name, schema: JoinSchema }]),
   ],
-  providers: [JoinService],
-  exports: [JoinService],
+  providers: [JoinsService],
+  exports: [JoinsService],
 })
-export class JoinModule {}
+export class JoinsModule {}
