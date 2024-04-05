@@ -11,9 +11,18 @@ import { CronsModule } from 'src/crons/crons.module';
 import { TransferController } from './transfer/transfer.controller';
 import { TransferService } from './transfer/transfer.service';
 import { TransfersModule } from 'src/transfers/transfers.module';
+import { TeamsModule } from 'src/teams/teams.module';
+import { PlayersModule } from 'src/players/players.module';
 
 @Module({
-  imports: [UsersModule, TokenModule, CronsModule, TransfersModule],
+  imports: [
+    UsersModule,
+    TokenModule,
+    CronsModule,
+    TransfersModule,
+    TeamsModule,
+    PlayersModule,
+  ],
   controllers: [
     UserController,
     ProfileController,
