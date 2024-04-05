@@ -14,6 +14,7 @@ import { ImagesModule } from './images/images.module';
 import { CronsModule } from './crons/crons.module';
 import { TransfersModule } from './transfers/transfers.module';
 import { JoinsModule } from './joins/joins.module';
+import { PublicModule } from './public/public.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { JoinsModule } from './joins/joins.module';
     CronsModule,
     TransfersModule,
     JoinsModule,
+    PublicModule,
   ],
 })
 export class AppModule {}
