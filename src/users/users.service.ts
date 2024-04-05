@@ -66,4 +66,10 @@ export class UsersService {
 
     return user;
   }
+
+  async delete(userId: Types.ObjectId, session?: ClientSession): Promise<User> {
+    const _user = await this.userModel.findByIdAndDelete(userId, { session });
+
+    return _user;
+  }
 }
