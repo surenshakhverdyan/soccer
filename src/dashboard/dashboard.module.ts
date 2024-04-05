@@ -9,10 +9,12 @@ import { UsersModule } from 'src/users/users.module';
 import { TokenModule } from 'src/token/token.module';
 import { PlayerController } from './player/player.controller';
 import { PlayerService } from './player/player.service';
+import { UserController } from './user/user.controller';
+import { UserService } from './user/user.service';
 
 @Module({
   imports: [TeamsModule, PlayersModule, ImagesModule, UsersModule, TokenModule],
-  controllers: [TeamController, PlayerController],
-  providers: [TeamService, PlayerService],
+  controllers: [TeamController, PlayerController, UserController],
+  providers: [TeamService, PlayerService, UserService],
 })
 export class DashboardModule {}
