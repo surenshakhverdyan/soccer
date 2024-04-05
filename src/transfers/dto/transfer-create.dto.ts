@@ -1,13 +1,11 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsBoolean, IsNotEmpty } from 'class-validator';
 import { Types } from 'mongoose';
 
 export class TransferCreateDto {
   @IsNotEmpty()
-  player: Types.ObjectId;
+  transferId: Types.ObjectId;
 
+  @IsBoolean()
   @IsNotEmpty()
-  fromTeam: Types.ObjectId;
-
-  @IsNotEmpty()
-  toTeam: Types.ObjectId;
+  status: boolean;
 }
