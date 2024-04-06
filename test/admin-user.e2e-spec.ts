@@ -45,4 +45,14 @@ describe('admin/user/UserController (e2e)', () => {
       })
       .expect(200);
   });
+
+  it('get users (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/admin/get-users')
+      .set({
+        authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBkNDM1ZWEzNjhiYzMxZDdlN2ZlYWMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiQVQifQ.Id7efVUe3F-WtxLYb8hvqpZBqgXVoxHsi5mnRirrBP8',
+      })
+      .expect(200);
+  });
 });
