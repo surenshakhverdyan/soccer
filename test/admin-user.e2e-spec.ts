@@ -32,4 +32,17 @@ describe('admin/user/UserController (e2e)', () => {
       })
       .expect(201);
   });
+
+  it('delete user (DELETE)', () => {
+    return request(app.getHttpServer())
+      .delete('/admin/delete-user')
+      .set({
+        authorization:
+          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBkNDM1ZWEzNjhiYzMxZDdlN2ZlYWMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiQVQifQ.Id7efVUe3F-WtxLYb8hvqpZBqgXVoxHsi5mnRirrBP8',
+      })
+      .send({
+        userId: '660ee0f44c9d71de0779f911',
+      })
+      .expect(200);
+  });
 });
