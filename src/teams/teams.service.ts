@@ -60,6 +60,12 @@ export class TeamsService {
     return team;
   }
 
+  async getAll(): Promise<Team[]> {
+    const teams = await this.teamModel.find();
+
+    return teams;
+  }
+
   async update(avatar: string, teamId: Types.ObjectId): Promise<Team> {
     const team = await this.teamModel
       .findByIdAndUpdate(teamId, { $set: { avatar } }, { new: true })
