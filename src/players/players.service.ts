@@ -44,4 +44,17 @@ export class PlayersService {
       { session },
     );
   }
+
+  async delete(
+    playerId: Types.ObjectId,
+    session?: ClientSession,
+  ): Promise<Player> {
+    const player = await this.playerModel.findByIdAndUpdate(
+      playerId,
+      { $set: { status: Status.Deleted } },
+      { new: true, session },
+    );
+
+    return player;
+  }
 }
