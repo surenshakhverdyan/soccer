@@ -15,7 +15,7 @@ import { CronsModule } from './crons/crons.module';
 import { TransfersModule } from './transfers/transfers.module';
 import { JoinsModule } from './joins/joins.module';
 import { PublicModule } from './public/public.module';
-import { LeagueModule } from './league/league.module';
+import { LeaguesModule } from './leagues/leagues.module';
 
 @Module({
   imports: [
@@ -55,7 +55,7 @@ import { LeagueModule } from './league/league.module';
     TransfersModule,
     JoinsModule,
     PublicModule,
-    LeagueModule,
+    LeaguesModule,
   ],
 })
 export class AppModule {}
