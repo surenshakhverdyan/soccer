@@ -5,6 +5,7 @@ import { ClientSession, Model, Types } from 'mongoose';
 import { User } from 'src/schemas';
 import { IUser } from './interfaces';
 import { UserCreateDto, UserUpdateDto } from './dto';
+import { Role } from 'src/enums';
 
 @Injectable()
 export class UsersService {
@@ -22,6 +23,14 @@ export class UsersService {
     const _user = await this.userModel.findById(sub);
 
     return _user;
+  }
+
+  async getAll(): Promise<User[]> {
+    const users = await this.userModel
+      .find({ role: Role.User })
+      .select('-password');
+
+    return users;
   }
 
   async update(
