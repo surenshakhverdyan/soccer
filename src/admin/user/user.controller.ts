@@ -1,14 +1,19 @@
-import { Body, Controller, Delete, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, UseGuards } from '@nestjs/common';
+import { Types } from 'mongoose';
 
 import { AdminGuard } from 'src/guards';
 import { UserService } from './user.service';
 import { UserCreateDto } from 'src/users/dto';
-import { Types } from 'mongoose';
+import { User } from 'src/schemas';
+import { UsersService } from 'src/users/users.service';
 
 @UseGuards(AdminGuard)
 @Controller('admin')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly usersService: UsersService,
+  ) {}
 
   @Post('create-user')
   createUser(@Body() dto: UserCreateDto): Promise<boolean> {
@@ -18,5 +23,10 @@ export class UserController {
   @Delete('delete-user')
   deleteUser(@Body('userId') userId: Types.ObjectId): Promise<boolean> {
     return this.userService.deleteUser(userId);
+  }
+
+  @Get('get-users')
+  getUsers(): Promise<User[]> {
+    return this.usersService.getAll();
   }
 }
