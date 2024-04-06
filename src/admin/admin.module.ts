@@ -18,6 +18,7 @@ import { JoinService } from './join/join.service';
 import { JoinsModule } from 'src/joins/joins.module';
 import { PlayerController } from './player/player.controller';
 import { PlayerService } from './player/player.service';
+import { TeamController } from './team/team.controller';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { PlayerService } from './player/player.service';
     TransferController,
     JoinController,
     PlayerController,
+    TeamController,
   ],
   providers: [
     UserService,
