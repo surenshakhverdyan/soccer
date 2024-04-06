@@ -1,16 +1,15 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/mongoose';
 import { Connection, Types } from 'mongoose';
+
 import { PlayersService } from 'src/players/players.service';
 import { TeamsService } from 'src/teams/teams.service';
-import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class PlayerService {
   constructor(
     @InjectConnection() private readonly connection: Connection,
     private readonly playersService: PlayersService,
-    private readonly usersService: UsersService,
     private readonly teamsService: TeamsService,
   ) {}
 
