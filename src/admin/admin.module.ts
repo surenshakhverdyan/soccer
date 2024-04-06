@@ -19,6 +19,7 @@ import { JoinsModule } from 'src/joins/joins.module';
 import { PlayerController } from './player/player.controller';
 import { PlayerService } from './player/player.service';
 import { TeamController } from './team/team.controller';
+import { LeaguesModule } from 'src/leagues/leagues.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { TeamController } from './team/team.controller';
     TeamsModule,
     PlayersModule,
     JoinsModule,
+    LeaguesModule,
   ],
   controllers: [
     UserController,
