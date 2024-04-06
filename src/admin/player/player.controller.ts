@@ -5,7 +5,7 @@ import { AdminGuard } from 'src/guards';
 import { PlayerService } from './player.service';
 
 @UseGuards(AdminGuard)
-@Controller('player')
+@Controller('admin')
 export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
