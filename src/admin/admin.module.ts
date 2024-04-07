@@ -24,6 +24,9 @@ import { LeagueController } from './league/league.controller';
 import { BasketController } from './basket/basket.controller';
 import { BasketsModule } from 'src/baskets/baskets.module';
 import { BasketService } from './basket/basket.service';
+import { GameController } from './game/game.controller';
+import { GameService } from './game/game.service';
+import { GamesModule } from 'src/games/games.module';
 
 @Module({
   imports: [
@@ -36,6 +39,7 @@ import { BasketService } from './basket/basket.service';
     JoinsModule,
     LeaguesModule,
     BasketsModule,
+    GamesModule,
   ],
   controllers: [
     UserController,
@@ -47,6 +51,7 @@ import { BasketService } from './basket/basket.service';
     TeamController,
     LeagueController,
     BasketController,
+    GameController,
   ],
   providers: [
     UserService,
@@ -55,6 +60,7 @@ import { BasketService } from './basket/basket.service';
     JoinService,
     PlayerService,
     BasketService,
+    GameService,
   ],
 })
 export class AdminModule {}

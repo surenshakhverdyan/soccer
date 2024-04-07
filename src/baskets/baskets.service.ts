@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { ClientSession, Model } from 'mongoose';
+import { ClientSession, Model, Types } from 'mongoose';
 
 import { Basket } from 'src/schemas';
 import { BasketCreateDto } from './dto';
@@ -13,6 +13,20 @@ export class BasketsService {
 
   async create(dto: BasketCreateDto, session?: ClientSession): Promise<Basket> {
     const [basket] = await this.basketModel.create([dto], { session });
+
+    return basket;
+  }
+
+  async getById(basketId: Types.ObjectId): Promise<Basket> {
+    const basket = await this.basketModel.findById(basketId).populate({
+      path: 'teams',
+      model: 'Team',
+      populate: {
+        path: 'user',
+        model: 'User',
+        select: 'email',
+      },
+    });
 
     return basket;
   }
