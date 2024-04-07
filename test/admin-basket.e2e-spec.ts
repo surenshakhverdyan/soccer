@@ -25,10 +25,7 @@ describe('admin/basket/BasketController (e2e)', () => {
       })
       .send({
         league: '6612228b36c4a2cda7909906',
-        teams: [
-          { team: '661218f59646cacbdf8488bd' },
-          { team: '661218f59646cacbdf8488bd' },
-        ],
+        teams: ['661218f59646cacbdf8488bd', '661218f59646cacbdf8488bd'],
       })
       .expect(201);
   });
