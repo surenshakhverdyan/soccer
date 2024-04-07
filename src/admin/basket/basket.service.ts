@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/mongoose';
-import { Connection } from 'mongoose';
+import { Connection, Types } from 'mongoose';
 
 import { BasketsService } from 'src/baskets/baskets.service';
 import { BasketCreateDto } from 'src/baskets/dto';
@@ -20,6 +20,14 @@ export class BasketService {
 
     try {
       session.startTransaction();
+
+      const teams: Array<Types.ObjectId> = [];
+      dto.league = new Types.ObjectId(dto.league);
+      dto.teams.map((team) => {
+        teams.push(new Types.ObjectId(team));
+      });
+      dto.teams = teams;
+      console.log(dto);
 
       const basket = await this.basketsService.create(dto, session);
       await this.leaguesService.addBasket(dto.league, basket._id, session);
