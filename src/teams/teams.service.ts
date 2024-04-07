@@ -61,7 +61,10 @@ export class TeamsService {
   }
 
   async getAll(): Promise<Team[]> {
-    const teams = await this.teamModel.find();
+    const teams = await this.teamModel.find().populate({
+      path: 'players',
+      model: 'Player',
+    });
 
     return teams;
   }
