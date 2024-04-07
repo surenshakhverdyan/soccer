@@ -16,6 +16,7 @@ import { TransfersModule } from './transfers/transfers.module';
 import { JoinsModule } from './joins/joins.module';
 import { PublicModule } from './public/public.module';
 import { LeaguesModule } from './leagues/leagues.module';
+import { BasketsModule } from './baskets/baskets.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { LeaguesModule } from './leagues/leagues.module';
     JoinsModule,
     PublicModule,
     LeaguesModule,
+    BasketsModule,
   ],
 })
 export class AppModule {}
