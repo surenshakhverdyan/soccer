@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { ArrayMinSize, IsArray, IsNotEmpty, IsString } from 'class-validator';
 import { Types } from 'mongoose';
 
 export class LeagueCreateDto {
@@ -7,6 +7,6 @@ export class LeagueCreateDto {
   name: string;
 
   @IsArray()
-  @MinLength(2)
+  @ArrayMinSize(2)
   teams: Types.ObjectId[];
 }
