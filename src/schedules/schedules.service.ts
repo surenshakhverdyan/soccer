@@ -4,6 +4,7 @@ import { Model, Types } from 'mongoose';
 
 import { Schedule } from 'src/schemas';
 import { ScheduleCreateDto } from './dto';
+import { ISchedule } from './interfaces';
 
 @Injectable()
 export class SchedulesService {
@@ -29,8 +30,20 @@ export class SchedulesService {
     return schedule;
   }
 
-  async getById(scheduleId: Types.ObjectId): Promise<Schedule> {
-    const schedule = await this.scheduleModel.findById(scheduleId);
+  async getById(scheduleId: Types.ObjectId): Promise<ISchedule> {
+    const schedule = await this.scheduleModel
+      .findById(scheduleId)
+      .populate({
+        path: 'team',
+        model: 'Team',
+        select: '-players -avatar -status -createdAt -updatedAt -__v',
+        populate: {
+          path: 'user',
+          model: 'User',
+          select: '_id email',
+        },
+      })
+      .select('-updatedAt -createdAt -__v');
 
     return schedule;
   }
