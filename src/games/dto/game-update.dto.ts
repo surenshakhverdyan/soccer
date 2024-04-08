@@ -14,4 +14,6 @@ export class GameUpdateDto {
   };
 
   startDateTime: Date;
+
+  status: string;
 }
