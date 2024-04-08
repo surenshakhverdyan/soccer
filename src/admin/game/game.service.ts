@@ -31,7 +31,7 @@ export class GameService {
 
       const basket = await this.basketsService.getById(dto.basket);
 
-      const game = await this.gamesService.create(dto);
+      const game = await this.gamesService.create(dto, session);
 
       basket.teams.map(async (team) => {
         const payload = {
