@@ -17,7 +17,7 @@ import { AuthGuard } from 'src/guards';
 import { Player, Team } from 'src/schemas';
 
 @UseGuards(AuthGuard)
-@Controller('team')
+@Controller('player')
 export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
