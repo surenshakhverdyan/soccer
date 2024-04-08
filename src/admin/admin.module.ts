@@ -27,6 +27,7 @@ import { BasketService } from './basket/basket.service';
 import { GameController } from './game/game.controller';
 import { GameService } from './game/game.service';
 import { GamesModule } from 'src/games/games.module';
+import { SchedulesModule } from 'src/schedules/schedules.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { GamesModule } from 'src/games/games.module';
     LeaguesModule,
     BasketsModule,
     GamesModule,
+    SchedulesModule,
   ],
   controllers: [
     UserController,

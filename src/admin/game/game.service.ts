@@ -2,15 +2,18 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { HttpException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectConnection } from '@nestjs/mongoose';
-import { Connection } from 'mongoose';
+import { Connection, Types } from 'mongoose';
 
 import { BasketsService } from 'src/baskets/baskets.service';
 import { Role, TokenType } from 'src/enums';
 import { GameCreateDto } from 'src/games/dto';
 import { GamesService } from 'src/games/games.service';
+import { LeaguesService } from 'src/leagues/leagues.service';
 import { Game } from 'src/schemas';
 import { scheduleGameTemplate } from 'src/templates';
 import { TokenService } from 'src/token/token.service';
+import { GameUpdateDto } from './dto';
+import { PlayersService } from 'src/players/players.service';
 
 @Injectable()
 export class GameService {
@@ -21,6 +24,8 @@ export class GameService {
     private readonly basketsService: BasketsService,
     private readonly tokenService: TokenService,
     private readonly configService: ConfigService,
+    private readonly leaguesService: LeaguesService,
+    private readonly playersService: PlayersService,
   ) {}
 
   async createGame(dto: GameCreateDto): Promise<Game> {
@@ -29,8 +34,10 @@ export class GameService {
     try {
       session.startTransaction();
 
-      const basket = await this.basketsService.getById(dto.basket);
+      dto.basket = new Types.ObjectId(dto.basket);
+      dto.league = new Types.ObjectId(dto.league);
 
+      const basket = await this.basketsService.getById(dto.basket);
       const game = await this.gamesService.create(dto, session);
 
       basket.teams.map(async (team) => {
@@ -53,6 +60,8 @@ export class GameService {
         });
       });
 
+      await this.leaguesService.addGame(dto.league, game._id, session);
+
       await session.commitTransaction();
       session.endSession();
 
@@ -62,6 +71,24 @@ export class GameService {
       session.endSession();
 
       throw new HttpException(error.message, 500);
+    }
+  }
+
+  async setGame(dto: GameUpdateDto): Promise<Game> {
+    const team_1 = await this.basketsService.getById(dto.team_1);
+    const team_2 = await this.basketsService.getById(dto.team_2);
+    const data = {
+      team_1,
+      team_2,
+      startDateTime: dto.startDateTime,
+    };
+
+    const session = await this.connection.startSession();
+
+    try {
+      
+    } catch (error: any) {
+      
     }
   }
 }

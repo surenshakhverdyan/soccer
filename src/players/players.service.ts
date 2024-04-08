@@ -57,4 +57,20 @@ export class PlayersService {
 
     return player;
   }
+
+  async findByTeamAndActivate(
+    teamId: Types.ObjectId,
+    session?: ClientSession,
+  ): Promise<boolean> {
+    await this.playerModel.updateMany(
+      {
+        team: teamId,
+        status: Status.Inactive,
+      },
+      { $set: { status: Status.Active } },
+      { session },
+    );
+
+    return true;
+  }
 }

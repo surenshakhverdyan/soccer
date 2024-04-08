@@ -28,4 +28,10 @@ export class SchedulesService {
 
     return schedule;
   }
+
+  async getById(scheduleId: Types.ObjectId): Promise<Schedule> {
+    const schedule = await this.scheduleModel.findById(scheduleId);
+
+    return schedule;
+  }
 }
