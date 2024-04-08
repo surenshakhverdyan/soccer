@@ -30,4 +30,18 @@ export class LeaguesService {
 
     return league;
   }
+
+  async addGame(
+    leagueId: Types.ObjectId,
+    gameId: Types.ObjectId,
+    session?: ClientSession,
+  ): Promise<League> {
+    const league = await this.leagueModel.findByIdAndUpdate(
+      leagueId,
+      { $push: { games: gameId } },
+      { new: true, session },
+    );
+
+    return league;
+  }
 }
