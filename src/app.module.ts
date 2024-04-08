@@ -18,6 +18,7 @@ import { PublicModule } from './public/public.module';
 import { LeaguesModule } from './leagues/leagues.module';
 import { BasketsModule } from './baskets/baskets.module';
 import { GamesModule } from './games/games.module';
+import { SchedulesModule } from './schedules/schedules.module';
 
 @Module({
   imports: [
@@ -60,6 +61,7 @@ import { GamesModule } from './games/games.module';
     LeaguesModule,
     BasketsModule,
     GamesModule,
+    SchedulesModule,
   ],
 })
 export class AppModule {}
