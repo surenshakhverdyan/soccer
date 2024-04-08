@@ -4,6 +4,7 @@ import { ClientSession, Model, Types } from 'mongoose';
 
 import { Basket } from 'src/schemas';
 import { BasketCreateDto } from './dto';
+import { IBasket } from './interfaces';
 
 @Injectable()
 export class BasketsService {
@@ -17,10 +18,11 @@ export class BasketsService {
     return basket;
   }
 
-  async getById(basketId: Types.ObjectId): Promise<Basket> {
-    const basket = await this.basketModel.findById(basketId).populate({
+  async getById(basketId: Types.ObjectId): Promise<IBasket> {
+    const basket: IBasket = await this.basketModel.findById(basketId).populate({
       path: 'teams',
       model: 'Team',
+      select: '_id',
       populate: {
         path: 'user',
         model: 'User',
