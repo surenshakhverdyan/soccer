@@ -1,4 +1,4 @@
-import { IsArray, IsDate, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsArray, IsDateString, IsNotEmpty, IsOptional } from 'class-validator';
 import { Types } from 'mongoose';
 
 export class ScheduleCreateDto {
@@ -12,6 +12,6 @@ export class ScheduleCreateDto {
   @IsNotEmpty()
   players: Types.ObjectId[];
 
-  @IsDate()
+  @IsDateString()
   date: Date;
 }
