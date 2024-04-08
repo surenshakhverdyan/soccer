@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 
-import { IPayload } from './interfaces';
+import { IPayload, IPayloadGSchedule } from './interfaces';
 
 @Injectable()
 export class TokenService {
@@ -39,7 +39,7 @@ export class TokenService {
     return token;
   }
 
-  signGameScheduleToken(payload: IPayload): string {
+  signGameScheduleToken(payload: IPayloadGSchedule): string {
     const token = this.jwtService.sign(payload, {
       secret: this.configService.get<string>('JWT_SECRET'),
       expiresIn: '5d',
