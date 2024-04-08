@@ -27,7 +27,6 @@ export class BasketService {
         teams.push(new Types.ObjectId(team));
       });
       dto.teams = teams;
-      console.log(dto);
 
       const basket = await this.basketsService.create(dto, session);
       await this.leaguesService.addBasket(dto.league, basket._id, session);
