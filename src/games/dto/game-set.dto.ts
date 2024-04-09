@@ -1,6 +1,6 @@
 import { Types } from 'mongoose';
 
-export class GameUpdateDto {
+export class GameSetDto {
   gameId: Types.ObjectId;
 
   team_1: {

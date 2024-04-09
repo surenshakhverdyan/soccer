@@ -12,7 +12,7 @@ import { LeaguesService } from 'src/leagues/leagues.service';
 import { Game } from 'src/schemas';
 import { gameDateTimeTemplate, scheduleGameTemplate } from 'src/templates';
 import { TokenService } from 'src/token/token.service';
-import { GameUpdateDto } from './dto';
+import { GameSetDto } from './dto';
 import { PlayersService } from 'src/players/players.service';
 import { SchedulesService } from 'src/schedules/schedules.service';
 
@@ -76,7 +76,7 @@ export class GameService {
     }
   }
 
-  async setGame(dto: GameUpdateDto): Promise<Game> {
+  async setGame(dto: GameSetDto): Promise<Game> {
     const team_1 = await this.schedulesService.getById(dto.team_1);
     const team_2 = await this.schedulesService.getById(dto.team_2);
     const session = await this.connection.startSession();
@@ -121,6 +121,22 @@ export class GameService {
       session.endSession();
 
       return game;
+    } catch (error: any) {
+      await session.abortTransaction();
+      session.endSession();
+
+      throw new HttpException(error.message, 500);
+    }
+  }
+
+  async updateGame() {
+    const session = await this.connection.startSession();
+
+    try {
+      session.startTransaction();
+
+      await session.commitTransaction();
+      session.endSession();
     } catch (error: any) {
       await session.abortTransaction();
       session.endSession();
