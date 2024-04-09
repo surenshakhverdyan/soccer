@@ -4,7 +4,7 @@ import { AdminGuard } from 'src/guards';
 import { GameService } from './game.service';
 import { GameCreateDto } from 'src/games/dto';
 import { Game } from 'src/schemas';
-import { GameSetDto } from './dto';
+import { GameSetDto, GameUpdateDto } from './dto';
 
 @UseGuards(AdminGuard)
 @Controller('admin')
@@ -19,5 +19,10 @@ export class GameController {
   @Put('set-game')
   setGame(@Body() dto: GameSetDto): Promise<Game> {
     return this.gameService.setGame(dto);
+  }
+
+  @Put('update-game')
+  updateGame(@Body() dto: GameUpdateDto): Promise<Game> {
+    return this.gameService.updateGame(dto);
   }
 }

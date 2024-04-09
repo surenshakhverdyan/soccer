@@ -3,7 +3,11 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ClientSession, Model, Types } from 'mongoose';
 
 import { Player } from 'src/schemas';
-import { PlayerCreateDto, PlayerUpdateDto } from './dto';
+import {
+  PlayerCreateDto,
+  PlayerStatisticsUpdateDto,
+  PlayerUpdateDto,
+} from './dto';
 import { Status } from 'src/enums';
 
 @Injectable()
@@ -72,5 +76,34 @@ export class PlayersService {
     );
 
     return true;
+  }
+
+  async findByIdAndInactivate(
+    teamId: Types.ObjectId,
+    session?: ClientSession,
+  ): Promise<boolean> {
+    await this.playerModel.findByIdAndUpdate(
+      teamId,
+      { $set: { status: Status.Inactive } },
+      { new: true, session },
+    );
+
+    return true;
+  }
+
+  async updateStatistics(
+    dto: PlayerStatisticsUpdateDto,
+    session?: ClientSession,
+  ): Promise<Player> {
+    const updateObj = {};
+    updateObj[dto.fieldKey] = dto.value;
+
+    const player = await this.playerModel.findByIdAndUpdate(
+      dto.playerId,
+      { $inc: { updateObj } },
+      { new: true, session },
+    );
+
+    return player;
   }
 }

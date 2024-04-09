@@ -12,7 +12,7 @@ import { LeaguesService } from 'src/leagues/leagues.service';
 import { Game } from 'src/schemas';
 import { gameDateTimeTemplate, scheduleGameTemplate } from 'src/templates';
 import { TokenService } from 'src/token/token.service';
-import { GameSetDto } from './dto';
+import { GameSetDto, GameUpdateDto } from './dto';
 import { PlayersService } from 'src/players/players.service';
 import { SchedulesService } from 'src/schedules/schedules.service';
 
@@ -129,7 +129,7 @@ export class GameService {
     }
   }
 
-  async updateGame() {
+  async updateGame(dto: GameUpdateDto): Promise<Game> {
     const session = await this.connection.startSession();
 
     try {
