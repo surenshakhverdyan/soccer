@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { ClientSession, Model } from 'mongoose';
+import { ClientSession, Model, Types } from 'mongoose';
 
 import { Game } from 'src/schemas';
 import { GameCreateDto, GameSetDto } from './dto';
@@ -23,6 +23,12 @@ export class GamesService {
       { $set: dto },
       { new: true, session },
     );
+
+    return game;
+  }
+
+  async getById(gameId: Types.ObjectId): Promise<Game> {
+    const game = await this.gameModel.findById(gameId);
 
     return game;
   }
