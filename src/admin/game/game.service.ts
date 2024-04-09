@@ -130,13 +130,20 @@ export class GameService {
   }
 
   async updateGame(dto: GameUpdateDto): Promise<Game> {
+    const _game = await this.gamesService.getById(dto.gameId);
     const session = await this.connection.startSession();
 
     try {
       session.startTransaction();
 
+      if (_game.team_1.team.equals(dto.teamId)) {
+        await this.gamesService.pushData(dto.)
+      } else {}
+
       await session.commitTransaction();
       session.endSession();
+
+      return game;
     } catch (error: any) {
       await session.abortTransaction();
       session.endSession();
