@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ClientSession, Model, Types } from 'mongoose';
 
 import { Game } from 'src/schemas';
-import { GameCreateDto, GameSetDto } from './dto';
+import { GameCreateDto, GameSetDto, GameUpdateDto } from './dto';
 
 @Injectable()
 export class GamesService {
@@ -33,7 +33,20 @@ export class GamesService {
     return game;
   }
 
-  async pushData(session?: ClientSession) {
-    session;
+  async pushData(dto: GameUpdateDto, session?: ClientSession): Promise<Game> {
+    const updateObj = {};
+    const data = {
+      cards: dto.cards,
+      goals: dto.goals,
+    };
+    updateObj[dto.teamKey];
+
+    const game = await this.gameModel.findByIdAndUpdate(
+      dto.gameId,
+      { $set: { updateObj: data } },
+      { new: true, session },
+    );
+
+    return game;
   }
 }

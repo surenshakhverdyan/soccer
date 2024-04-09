@@ -137,13 +137,48 @@ export class GameService {
       session.startTransaction();
 
       if (_game.team_1.team.equals(dto.teamId)) {
-        await this.gamesService.pushData(dto.)
+        const data = {
+          gameId: dto.gameId,
+          teamKey: 'team_1',
+          goals: dto.goals,
+          cards: dto.cards,
+        };
+
+        const game = await this.gamesService.pushData(data, session);
+        dto.cards.map(async (element) => {
+          if (element.red) {
+            const statistics = {
+              playerId: element.player,
+              fieldKey: 'redCards',
+              value: element.red,
+            };
+            await this.playersService.updateStatistics(statistics, session);
+          }
+
+          if (element.yellow) {
+            const statistics = {
+              playerId: element.player,
+              fieldKey: 'yellowCards',
+              value: element.yellow,
+            };
+            await this.playersService.updateStatistics(statistics, session);
+          }
+
+          dto.goals.map(async (element) => {
+            const statistics = {
+              playerId: element.goal,
+              fieldKey: 'goals',
+              value: 1,
+            };
+            await this.playersService.updateStatistics(statistics, session);
+          });
+        });
       } else {}
 
       await session.commitTransaction();
       session.endSession();
 
-      return game;
+      return _game;
     } catch (error: any) {
       await session.abortTransaction();
       session.endSession();
