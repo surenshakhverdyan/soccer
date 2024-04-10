@@ -131,54 +131,58 @@ export class GameService {
 
   async updateGame(dto: GameUpdateDto): Promise<Game> {
     const _game = await this.gamesService.getById(dto.gameId);
+    const data = {
+      gameId: dto.gameId,
+      teamKey: '',
+      goals: dto.goals,
+      cards: dto.cards,
+    };
+
+    if (_game.team_1.team.equals(dto.teamId)) {
+      data.teamKey = 'team_1';
+    } else {
+      data.teamKey = 'team_2';
+    }
+
     const session = await this.connection.startSession();
 
     try {
       session.startTransaction();
 
-      if (_game.team_1.team.equals(dto.teamId)) {
-        const data = {
-          gameId: dto.gameId,
-          teamKey: 'team_1',
-          goals: dto.goals,
-          cards: dto.cards,
+      const game = await this.gamesService.pushData(data, session);
+      dto.cards.map(async (element) => {
+        if (element.red) {
+          const statistics = {
+            playerId: element.player,
+            fieldKey: 'redCards',
+            value: element.red,
+          };
+          await this.playersService.updateStatistics(statistics, session);
+        }
+
+        if (element.yellow) {
+          const statistics = {
+            playerId: element.player,
+            fieldKey: 'yellowCards',
+            value: element.yellow,
+          };
+          await this.playersService.updateStatistics(statistics, session);
+        }
+      });
+
+      dto.goals.map(async (element) => {
+        const statistics = {
+          playerId: element.goal,
+          fieldKey: 'goals',
+          value: 1,
         };
-
-        const game = await this.gamesService.pushData(data, session);
-        dto.cards.map(async (element) => {
-          if (element.red) {
-            const statistics = {
-              playerId: element.player,
-              fieldKey: 'redCards',
-              value: element.red,
-            };
-            await this.playersService.updateStatistics(statistics, session);
-          }
-
-          if (element.yellow) {
-            const statistics = {
-              playerId: element.player,
-              fieldKey: 'yellowCards',
-              value: element.yellow,
-            };
-            await this.playersService.updateStatistics(statistics, session);
-          }
-
-          dto.goals.map(async (element) => {
-            const statistics = {
-              playerId: element.goal,
-              fieldKey: 'goals',
-              value: 1,
-            };
-            await this.playersService.updateStatistics(statistics, session);
-          });
-        });
-      } else {}
+        await this.playersService.updateStatistics(statistics, session);
+      });
 
       await session.commitTransaction();
       session.endSession();
 
-      return _game;
+      return game;
     } catch (error: any) {
       await session.abortTransaction();
       session.endSession();
