@@ -34,18 +34,12 @@ export class GamesService {
   }
 
   async pushData(dto: GameUpdateDto, session?: ClientSession): Promise<Game> {
-    const updateObj = {};
-    const data = {
-      cards: dto.cards,
-      goals: dto.goals,
-    };
-    updateObj[dto.teamKey];
+    const game = await this.gameModel.findById(dto.gameId);
 
-    const game = await this.gameModel.findByIdAndUpdate(
-      dto.gameId,
-      { $set: { updateObj: data } },
-      { new: true, session },
-    );
+    game[dto.teamKey].goals.push(...dto.goals);
+    game[dto.teamKey].cards.push(...dto.cards);
+
+    await game.save({ session });
 
     return game;
   }
