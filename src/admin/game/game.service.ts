@@ -131,6 +131,10 @@ export class GameService {
 
   async updateGame(dto: GameUpdateDto): Promise<Game> {
     const _game = await this.gamesService.getById(dto.gameId);
+
+    if (_game.status !== Status.Active)
+      throw new HttpException('The game is ended', 403);
+
     const data = {
       gameId: dto.gameId,
       teamKey: _game.team_1.team.equals(dto.teamId) ? 'team_1' : 'team_2',
