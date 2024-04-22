@@ -100,7 +100,7 @@ export class PlayersService {
 
     const player = await this.playerModel.findByIdAndUpdate(
       dto.playerId,
-      { $inc: { updateObj } },
+      { $inc: updateObj },
       { new: true, session },
     );
 

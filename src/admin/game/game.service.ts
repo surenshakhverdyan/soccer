@@ -133,16 +133,10 @@ export class GameService {
     const _game = await this.gamesService.getById(dto.gameId);
     const data = {
       gameId: dto.gameId,
-      teamKey: '',
+      teamKey: _game.team_1.team.equals(dto.teamId) ? 'team_1' : 'team_2',
       goals: dto.goals,
       cards: dto.cards,
     };
-
-    if (_game.team_1.team.equals(dto.teamId)) {
-      data.teamKey = 'team_1';
-    } else {
-      data.teamKey = 'team_2';
-    }
 
     const session = await this.connection.startSession();
 
@@ -150,34 +144,44 @@ export class GameService {
       session.startTransaction();
 
       const game = await this.gamesService.pushData(data, session);
-      dto.cards.map(async (element) => {
-        if (element.red) {
+
+      for (const card of dto.cards) {
+        if (card.red) {
           const statistics = {
-            playerId: element.player,
+            playerId: card.player,
             fieldKey: 'redCards',
-            value: element.red,
+            value: card.red,
           };
           await this.playersService.updateStatistics(statistics, session);
         }
 
-        if (element.yellow) {
+        if (card.yellow) {
           const statistics = {
-            playerId: element.player,
+            playerId: card.player,
             fieldKey: 'yellowCards',
-            value: element.yellow,
+            value: card.yellow,
           };
           await this.playersService.updateStatistics(statistics, session);
         }
-      });
+      }
 
-      dto.goals.map(async (element) => {
-        const statistics = {
-          playerId: element.goal,
+      for (const goal of dto.goals) {
+        const goalStatistics = {
+          playerId: goal.goal,
           fieldKey: 'goals',
           value: 1,
         };
-        await this.playersService.updateStatistics(statistics, session);
-      });
+        await this.playersService.updateStatistics(goalStatistics, session);
+
+        if (goal.assist) {
+          const assistStatistics = {
+            playerId: goal.assist,
+            fieldKey: 'assists',
+            value: 1,
+          };
+          await this.playersService.updateStatistics(assistStatistics, session);
+        }
+      }
 
       await session.commitTransaction();
       session.endSession();
