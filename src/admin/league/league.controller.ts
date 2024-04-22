@@ -1,4 +1,5 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Patch, Post, UseGuards } from '@nestjs/common';
+import { Types } from 'mongoose';
 
 import { AdminGuard } from 'src/guards';
 import { LeagueCreateDto } from 'src/leagues/dto';
@@ -13,5 +14,10 @@ export class LeagueController {
   @Post('create-league')
   createLeague(@Body() dto: LeagueCreateDto): Promise<League> {
     return this.leaguesService.create(dto);
+  }
+
+  @Patch('calculate-league')
+  calculateLeague(@Body('leagueId') leagueId: Types.ObjectId): Promise<League> {
+    return this.leaguesService.updateStatus(leagueId);
   }
 }
