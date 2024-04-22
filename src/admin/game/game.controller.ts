@@ -1,4 +1,5 @@
 import { Body, Controller, Post, Put, UseGuards } from '@nestjs/common';
+import { Types } from 'mongoose';
 
 import { AdminGuard } from 'src/guards';
 import { GameService } from './game.service';
@@ -24,5 +25,10 @@ export class GameController {
   @Put('update-game')
   updateGame(@Body() dto: GameUpdateDto): Promise<Game> {
     return this.gameService.updateGame(dto);
+  }
+
+  @Put('calculate-game')
+  calculateGame(@Body('gameId') gameId: Types.ObjectId): Promise<Game> {
+    return this.gameService.calculateGame(gameId);
   }
 }

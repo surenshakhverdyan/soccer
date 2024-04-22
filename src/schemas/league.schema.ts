@@ -46,7 +46,7 @@ export class League extends Document {
           type: Types.ObjectId,
           ref: 'Team',
         },
-        post: { type: Number },
+        points: { type: Number },
       },
     ],
   })

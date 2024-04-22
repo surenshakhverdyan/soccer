@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ClientSession, Model, Types } from 'mongoose';
 
 import { League } from 'src/schemas';
-import { LeagueCreateDto } from './dto';
+import { LeagueCreateDto, PointsUpdateDto } from './dto';
 
 @Injectable()
 export class LeaguesService {
@@ -43,5 +43,18 @@ export class LeaguesService {
     );
 
     return league;
+  }
+
+  async updatePoint(
+    dto: PointsUpdateDto,
+    session?: ClientSession,
+  ): Promise<boolean> {
+    await this.leagueModel.updateOne(
+      { _id: dto.leagueId, 'teams.team': dto.teamId },
+      { $inc: { 'teams.$.points': dto.value } },
+      { new: true, session },
+    );
+
+    return true;
   }
 }

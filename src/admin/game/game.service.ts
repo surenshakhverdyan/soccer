@@ -198,4 +198,56 @@ export class GameService {
       throw new HttpException(error.message, 500);
     }
   }
+
+  async calculateGame(gameId: Types.ObjectId): Promise<Game> {
+    const _game = await this.gamesService.getById(gameId);
+
+    if (_game.status !== Status.Active)
+      throw new HttpException('The game is ended', 403);
+
+    const session = await this.connection.startSession();
+
+    try {
+      session.startTransaction();
+
+      if (_game.team_1.goals.length > _game.team_2.goals.length) {
+        const data = {
+          leagueId: _game.league,
+          teamId: _game.team_1.team,
+          value: 3,
+        };
+        await this.leaguesService.updatePoint(data, session);
+      } else if (_game.team_2.goals.length > _game.team_1.goals.length) {
+        const data = {
+          leagueId: _game.league,
+          teamId: _game.team_2.team,
+          value: 3,
+        };
+        await this.leaguesService.updatePoint(data, session);
+      } else {
+        const data = {
+          leagueId: _game.league,
+          teamId: _game.team_1.team,
+          value: 1,
+        };
+        await this.leaguesService.updatePoint(data, session);
+
+        data.teamId = _game.team_2.team;
+        await this.leaguesService.updatePoint(data, session);
+      }
+
+      _game.status = Status.Ended;
+      await _game.save({ session });
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return _game;
+    } catch (error: any) {
+      await session.abortTransaction();
+      session.endSession();
+
+      throw new HttpException(error.message, 500);
+    }
+  }
 }
