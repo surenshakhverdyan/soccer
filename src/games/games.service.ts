@@ -4,6 +4,7 @@ import { ClientSession, Model, Types } from 'mongoose';
 
 import { Game } from 'src/schemas';
 import { GameCreateDto, GameSetDto, GameUpdateDto } from './dto';
+import { GameMediaDto } from 'src/admin/game/dto';
 
 @Injectable()
 export class GamesService {
@@ -42,5 +43,15 @@ export class GamesService {
     await game.save({ session });
 
     return game;
+  }
+
+  async updateMedia(dto: GameMediaDto): Promise<boolean> {
+    await this.gameModel.findByIdAndUpdate(
+      dto.gameId,
+      { $set: { video: dto.url }, $push: { images: dto.images } },
+      { new: true },
+    );
+
+    return true;
   }
 }

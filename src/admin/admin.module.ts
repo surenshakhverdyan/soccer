@@ -28,6 +28,7 @@ import { GameController } from './game/game.controller';
 import { GameService } from './game/game.service';
 import { GamesModule } from 'src/games/games.module';
 import { SchedulesModule } from 'src/schedules/schedules.module';
+import { ImagesModule } from 'src/images/images.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { SchedulesModule } from 'src/schedules/schedules.module';
     BasketsModule,
     GamesModule,
     SchedulesModule,
+    ImagesModule,
   ],
   controllers: [
     UserController,

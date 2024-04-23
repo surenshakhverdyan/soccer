@@ -12,9 +12,10 @@ import { LeaguesService } from 'src/leagues/leagues.service';
 import { Game } from 'src/schemas';
 import { gameDateTimeTemplate, scheduleGameTemplate } from 'src/templates';
 import { TokenService } from 'src/token/token.service';
-import { GameSetDto, GameUpdateDto } from './dto';
+import { GameMediaDto, GameSetDto, GameUpdateDto } from './dto';
 import { PlayersService } from 'src/players/players.service';
 import { SchedulesService } from 'src/schedules/schedules.service';
+import { ImagesService } from 'src/images/images.service';
 
 @Injectable()
 export class GameService {
@@ -28,6 +29,7 @@ export class GameService {
     private readonly leaguesService: LeaguesService,
     private readonly playersService: PlayersService,
     private readonly schedulesService: SchedulesService,
+    private readonly imagesService: ImagesService,
   ) {}
 
   async createGame(dto: GameCreateDto): Promise<Game> {
@@ -246,6 +248,39 @@ export class GameService {
     } catch (error: any) {
       await session.abortTransaction();
       session.endSession();
+
+      throw new HttpException(error.message, 500);
+    }
+  }
+
+  async updateGameMedia(
+    dto: GameMediaDto,
+    images?: Express.Multer.File[],
+  ): Promise<boolean> {
+    const _images: Array<string> = [];
+
+    try {
+      for (let i = 0; i < images.length; i++) {
+        const element = images[i];
+        console.log(element);
+        const _image = await this.imagesService.upload(element);
+        _images.push(_image);
+      }
+
+      const data = {
+        gameId: dto.gameId,
+        url: dto.url,
+        images: _images,
+      };
+
+      await this.gamesService.updateMedia(data);
+
+      return true;
+    } catch (error: any) {
+      for (let i = 0; i < _images.length; i++) {
+        const element = _images[i];
+        await this.imagesService.delete(element);
+      }
 
       throw new HttpException(error.message, 500);
     }
