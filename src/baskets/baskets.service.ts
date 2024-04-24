@@ -18,6 +18,20 @@ export class BasketsService {
     return basket;
   }
 
+  async removeTeam(
+    basketId: Types.ObjectId,
+    teamId: Types.ObjectId,
+    session: ClientSession,
+  ): Promise<boolean> {
+    await this.basketModel.findByIdAndUpdate(
+      basketId,
+      { $pull: { teams: teamId } },
+      { new: true, session },
+    );
+
+    return true;
+  }
+
   async getById(basketId: Types.ObjectId): Promise<IBasket> {
     const basket: IBasket = await this.basketModel.findById(basketId).populate({
       path: 'teams',

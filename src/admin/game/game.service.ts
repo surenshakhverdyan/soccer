@@ -219,6 +219,11 @@ export class GameService {
           value: 3,
         };
         await this.leaguesService.updatePoint(data, session);
+        await this.basketsService.removeTeam(
+          _game.basket,
+          _game.team_2.team,
+          session,
+        );
       } else if (_game.team_2.goals.length > _game.team_1.goals.length) {
         const data = {
           leagueId: _game.league,
@@ -226,6 +231,11 @@ export class GameService {
           value: 3,
         };
         await this.leaguesService.updatePoint(data, session);
+        await this.basketsService.removeTeam(
+          _game.basket,
+          _game.team_1.team,
+          session,
+        );
       } else {
         const data = {
           leagueId: _game.league,
