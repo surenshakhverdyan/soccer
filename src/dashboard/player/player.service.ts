@@ -94,6 +94,7 @@ export class PlayerService {
     try {
       const player = await this.playersService.getById(dto.playerId);
       dto.status = Status.Deleted;
+      dto.number = null;
 
       session.startTransaction();
 

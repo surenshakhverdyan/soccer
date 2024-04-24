@@ -48,6 +48,11 @@ export class TeamsService {
       { new: true, session },
     );
 
+    if (team.players.length < 9) {
+      team.status = Status.Inactive;
+      await team.save({ session });
+    }
+
     return team;
   }
 

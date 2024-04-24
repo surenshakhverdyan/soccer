@@ -1,11 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/mongoose';
 import { Connection, Types } from 'mongoose';
-import { Status } from 'src/enums';
 
 import { PlayersService } from 'src/players/players.service';
 import { TeamsService } from 'src/teams/teams.service';
 import { TransfersService } from 'src/transfers/transfers.service';
+import { Status } from 'src/enums';
 
 @Injectable()
 export class TransferService {
