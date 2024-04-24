@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import { ClientSession, Model, Types } from 'mongoose';
 
 import { Schedule } from 'src/schemas';
 import { ScheduleCreateDto } from './dto';
@@ -46,5 +46,14 @@ export class SchedulesService {
       .select('-updatedAt -createdAt -__v');
 
     return schedule;
+  }
+
+  async delete(
+    scheduleId: Types.ObjectId,
+    session?: ClientSession,
+  ): Promise<boolean> {
+    await this.scheduleModel.findByIdAndDelete(scheduleId, session);
+
+    return true;
   }
 }
