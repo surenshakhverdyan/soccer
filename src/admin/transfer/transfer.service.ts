@@ -49,7 +49,11 @@ export class TransferService {
         session,
       );
 
-      const dto = { team: transfer.toTeam, playerId: transfer.player };
+      const dto = {
+        team: transfer.toTeam,
+        playerId: transfer.player,
+        number: null,
+      };
 
       await this.playersService.update(dto, session);
 
