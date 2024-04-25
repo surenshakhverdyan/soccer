@@ -1,0 +1,1548 @@
+{
+	"info": {
+		"_postman_id": "a9d35b4a-35ed-49fa-bd8d-763fabf0ad53",
+		"name": "soccer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32307856"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "reset-password",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"156354111\",\n    \"passwordConfirmation\": \"156354111\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWQyZWJkYzljMjM5YWI4ZDk0YmM5NzMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiRlBUIiwiaWF0IjoxNzA4MzIyMjIyLCJleHAiOjE3MDgzMjU4MjJ9.er85R1hq0F7d_7I3SMbnxVEdY-LChJcat0NWpW48vcs",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"reset-password",
+								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWQyZWJkYzljMjM5YWI4ZDk0YmM5NzMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiRlBUIiwiaWF0IjoxNzA4MzIyMjIyLCJleHAiOjE3MDgzMjU4MjJ9.er85R1hq0F7d_7I3SMbnxVEdY-LChJcat0NWpW48vcs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign-in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@email.com\",\n    \"password\": \"156354111\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/sign-in",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"sign-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh-token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "refresh",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWQyZWJkYzljMjM5YWI4ZDk0YmM5NzMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiUlQiLCJpYXQiOjE3MDgzMjIxNDQsImV4cCI6MTcwODkyNjk0NH0.95GYnPuXRoFHg5l5fjTOXX-tojWQeIyPXxX4l5eUKpk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/auth/refresh-token",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"agent.-.007@mail.ru\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/forgot-password",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "league",
+					"item": [
+						{
+							"name": "create-league",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"League1\",\n    \"teams\": [\n        {\n            \"team\": \"6628e0fbc939b907ceab436b\"\n        },\n        {\n            \"team\": \"6628e150c939b907ceab438e\"\n        },\n        {\n            \"team\": \"6628e1b8c939b907ceab43b5\"\n        },\n        {\n            \"team\": \"6628e1ddc939b907ceab43d8\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/create-league",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"create-league"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-league/id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/admin/get-league/662954417e10083851d91948",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"get-league",
+										"662954417e10083851d91948"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-leagues",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/admin/get-leagues",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"get-leagues"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "calculate-league",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjBkNDM1ZWEzNjhiYzMxZDdlN2ZlYWMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiQVQifQ.Id7efVUe3F-WtxLYb8hvqpZBqgXVoxHsi5mnRirrBP8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"leagueId\": \"662954417e10083851d91948\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/calculate-league",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"calculate-league"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "transfers",
+					"item": [
+						{
+							"name": "transfer",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"transferId\": \"6628e87e08b6f9c7b1673b18\",\n    \"status\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/transfer",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"transfer"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "join",
+					"item": [
+						{
+							"name": "join-requests",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/admin/join",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"join"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "join-request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"joinId\": \"66296571a7ab3045a11bd520\",\n    \"status\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/update-join",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"update-join"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "game",
+					"item": [
+						{
+							"name": "set-game",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"startDateTime\": \"2024-08-24 23:30:00.000\",\n    \"team_1\": \"6629569d448698e801edfecf\", // schedule ids\n    \"team_2\": \"66295744448698e801edfed2\"  // schedule ids\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/set-game",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"set-game"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-game",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"league\": \"662954417e10083851d91948\",\n    \"basket\": \"662954dd7e10083851d9194e\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/create-game",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"create-game"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-game-media",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "gameId",
+											"value": "66295598448698e801edfec7",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/suren/Pictures/facebook/received_302230147135456.jpeg"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/suren/Pictures/Logo.jpeg"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/suren/Pictures/We/504A1476.JPG"
+										},
+										{
+											"key": "url",
+											"value": "https://www.youtube.com/watch?v=Sk2yoOY8CTU&list=RDSk2yoOY8CTU&start_radio=1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/update-game-media",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"update-game-media"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "calculate-game",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gameId\": \"66295598448698e801edfec7\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/calculate-game",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"calculate-game"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-game",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gameId\": \"66295598448698e801edfec7\",\n    \"teamId\": \"6628e1b8c939b907ceab43b5\",\n    \"goals\": [\n        {\n            \"assist\": \"6628e1b8c939b907ceab43b8\",\n            \"goal\": \"6628e1b8c939b907ceab43be\"\n        },\n        {\n            \"goal\": \"6628e1b9c939b907ceab43c1\"\n        },\n        {\n            \"goal\": \"6628e1b9c939b907ceab43c4\"\n        }\n    ],\n    \"cards\": [\n        {\n            \"player\": \"6628e1b9c939b907ceab43ca\",\n            \"yellow\": 1\n        },\n        {\n            \"player\": \"6629582e448698e801edfedd\",\n            \"red\": 1\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/update-game",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"update-game"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "basket",
+					"item": [
+						{
+							"name": "create-basket",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"league\": \"662954417e10083851d91948\",\n    \"teams\": [\n        \"6628e0fbc939b907ceab436b\",\n        \"6628e150c939b907ceab438e\",\n        \"6628e1b8c939b907ceab43b5\",\n        \"6628e1ddc939b907ceab43d8\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/create-basket",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"create-basket"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "delete-user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"65d2ec159c239ab8d94bc97b\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/delete-user",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"delete-user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"User_4\",\n    \"email\": \"user_4@email.com\",\n    \"phone\": \"+37411444444\",\n    \"password\": \"156354111\",\n    \"role\": \"user\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/create-user",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"create-user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete-player",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerId\": \"65d2f0539c239ab8d94bc99b\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/delete-player",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"delete-player"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/admin/get-users",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"get-users"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "cron",
+					"item": [
+						{
+							"name": "set-cron",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": 1713956899008\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/set-cron",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"set-cron"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "team",
+					"item": [
+						{
+							"name": "get-teams",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/admin/get-teams",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"get-teams"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "update-password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"156354111\",\n    \"newPassword\": \"156354111\",\n    \"passwordConfirmation\": \"156354111\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/admin/update-password",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"admin",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Administrator\",\n    \"email\": \"agent.-.007@mail.ru\",\n    \"phone\": \"+37494900359\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/admin/update-profile",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"admin",
+								"update-profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "dashboard",
+			"item": [
+				{
+					"name": "scheduler",
+					"item": [
+						{
+							"name": "create-schedule",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"date\": \"2024-05-24\",\n    \"players\": [\n        \"6628e1ddc939b907ceab43db\",\n        \"6628e1ddc939b907ceab43de\",\n        \"6628e1ddc939b907ceab43e1\",\n        \"6628e1ddc939b907ceab43e4\",\n        \"6628e1ddc939b907ceab43e7\"\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/schedule/create-schedule/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjI4ZTFkZGM5MzliOTA3Y2VhYjQzZDggNjYyOTU1OTg0NDg2OThlODAxZWRmZWM3Iiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzEzOTg0OTIwLCJleHAiOjE3MTQ0MTY5MjB9.MxvS9Xju8LH2KboefGLQGuBgputy-ww3KCjO7YgLahQ",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"schedule",
+										"create-schedule",
+										"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjI4ZTFkZGM5MzliOTA3Y2VhYjQzZDggNjYyOTU1OTg0NDg2OThlODAxZWRmZWM3Iiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzEzOTg0OTIwLCJleHAiOjE3MTQ0MTY5MjB9.MxvS9Xju8LH2KboefGLQGuBgputy-ww3KCjO7YgLahQ"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "team",
+					"item": [
+						{
+							"name": "update-team",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER2_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "avatar",
+											"type": "file",
+											"src": "/home/suren/Pictures/Logo.jpeg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/team/update-team",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"team",
+										"update-team"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create-team",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER4_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Soccer4",
+											"type": "text"
+										},
+										{
+											"key": "avatar",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "players[0][name]",
+											"value": "Arsen Iskandaryan",
+											"type": "text"
+										},
+										{
+											"key": "players[0][number]",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "players[0][position]",
+											"value": "Goalkeeper",
+											"type": "text"
+										},
+										{
+											"key": "players[0][avatar]",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "players[1][name]",
+											"value": "Alik Iskandaryan",
+											"type": "text"
+										},
+										{
+											"key": "players[1][number]",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "players[1][position]",
+											"value": "Head Coach",
+											"type": "text"
+										},
+										{
+											"key": "players[1][avatar]",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "players[2][name]",
+											"value": "David Karapetyan",
+											"type": "text"
+										},
+										{
+											"key": "players[2][number]",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "players[2][position]",
+											"value": "Center Defender",
+											"type": "text"
+										},
+										{
+											"key": "players[2][avatar]",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "players[3][name]",
+											"value": "Vigen Hayrapetyan",
+											"type": "text"
+										},
+										{
+											"key": "players[3][number]",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "players[3][position]",
+											"value": "Right Defender",
+											"type": "text"
+										},
+										{
+											"key": "players[3][avatar]",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "players[4][name]",
+											"value": "Edgar Petrosyan",
+											"type": "text"
+										},
+										{
+											"key": "players[4][number]",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "players[4][position]",
+											"value": "Left Defender",
+											"type": "text"
+										},
+										{
+											"key": "player[4][avatar]",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "players[5][name]",
+											"value": "Gagik Avanesyan",
+											"type": "text"
+										},
+										{
+											"key": "players[5][number]",
+											"value": "6",
+											"type": "text"
+										},
+										{
+											"key": "players[5][position]",
+											"value": "Center Midfielder",
+											"type": "text"
+										},
+										{
+											"key": "players[5][avatar]",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "players[6][name]",
+											"value": "Raul",
+											"type": "text"
+										},
+										{
+											"key": "players[6][number]",
+											"value": "7",
+											"type": "text"
+										},
+										{
+											"key": "players[6][position]",
+											"value": "Right Midfielder",
+											"type": "text"
+										},
+										{
+											"key": "players[6][avatar]",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "players[7][name]",
+											"value": "Vigen Hovhannisyan",
+											"type": "text"
+										},
+										{
+											"key": "players[7][number]",
+											"value": "8",
+											"type": "text"
+										},
+										{
+											"key": "players[7][position]",
+											"value": "Left Midfielder",
+											"type": "text"
+										},
+										{
+											"key": "players[7][avatar]",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "players[8][name]",
+											"value": "Arkadi Karapetyan",
+											"type": "text"
+										},
+										{
+											"key": "players[8][number]",
+											"value": "9",
+											"type": "text"
+										},
+										{
+											"key": "players[8][position]",
+											"value": "Striker",
+											"type": "text"
+										},
+										{
+											"key": "players[8][avatar]",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/team/create-team",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"team",
+										"create-team"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "transfer",
+					"item": [
+						{
+							"name": "create-transfer",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER1_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerId\": \"6628e150c939b907ceab43a3\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/transfer/create-transfer",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"transfer",
+										"create-transfer"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "player",
+					"item": [
+						{
+							"name": "add-player",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER2_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Levon Muradyan",
+											"type": "text"
+										},
+										{
+											"key": "number",
+											"value": "13",
+											"type": "text"
+										},
+										{
+											"key": "position",
+											"value": "Center Midfielder",
+											"type": "text"
+										},
+										{
+											"key": "avatar",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/player/add-player",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"player",
+										"add-player"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete-player",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER2_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerId\": \"6628e180c939b907ceab43ad\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/player/delete-player",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"player",
+										"delete-player"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-player",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER1_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "avatar",
+											"type": "file",
+											"src": "/home/suren/Pictures/IMG_1766.jpg"
+										},
+										{
+											"key": "playerId",
+											"value": "6628e0fbc939b907ceab436e",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "Lionel Messi",
+											"type": "text"
+										},
+										{
+											"key": "position",
+											"value": "Striker",
+											"type": "text"
+										},
+										{
+											"key": "number",
+											"value": "13",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/player/update-player",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"player",
+										"update-player"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "update-password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER1_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"currentPassword\": \"156354111\",\n    \"password\": \"156354111\",\n    \"passwordConfirm\": \"156354111\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/user/password-update",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"user",
+										"password-update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER1_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"User1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/user/update-profile",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"user",
+										"update-profile"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "public",
+			"item": [
+				{
+					"name": "images",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/public/images/1708323851010.png",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"public",
+								"images",
+								"1708323851010.png"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "join-request/create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"User_5\",\n    \"email\": \"user_5@email.com\",\n    \"phone\": \"+37411555555\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/join",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"join"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
