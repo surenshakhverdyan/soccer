@@ -43,4 +43,25 @@ export class TransfersService {
 
     return transfers;
   }
+
+  async getMyTransfers(teamId: Types.ObjectId): Promise<Transfer[]> {
+    const transfers = await this.transferModel
+      .find({ $or: [{ toTeam: teamId }, { fromTeam: teamId }] })
+      .populate({
+        path: 'fromTeam',
+        model: 'Team',
+        select: 'name',
+      })
+      .populate({
+        path: 'toTeam',
+        model: 'Team',
+        select: 'name',
+      })
+      .populate({
+        path: 'player',
+        model: 'Player',
+      });
+
+    return transfers;
+  }
 }

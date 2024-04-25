@@ -45,4 +45,14 @@ export class TransferService {
       throw new HttpException(error.message, 500);
     }
   }
+
+  async getMyTransfers(): Promise<Transfer[]> {
+    const token = this.tokenService.extractToken(this.request);
+    const { sub } = this.tokenService.decode(token);
+    const _user = await this.usersService.getById(sub);
+
+    const transfers = await this.transfersService.getMyTransfers(_user.team);
+
+    return transfers;
+  }
 }
