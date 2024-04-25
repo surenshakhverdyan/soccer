@@ -93,4 +93,14 @@ export class LeaguesService {
 
     return league;
   }
+
+  async getById(leagueId: Types.ObjectId): Promise<League> {
+    const league = await this.leagueModel.findById(leagueId).populate({
+      path: 'teams',
+      model: 'Team',
+      select: 'name',
+    });
+
+    return league;
+  }
 }
