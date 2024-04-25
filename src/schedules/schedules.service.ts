@@ -48,11 +48,27 @@ export class SchedulesService {
     return schedule;
   }
 
-  async delete(
-    scheduleId: Types.ObjectId,
+  async getByGameId(gameId: Types.ObjectId): Promise<Schedule[]> {
+    const schedules = await this.scheduleModel
+      .find({ game: new Types.ObjectId(gameId) })
+      .populate({
+        path: 'team',
+        model: 'Team',
+        select: 'name',
+      })
+      .populate({
+        path: 'players',
+        model: 'Player',
+      });
+
+    return schedules;
+  }
+
+  async deleteByGameId(
+    gameId: Types.ObjectId,
     session?: ClientSession,
   ): Promise<boolean> {
-    await this.scheduleModel.findByIdAndDelete(scheduleId, session);
+    await this.scheduleModel.deleteMany(gameId, session);
 
     return true;
   }

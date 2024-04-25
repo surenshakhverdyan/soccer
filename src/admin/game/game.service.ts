@@ -119,8 +119,7 @@ export class GameService {
         });
       }
 
-      await this.schedulesService.delete(dto.team_1);
-      await this.schedulesService.delete(dto.team_2);
+      await this.schedulesService.deleteByGameId(data.gameId, session);
 
       await session.commitTransaction();
       session.endSession();
