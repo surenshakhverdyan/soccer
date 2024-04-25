@@ -3,7 +3,7 @@ import { Response } from 'express';
 
 import { ImagesService } from 'src/images/images.service';
 
-@Controller('public/image')
+@Controller('image')
 export class ImageController {
   constructor(private readonly imagesService: ImagesService) {}
 
