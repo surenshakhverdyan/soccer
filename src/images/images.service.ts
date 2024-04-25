@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { extname } from 'path';
+import { extname, join } from 'path';
 import * as fs from 'fs';
 
 @Injectable()
@@ -16,5 +16,11 @@ export class ImagesService {
 
   async delete(image: string): Promise<void> {
     fs.promises.unlink(`uploads/${image}`);
+  }
+
+  getImage(path: string): string {
+    const imagePath = join(__dirname, '../..', 'uploads', path);
+
+    return imagePath;
   }
 }
