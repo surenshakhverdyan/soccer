@@ -16,13 +16,15 @@ export class CronsService {
     });
 
     if (!cron) {
-      await this.cronModel.create({ endTransfers: date });
+      const _cron = await this.cronModel.create({ endTransfers: date });
+
+      return _cron;
     } else {
       cron.endTransfers = date;
       await cron.save();
-    }
 
-    return cron;
+      return cron;
+    }
   }
 
   async get(): Promise<Cron> {
