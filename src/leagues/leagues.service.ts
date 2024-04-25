@@ -96,7 +96,7 @@ export class LeaguesService {
 
   async getById(leagueId: Types.ObjectId): Promise<League> {
     const league = await this.leagueModel.findById(leagueId).populate({
-      path: 'teams',
+      path: 'teams.team',
       model: 'Team',
       select: 'name',
     });
