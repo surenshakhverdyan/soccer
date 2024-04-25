@@ -109,4 +109,20 @@ export class LeaguesService {
 
     return league;
   }
+
+  async getActiveLeagues(): Promise<League[]> {
+    const leagues = await this.leagueModel
+      .find({ status: Status.Active })
+      .populate({
+        path: 'teams.team',
+        model: 'Team',
+        select: 'name',
+      })
+      .populate({
+        path: 'games',
+        model: 'Game',
+      });
+
+    return leagues;
+  }
 }

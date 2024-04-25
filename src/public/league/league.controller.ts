@@ -8,6 +8,11 @@ import { League } from 'src/schemas';
 export class LeagueController {
   constructor(private readonly leaguesService: LeaguesService) {}
 
+  @Get('active')
+  getActiveLeagues(): Promise<League[]> {
+    return this.leaguesService.getActiveLeagues();
+  }
+
   @Get(':id')
   getLeague(@Param('id') leagueId: Types.ObjectId): Promise<League> {
     return this.leaguesService.getById(leagueId);
