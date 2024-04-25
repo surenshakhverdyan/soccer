@@ -162,6 +162,10 @@ export class GameService {
             value: card.red,
           };
           await this.playersService.updateStatistics(statistics, session);
+          await this.playersService.findByIdAndInactivate(
+            statistics.playerId,
+            session,
+          );
         }
 
         if (card.yellow) {
@@ -275,7 +279,6 @@ export class GameService {
     try {
       for (let i = 0; i < images.length; i++) {
         const element = images[i];
-        console.log(element);
         const _image = await this.imagesService.upload(element);
         _images.push(_image);
       }

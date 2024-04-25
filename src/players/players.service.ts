@@ -79,11 +79,11 @@ export class PlayersService {
   }
 
   async findByIdAndInactivate(
-    teamId: Types.ObjectId,
+    playerId: Types.ObjectId,
     session?: ClientSession,
   ): Promise<boolean> {
     await this.playerModel.findByIdAndUpdate(
-      teamId,
+      playerId,
       { $set: { status: Status.Inactive } },
       { new: true, session },
     );
