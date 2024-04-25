@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a9d35b4a-35ed-49fa-bd8d-763fabf0ad53",
+		"_postman_id": "23c6c07e-20ee-4ebf-b030-ff7509b911e4",
 		"name": "soccer",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "32307856"
@@ -140,7 +140,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"League1\",\n    \"teams\": [\n        {\n            \"team\": \"6628e0fbc939b907ceab436b\"\n        },\n        {\n            \"team\": \"6628e150c939b907ceab438e\"\n        },\n        {\n            \"team\": \"6628e1b8c939b907ceab43b5\"\n        },\n        {\n            \"team\": \"6628e1ddc939b907ceab43d8\"\n        }\n    ]\n}",
+									"raw": "{\n    \"name\": \"League1\",\n    \"teams\": [\n        {\n            \"team\": \"662a0aad609947627c31c263\"\n        },\n        {\n            \"team\": \"662a0abf609947627c31c286\"\n        },\n        {\n            \"team\": \"662a0aca609947627c31c2a9\"\n        },\n        {\n            \"team\": \"662a0ae3609947627c31c2cd\"\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -155,63 +155,6 @@
 									"path": [
 										"admin",
 										"create-league"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "get-league/id",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{ADMIN_TOKEN}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{BASE_URL}}/admin/get-league/662954417e10083851d91948",
-									"host": [
-										"{{BASE_URL}}"
-									],
-									"path": [
-										"admin",
-										"get-league",
-										"662954417e10083851d91948"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "get-leagues",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "{{ADMIN_TOKEN}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{BASE_URL}}/admin/get-leagues",
-									"host": [
-										"{{BASE_URL}}"
-									],
-									"path": [
-										"admin",
-										"get-leagues"
 									]
 								}
 							},
@@ -276,7 +219,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"transferId\": \"6628e87e08b6f9c7b1673b18\",\n    \"status\": true\n}",
+									"raw": "{\n    \"transferId\": \"662a2d242304751a2f71542f\",\n    \"status\": true\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -295,6 +238,34 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "pending-transfers",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/admin/pending-transfers",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"pending-transfers"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -302,7 +273,7 @@
 					"name": "join",
 					"item": [
 						{
-							"name": "join-requests",
+							"name": "join",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -330,7 +301,7 @@
 							"response": []
 						},
 						{
-							"name": "join-request",
+							"name": "update-join",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -346,7 +317,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"joinId\": \"66296571a7ab3045a11bd520\",\n    \"status\": true\n}",
+									"raw": "{\n    \"joinId\": \"662a29e58784bfc6c4ba9c2e\",\n    \"status\": false\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -388,7 +359,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"startDateTime\": \"2024-08-24 23:30:00.000\",\n    \"team_1\": \"6629569d448698e801edfecf\", // schedule ids\n    \"team_2\": \"66295744448698e801edfed2\"  // schedule ids\n}",
+									"raw": "{\n    \"startDateTime\": \"2024-08-24 23:30:00.000\",\n    \"team_1\": \"662a20b57d3487c17674e562\", // schedule ids\n    \"team_2\": \"662a21217d3487c17674e565\"  // schedule ids\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -425,7 +396,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"league\": \"662954417e10083851d91948\",\n    \"basket\": \"662954dd7e10083851d9194e\"\n}",
+									"raw": "{\n    \"league\": \"662a1f15619b909b06792861\",\n    \"basket\": \"662a1f8a619b909b06792867\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -465,23 +436,23 @@
 									"formdata": [
 										{
 											"key": "gameId",
-											"value": "66295598448698e801edfec7",
+											"value": "662a202f7d3487c17674e55a",
 											"type": "text"
 										},
 										{
 											"key": "image",
 											"type": "file",
-											"src": "/home/suren/Pictures/facebook/received_302230147135456.jpeg"
+											"src": "/home/wppc-0021/Pictures/Screenshots/Screenshot from 2024-03-13 18-13-27.png"
 										},
 										{
 											"key": "image",
 											"type": "file",
-											"src": "/home/suren/Pictures/Logo.jpeg"
+											"src": "/home/wppc-0021/Pictures/Screenshots/Screenshot from 2024-03-13 16-55-37.png"
 										},
 										{
 											"key": "image",
 											"type": "file",
-											"src": "/home/suren/Pictures/We/504A1476.JPG"
+											"src": "/home/wppc-0021/Pictures/Screenshots/Screenshot from 2024-03-20 10-46-00.png"
 										},
 										{
 											"key": "url",
@@ -520,7 +491,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"gameId\": \"66295598448698e801edfec7\"\n}",
+									"raw": "{\n    \"gameId\": \"662a202f7d3487c17674e55a\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -557,7 +528,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"gameId\": \"66295598448698e801edfec7\",\n    \"teamId\": \"6628e1b8c939b907ceab43b5\",\n    \"goals\": [\n        {\n            \"assist\": \"6628e1b8c939b907ceab43b8\",\n            \"goal\": \"6628e1b8c939b907ceab43be\"\n        },\n        {\n            \"goal\": \"6628e1b9c939b907ceab43c1\"\n        },\n        {\n            \"goal\": \"6628e1b9c939b907ceab43c4\"\n        }\n    ],\n    \"cards\": [\n        {\n            \"player\": \"6628e1b9c939b907ceab43ca\",\n            \"yellow\": 1\n        },\n        {\n            \"player\": \"6629582e448698e801edfedd\",\n            \"red\": 1\n        }\n    ]\n}",
+									"raw": "{\n    \"gameId\": \"662a202f7d3487c17674e55a\",\n    \"teamId\": \"662a0abf609947627c31c286\",\n    \"goals\": [\n        {\n            \"assist\": \"662a0abf609947627c31c289\",\n            \"goal\": \"662a0abf609947627c31c28c\"\n        },\n        {\n            \"goal\": \"662a0abf609947627c31c28c\"\n        },\n        {\n            \"goal\": \"662a0abf609947627c31c28f\"\n        },\n        {\n            \"goal\": \"662a0abf609947627c31c289\"\n        }\n    ],\n    \"cards\": [\n        {\n            \"player\": \"662a0abf609947627c31c292\",\n            \"yellow\": 1\n        },\n        {\n            \"player\": \"662a0abf609947627c31c295\",\n            \"red\": 1\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -599,7 +570,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"league\": \"662954417e10083851d91948\",\n    \"teams\": [\n        \"6628e0fbc939b907ceab436b\",\n        \"6628e150c939b907ceab438e\",\n        \"6628e1b8c939b907ceab43b5\",\n        \"6628e1ddc939b907ceab43d8\"\n    ]\n}",
+									"raw": "{\n    \"league\": \"662a1f15619b909b06792861\",\n    \"teams\": [\n        \"662a0aad609947627c31c263\",\n        \"662a0abf609947627c31c286\",\n        \"662a0aca609947627c31c2a9\",\n        \"662a0ae3609947627c31c2cd\"\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -841,6 +812,40 @@
 					]
 				},
 				{
+					"name": "schedule",
+					"item": [
+						{
+							"name": "schedule/gameId",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/admin/schedule/662a202f7d3487c17674e55a",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"schedule",
+										"662a202f7d3487c17674e55a"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "update-password",
 					"request": {
 						"auth": {
@@ -929,7 +934,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"date\": \"2024-05-24\",\n    \"players\": [\n        \"6628e1ddc939b907ceab43db\",\n        \"6628e1ddc939b907ceab43de\",\n        \"6628e1ddc939b907ceab43e1\",\n        \"6628e1ddc939b907ceab43e4\",\n        \"6628e1ddc939b907ceab43e7\"\n    ]\n}",
+									"raw": "{\n    \"date\": \"2024-05-24\",\n    \"players\": [\n        \"662a0ae3609947627c31c2d0\",\n        \"662a0ae3609947627c31c2d3\",\n        \"662a0ae3609947627c31c2d6\",\n        \"662a0ae3609947627c31c2d9\",\n        \"662a0ae3609947627c31c2dc\"\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -937,14 +942,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{BASE_URL}}/schedule/create-schedule/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjI4ZTFkZGM5MzliOTA3Y2VhYjQzZDggNjYyOTU1OTg0NDg2OThlODAxZWRmZWM3Iiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzEzOTg0OTIwLCJleHAiOjE3MTQ0MTY5MjB9.MxvS9Xju8LH2KboefGLQGuBgputy-ww3KCjO7YgLahQ",
+									"raw": "{{BASE_URL}}/schedule/create-schedule/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFlMzYwOTk0NzYyN2MzMWMyY2QgNjYyYTIwMmY3ZDM0ODdjMTc2NzRlNTVhIiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0MDM2NzgzLCJleHAiOjE3MTQ0Njg3ODN9.hF-76ERsx1IuW8_C_tJWrQjda-P9MTTiScvh170BTeo",
 									"host": [
 										"{{BASE_URL}}"
 									],
 									"path": [
 										"schedule",
 										"create-schedule",
-										"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjI4ZTFkZGM5MzliOTA3Y2VhYjQzZDggNjYyOTU1OTg0NDg2OThlODAxZWRmZWM3Iiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzEzOTg0OTIwLCJleHAiOjE3MTQ0MTY5MjB9.MxvS9Xju8LH2KboefGLQGuBgputy-ww3KCjO7YgLahQ"
+										"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFlMzYwOTk0NzYyN2MzMWMyY2QgNjYyYTIwMmY3ZDM0ODdjMTc2NzRlNTVhIiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0MDM2NzgzLCJleHAiOjE3MTQ0Njg3ODN9.hF-76ERsx1IuW8_C_tJWrQjda-P9MTTiScvh170BTeo"
 									]
 								}
 							},
@@ -1229,7 +1234,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "{{USER1_TOKEN}}",
+											"value": "{{USER2_TOKEN}}",
 											"type": "string"
 										}
 									]
@@ -1238,7 +1243,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"playerId\": \"6628e150c939b907ceab43a3\"\n}",
+									"raw": "{\n    \"playerId\": \"662a0abf609947627c31c2a1\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1253,6 +1258,34 @@
 									"path": [
 										"transfer",
 										"create-transfer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "my-transfers",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER1_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/transfer/my-transfers",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"transfer",
+										"my-transfers"
 									]
 								}
 							},
@@ -1361,7 +1394,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "{{USER1_TOKEN}}",
+											"value": "{{USER2_TOKEN}}",
 											"type": "string"
 										}
 									]
@@ -1374,26 +1407,26 @@
 										{
 											"key": "avatar",
 											"type": "file",
-											"src": "/home/suren/Pictures/IMG_1766.jpg"
+											"src": []
 										},
 										{
 											"key": "playerId",
-											"value": "6628e0fbc939b907ceab436e",
+											"value": "662a0abf609947627c31c2a1",
 											"type": "text"
 										},
 										{
 											"key": "name",
-											"value": "Lionel Messi",
+											"value": "",
 											"type": "text"
 										},
 										{
 											"key": "position",
-											"value": "Striker",
+											"value": "",
 											"type": "text"
 										},
 										{
 											"key": "number",
-											"value": "13",
+											"value": "9",
 											"type": "text"
 										}
 									]
@@ -1498,26 +1531,25 @@
 			"name": "public",
 			"item": [
 				{
-					"name": "images",
+					"name": "image/image",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/public/images/1708323851010.png",
+							"raw": "{{BASE_URL}}/image/1714031445979.png",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
-								"public",
-								"images",
-								"1708323851010.png"
+								"image",
+								"1714031445979.png"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "join-request/create",
+					"name": "join",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -1537,6 +1569,42 @@
 							],
 							"path": [
 								"join"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-league/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/league/662a1f15619b909b06792861",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"league",
+								"662a1f15619b909b06792861"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-leagues",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/league/active",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"league",
+								"active"
 							]
 						}
 					},
