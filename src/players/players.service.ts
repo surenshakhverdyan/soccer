@@ -28,6 +28,12 @@ export class PlayersService {
     return player;
   }
 
+  async getByTeamId(teamId: Types.ObjectId): Promise<Player[]> {
+    const players = await this.playerModel.find({ team: teamId });
+
+    return players;
+  }
+
   async update(dto: PlayerUpdateDto, session?: ClientSession): Promise<Player> {
     const player = await this.playerModel.findByIdAndUpdate(
       dto.playerId,

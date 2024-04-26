@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   FileTypeValidator,
+  Get,
+  Param,
   ParseFilePipe,
   Put,
   UploadedFile,
@@ -10,16 +12,21 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Types } from 'mongoose';
 
 import { PlayerService } from './player.service';
 import { PlayerCreateDto, PlayerUpdateDto } from 'src/players/dto';
 import { AuthGuard } from 'src/guards';
 import { Player, Team } from 'src/schemas';
+import { PlayersService } from 'src/players/players.service';
 
 @UseGuards(AuthGuard)
 @Controller('player')
 export class PlayerController {
-  constructor(private readonly playerService: PlayerService) {}
+  constructor(
+    private readonly playerService: PlayerService,
+    private readonly playersService: PlayersService,
+  ) {}
 
   @Put('add-player')
   @UseInterceptors(FileInterceptor('avatar'))
@@ -54,5 +61,10 @@ export class PlayerController {
   @Delete('delete-player')
   deletePlayer(@Body() dto: PlayerUpdateDto): Promise<Team> {
     return this.playerService.deletePlayer(dto);
+  }
+
+  @Get('team-players/:teamId')
+  getTeamPlayers(@Param('teamId') teamId: Types.ObjectId): Promise<Player[]> {
+    return this.playersService.getByTeamId(new Types.ObjectId(teamId));
   }
 }
