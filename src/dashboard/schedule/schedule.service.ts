@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { Types } from 'mongoose';
-import { ScheduleCreateDto } from 'src/schedules/dto';
 
+import { ScheduleCreateDto } from 'src/schedules/dto';
 import { SchedulesService } from 'src/schedules/schedules.service';
 import { Schedule } from 'src/schemas';
 import { TokenService } from 'src/token/token.service';

@@ -8,6 +8,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { Types } from 'mongoose';
 
 import { AdminGuard } from 'src/guards';
@@ -15,7 +16,6 @@ import { GameService } from './game.service';
 import { GameCreateDto } from 'src/games/dto';
 import { Game } from 'src/schemas';
 import { GameMediaDto, GameSetDto, GameUpdateDto } from './dto';
-import { FilesInterceptor } from '@nestjs/platform-express';
 
 @UseGuards(AdminGuard)
 @Controller('admin')

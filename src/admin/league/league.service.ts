@@ -1,9 +1,9 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/mongoose';
 import { Connection } from 'mongoose';
+
 import { Status } from 'src/enums';
 import { LeagueCreateDto } from 'src/leagues/dto';
-
 import { LeaguesService } from 'src/leagues/leagues.service';
 import { League } from 'src/schemas';
 import { TeamsService } from 'src/teams/teams.service';
