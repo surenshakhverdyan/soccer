@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "23c6c07e-20ee-4ebf-b030-ff7509b911e4",
+		"_postman_id": "74981a17-d618-4059-baf2-36b2d71b5563",
 		"name": "soccer",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "32307856"
+		"_exporter_id": "28872600"
 	},
 	"item": [
 		{
@@ -808,6 +808,46 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "get-teams-by-status",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"status\": \"active\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/admin/get-teams-by-status",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"get-teams-by-status"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -1439,6 +1479,35 @@
 									"path": [
 										"player",
 										"update-player"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-by-team-id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER2_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/player/team-players/662a0aad609947627c31c263",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"player",
+										"team-players",
+										"662a0aad609947627c31c263"
 									]
 								}
 							},
