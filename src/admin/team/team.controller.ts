@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, UseGuards } from '@nestjs/common';
 
 import { AdminGuard } from 'src/guards';
 import { Team } from 'src/schemas';
@@ -12,5 +12,10 @@ export class TeamController {
   @Get('get-teams')
   getTeams(): Promise<Team[]> {
     return this.teamsService.getAll();
+  }
+
+  @Get('get-teams-by-status')
+  getTeamsByStatus(@Body('status') status: string): Promise<Team[]> {
+    return this.teamsService.getByStatus(status);
   }
 }

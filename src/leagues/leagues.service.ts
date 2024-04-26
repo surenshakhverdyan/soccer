@@ -12,8 +12,8 @@ export class LeaguesService {
     @InjectModel(League.name) private readonly leagueModel: Model<League>,
   ) {}
 
-  async create(dto: LeagueCreateDto): Promise<League> {
-    const league = await this.leagueModel.create(dto);
+  async create(dto: LeagueCreateDto, session?: ClientSession): Promise<League> {
+    const [league] = await this.leagueModel.create([dto], { session });
 
     return league;
   }

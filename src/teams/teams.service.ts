@@ -74,6 +74,12 @@ export class TeamsService {
     return teams;
   }
 
+  async getByStatus(status: string): Promise<Team[]> {
+    const teams = await this.teamModel.find({ status });
+
+    return teams;
+  }
+
   async update(avatar: string, teamId: Types.ObjectId): Promise<Team> {
     const team = await this.teamModel
       .findByIdAndUpdate(teamId, { $set: { avatar } }, { new: true })
@@ -81,6 +87,20 @@ export class TeamsService {
         path: 'players',
         model: 'Player',
       });
+
+    return team;
+  }
+
+  async updateStatus(
+    teamId: Types.ObjectId,
+    status: string,
+    session?: ClientSession,
+  ): Promise<Team> {
+    const team = await this.teamModel.findByIdAndUpdate(
+      teamId,
+      { $set: { status } },
+      { new: true, session },
+    );
 
     return team;
   }

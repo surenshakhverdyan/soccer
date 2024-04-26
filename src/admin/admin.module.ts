@@ -30,6 +30,7 @@ import { GamesModule } from 'src/games/games.module';
 import { SchedulesModule } from 'src/schedules/schedules.module';
 import { ImagesModule } from 'src/images/images.module';
 import { ScheduleController } from './schedule/schedule.controller';
+import { LeagueService } from './league/league.service';
 
 @Module({
   imports: [
@@ -67,6 +68,7 @@ import { ScheduleController } from './schedule/schedule.controller';
     PlayerService,
     BasketService,
     GameService,
+    LeagueService,
   ],
 })
 export class AdminModule {}
