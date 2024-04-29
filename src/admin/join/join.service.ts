@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Status } from 'src/enums';
 
 import { JoinUpdateDto } from './dto';
+import { Status } from 'src/enums';
 import { JoinsService } from 'src/joins/joins.service';
 
 @Injectable()
