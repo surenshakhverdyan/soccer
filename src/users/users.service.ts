@@ -14,7 +14,16 @@ export class UsersService {
   ) {}
 
   async getByEmail(email: string): Promise<User> {
-    const _user = await this.userModel.findOne({ email });
+    const _user = await this.userModel.findOne({ email }).populate({
+      path: 'team',
+      model: 'Team',
+      select: '-createdAt -updatedAt -__v',
+      populate: {
+        path: 'players',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      },
+    });
 
     return _user;
   }
@@ -28,6 +37,16 @@ export class UsersService {
   async getAll(): Promise<User[]> {
     const users = await this.userModel
       .find({ role: Role.User })
+      .populate({
+        path: 'team',
+        model: 'Team',
+        select: '-createdAt -updatedAt -__v',
+        populate: {
+          path: 'players',
+          model: 'Player',
+          select: '-createdAt -updatedAt -__v',
+        },
+      })
       .select('-password');
 
     return users;

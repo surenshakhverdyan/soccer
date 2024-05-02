@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { ClientSession, Model, Types } from 'mongoose';
+import { ClientSession, Model, Types, model } from 'mongoose';
 
 import { League } from 'src/schemas';
 import { LeagueCreateDto, PointsUpdateDto } from './dto';
@@ -116,7 +116,12 @@ export class LeaguesService {
       .populate({
         path: 'teams.team',
         model: 'Team',
-        select: 'name',
+        select: '-createdAt -updatedAt -__v',
+        populate: {
+          path: 'players',
+          model: 'Player',
+          select: '-createdAt -updatedAt -__v',
+        },
       })
       .populate({
         path: 'games',
