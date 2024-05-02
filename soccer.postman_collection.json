@@ -196,6 +196,35 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "league/id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/admin/league/663378be15fda4640093bdad",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"league",
+										"663378be15fda4640093bdad"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -1046,7 +1075,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "{{USER4_TOKEN}}",
+											"value": "{{USER1_TOKEN}}",
 											"type": "string"
 										}
 									]
@@ -1058,7 +1087,7 @@
 									"formdata": [
 										{
 											"key": "name",
-											"value": "Soccer4",
+											"value": "Soccer1",
 											"type": "text"
 										},
 										{
@@ -1674,6 +1703,51 @@
 							"path": [
 								"league",
 								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-team/id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get-player/id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/player/662a0aad609947627c31c266",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"player",
+								"662a0aad609947627c31c266"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-game-by-team-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/team/game/662a0aad609947627c31c263",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"team",
+								"game",
+								"662a0aad609947627c31c263"
 							]
 						}
 					},
