@@ -16,6 +16,7 @@ import { GameMediaDto, GameSetDto, GameUpdateDto } from './dto';
 import { PlayersService } from 'src/players/players.service';
 import { SchedulesService } from 'src/schedules/schedules.service';
 import { ImagesService } from 'src/images/images.service';
+import { TeamsService } from 'src/teams/teams.service';
 
 @Injectable()
 export class GameService {
@@ -30,6 +31,7 @@ export class GameService {
     private readonly playersService: PlayersService,
     private readonly schedulesService: SchedulesService,
     private readonly imagesService: ImagesService,
+    private readonly teamsService: TeamsService,
   ) {}
 
   async createGame(dto: GameCreateDto): Promise<Game> {
@@ -225,9 +227,15 @@ export class GameService {
           value: 3,
         };
         await this.leaguesService.updatePoint(data, session);
+        await this.teamsService.updateGame(data.teamId, { wins: 1 }, session);
         await this.basketsService.removeTeam(
           _game.basket,
           _game.team_2.team,
+          session,
+        );
+        await this.teamsService.updateGame(
+          _game.team_2.team,
+          { losses: 1 },
           session,
         );
       } else if (_game.team_2.goals.length > _game.team_1.goals.length) {
@@ -237,9 +245,15 @@ export class GameService {
           value: 3,
         };
         await this.leaguesService.updatePoint(data, session);
+        await this.teamsService.updateGame(data.teamId, { wins: 1 }, session);
         await this.basketsService.removeTeam(
           _game.basket,
           _game.team_1.team,
+          session,
+        );
+        await this.teamsService.updateGame(
+          _game.team_1.team,
+          { losses: 1 },
           session,
         );
       } else {
@@ -249,9 +263,11 @@ export class GameService {
           value: 1,
         };
         await this.leaguesService.updatePoint(data, session);
+        await this.teamsService.updateGame(data.teamId, { draws: 1 }, session);
 
         data.teamId = _game.team_2.team;
         await this.leaguesService.updatePoint(data, session);
+        await this.teamsService.updateGame(data.teamId, { draws: 1 }, session);
       }
 
       _game.status = Status.Ended;

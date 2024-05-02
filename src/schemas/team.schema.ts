@@ -33,6 +33,15 @@ export class Team extends Document {
   @Prop({ type: String })
   avatar: string;
 
+  @Prop({ type: Number })
+  winds: number;
+
+  @Prop({ type: Number })
+  draws: number;
+
+  @Prop({ type: Number })
+  losses: number;
+
   @Prop({
     type: String,
     enum: Object.values(Status),

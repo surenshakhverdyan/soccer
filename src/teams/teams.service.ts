@@ -114,4 +114,18 @@ export class TeamsService {
 
     return team;
   }
+
+  async updateGame(
+    teamId: Types.ObjectId,
+    incrementable: { draws: 1 } | { losses: 1 } | { wins: 1 },
+    session?: ClientSession,
+  ): Promise<Team> {
+    const team = await this.teamModel.findByIdAndUpdate(
+      teamId,
+      { $inc: { incrementable } },
+      { new: true, session },
+    );
+
+    return team;
+  }
 }
