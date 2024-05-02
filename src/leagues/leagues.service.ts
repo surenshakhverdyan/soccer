@@ -105,6 +105,16 @@ export class LeaguesService {
       .populate({
         path: 'games',
         model: 'Game',
+      })
+      .populate({
+        path: 'baskets',
+        model: 'Basket',
+        select: '-createdAt -updatedAt -__v',
+        populate: {
+          path: 'teams',
+          model: 'Team',
+          select: '-createdAt -updatedAt -__v',
+        },
       });
 
     return league;
