@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { ClientSession, Model, Types, model } from 'mongoose';
+import { ClientSession, Model, Types } from 'mongoose';
 
 import { League } from 'src/schemas';
 import { LeagueCreateDto, PointsUpdateDto } from './dto';
