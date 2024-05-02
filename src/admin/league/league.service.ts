@@ -22,7 +22,11 @@ export class LeagueService {
       session.startTransaction();
 
       dto.teams.map(async (team) => {
-        await this.teamsService.updateStatus(team, Status.InLeague, session);
+        await this.teamsService.updateStatus(
+          team.team,
+          Status.InLeague,
+          session,
+        );
       });
 
       const league = await this.leaguesService.create(dto, session);

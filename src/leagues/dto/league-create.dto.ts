@@ -8,5 +8,5 @@ export class LeagueCreateDto {
 
   @IsArray()
   @ArrayMinSize(2)
-  teams: Types.ObjectId[];
+  teams: { team: Types.ObjectId }[];
 }
