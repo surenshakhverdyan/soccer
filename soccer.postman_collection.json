@@ -72,7 +72,8 @@
 							{
 								"key": "refresh",
 								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWQyZWJkYzljMjM5YWI4ZDk0YmM5NzMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiUlQiLCJpYXQiOjE3MDgzMjIxNDQsImV4cCI6MTcwODkyNjk0NH0.95GYnPuXRoFHg5l5fjTOXX-tojWQeIyPXxX4l5eUKpk",
-								"type": "text"
+								"type": "text",
+								"uuid": "d0eed3ff-1eea-463d-aadf-970229ab7cb9"
 							}
 						],
 						"url": {
@@ -614,6 +615,35 @@
 									"path": [
 										"admin",
 										"create-basket"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "league-baskets/leagueId",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/admin/league-baskets/662a1f15619b909b06792861",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"league-baskets",
+										"662a1f15619b909b06792861"
 									]
 								}
 							},
