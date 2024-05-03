@@ -13,8 +13,8 @@ export class LeagueController {
     return this.leaguesService.getActiveLeagues();
   }
 
-  @Get(':id')
-  getLeague(@Param('id') leagueId: Types.ObjectId): Promise<League> {
+  @Get(':leagueId')
+  getLeague(@Param('leagueId') leagueId: Types.ObjectId): Promise<League> {
     return this.leaguesService.getById(leagueId);
   }
 }

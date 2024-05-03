@@ -12,9 +12,9 @@ export class TeamController {
     private readonly gamesService: GamesService,
   ) {}
 
-  @Get(':id')
-  getTeam(@Param('id') id: Types.ObjectId): Promise<Team> {
-    return this.teamsService.getById(id);
+  @Get(':teamId')
+  getTeam(@Param('teamId') teamId: Types.ObjectId): Promise<Team> {
+    return this.teamsService.getById(teamId);
   }
 
   @Get('game/:teamId')

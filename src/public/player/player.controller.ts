@@ -8,8 +8,8 @@ import { Player } from 'src/schemas';
 export class PlayerController {
   constructor(private readonly playersService: PlayersService) {}
 
-  @Get(':id')
-  getPlayer(@Param('id') id: Types.ObjectId): Promise<Player> {
-    return this.playersService.getById(id);
+  @Get(':playerId')
+  getPlayer(@Param('playerId') playerId: Types.ObjectId): Promise<Player> {
+    return this.playersService.getById(playerId);
   }
 }
