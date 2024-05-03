@@ -46,4 +46,20 @@ export class BasketsService {
 
     return basket;
   }
+
+  async getByLeagueId(leagueId: Types.ObjectId): Promise<Basket[]> {
+    leagueId = new Types.ObjectId(leagueId);
+    const baskets = await this.basketModel.find({ league: leagueId }).populate({
+      path: 'teams',
+      model: 'Team',
+      select: '-createdAt -updatedAt -__v',
+      populate: {
+        path: 'players',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      },
+    });
+
+    return baskets;
+  }
 }
