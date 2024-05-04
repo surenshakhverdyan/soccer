@@ -1,8 +1,8 @@
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 
 import { ScheduleService } from './schedule.service';
 import { ScheduleCreateDto } from 'src/schedules/dto';
-import { Schedule } from 'src/schemas';
+import { Player, Schedule } from 'src/schemas';
 
 @Controller('schedule')
 export class ScheduleController {
@@ -14,5 +14,10 @@ export class ScheduleController {
     @Param('token') token: string,
   ): Promise<Schedule> {
     return this.scheduleService.createSchedule(dto, token);
+  }
+
+  @Get('get-players/:token')
+  getPlayersByTeamId(@Param('token') token: string): Promise<Player[]> {
+    return this.scheduleService.getPlayersByTeamId(token);
   }
 }

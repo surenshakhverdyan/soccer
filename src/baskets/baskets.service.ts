@@ -62,4 +62,18 @@ export class BasketsService {
 
     return baskets;
   }
+
+  async changeStatus(
+    basketId: Types.ObjectId,
+    status: string,
+    session?: ClientSession,
+  ): Promise<Basket> {
+    const basket = await this.basketModel.findByIdAndUpdate(
+      basketId,
+      { $set: { status } },
+      { new: true, session },
+    );
+
+    return basket;
+  }
 }

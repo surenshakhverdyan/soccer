@@ -12,4 +12,5 @@ export interface IBasket {
       };
     },
   ];
+  status: string;
 }

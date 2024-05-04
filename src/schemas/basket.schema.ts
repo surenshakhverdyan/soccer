@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 
+import { Status } from 'src/enums';
+
 @Schema({ timestamps: true })
 export class Basket extends Document {
   @Prop({
@@ -18,6 +20,13 @@ export class Basket extends Document {
     ],
   })
   teams: Types.ObjectId[];
+
+  @Prop({
+    type: String,
+    enum: Object.values(Status),
+    default: Status.Active,
+  })
+  status: string;
 }
 
 export const BasketSchema = SchemaFactory.createForClass(Basket);

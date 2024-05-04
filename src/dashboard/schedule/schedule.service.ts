@@ -1,9 +1,10 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { Types } from 'mongoose';
 
+import { PlayersService } from 'src/players/players.service';
 import { ScheduleCreateDto } from 'src/schedules/dto';
 import { SchedulesService } from 'src/schedules/schedules.service';
-import { Schedule } from 'src/schemas';
+import { Player, Schedule } from 'src/schemas';
 import { TokenService } from 'src/token/token.service';
 
 @Injectable()
@@ -11,6 +12,7 @@ export class ScheduleService {
   constructor(
     private readonly schedulesService: SchedulesService,
     private readonly tokenService: TokenService,
+    private readonly playersService: PlayersService,
   ) {}
 
   async createSchedule(
@@ -39,5 +41,14 @@ export class ScheduleService {
     } catch (error: any) {
       throw new HttpException(error.message, 500);
     }
+  }
+
+  async getPlayersByTeamId(token: string): Promise<Player[]> {
+    const payload = this.tokenService.verifyToken(token);
+    const [team] = payload.sub.toString().split(' ');
+    const teamId = new Types.ObjectId(team);
+    const players = await this.playersService.getByTeamId(teamId);
+
+    return players;
   }
 }

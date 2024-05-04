@@ -44,7 +44,17 @@ export class GameService {
       dto.league = new Types.ObjectId(dto.league);
 
       const basket = await this.basketsService.getById(dto.basket);
+
+      if (basket.status !== Status.Active)
+        throw new HttpException('Wait for end game', 403);
+
       const game = await this.gamesService.create(dto, session);
+
+      await this.basketsService.changeStatus(
+        dto.basket,
+        Status.Pending,
+        session,
+      );
 
       basket.teams.map(async (team) => {
         const payload = {
@@ -272,6 +282,11 @@ export class GameService {
 
       _game.status = Status.Ended;
       await _game.save({ session });
+      await this.basketsService.changeStatus(
+        _game.basket,
+        Status.Active,
+        session,
+      );
 
       await session.commitTransaction();
       session.endSession();
