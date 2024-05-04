@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "74981a17-d618-4059-baf2-36b2d71b5563",
+		"_postman_id": "ccbab4c6-157c-49d6-9cf4-4da5aa39f0c2",
 		"name": "soccer",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "28872600"
+		"_exporter_id": "32307856"
 	},
 	"item": [
 		{
@@ -141,7 +141,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"League1\",\n    \"teams\": [\n        {\n            \"team\": \"662a0aad609947627c31c263\"\n        },\n        {\n            \"team\": \"662a0abf609947627c31c286\"\n        },\n        {\n            \"team\": \"662a0aca609947627c31c2a9\"\n        },\n        {\n            \"team\": \"662a0ae3609947627c31c2cd\"\n        }\n    ]\n}",
+									"raw": "{\n    \"name\": \"League_1\",\n    \"teams\": [\n        {\n            \"team\": \"662a0aad609947627c31c263\"\n        },\n        {\n            \"team\": \"662a0abf609947627c31c286\"\n        },\n        {\n            \"team\": \"662a0aca609947627c31c2a9\"\n        },\n        {\n            \"team\": \"662a0ae3609947627c31c2cd\"\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -815,7 +815,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"date\": 1713956899008\n}",
+									"raw": "{\n    \"date\": \"2024-05-29\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1049,6 +1049,25 @@
 										"schedule",
 										"create-schedule",
 										"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFlMzYwOTk0NzYyN2MzMWMyY2QgNjYyYTIwMmY3ZDM0ODdjMTc2NzRlNTVhIiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0MDM2NzgzLCJleHAiOjE3MTQ0Njg3ODN9.hF-76ERsx1IuW8_C_tJWrQjda-P9MTTiScvh170BTeo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-players/token",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/schedule/get-players/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFiZjYwOTk0NzYyN2MzMWMyODYgNjYzNjU5NTA2MjRkMjJiMTRjZDVlMzkzIiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0ODM3ODQwLCJleHAiOjE3MTUyNjk4NDB9.6IyogjDKZAv2r_IfqxR20uqwsTrN7NIhtXm6nnjHmck",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"schedule",
+										"get-players",
+										"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFiZjYwOTk0NzYyN2MzMWMyODYgNjYzNjU5NTA2MjRkMjJiMTRjZDVlMzkzIiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0ODM3ODQwLCJleHAiOjE3MTUyNjk4NDB9.6IyogjDKZAv2r_IfqxR20uqwsTrN7NIhtXm6nnjHmck"
 									]
 								}
 							},
@@ -1742,7 +1761,10 @@
 					"name": "get-team/id",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				},
