@@ -243,6 +243,11 @@ export class GameService {
           _game.team_2.team,
           session,
         );
+        await this.teamsService.updateStatus(
+          _game.team_2.team,
+          Status.Active,
+          session,
+        );
         await this.teamsService.updateGame(
           _game.team_2.team,
           { losses: 1 },
@@ -259,6 +264,11 @@ export class GameService {
         await this.basketsService.removeTeam(
           _game.basket,
           _game.team_1.team,
+          session,
+        );
+        await this.teamsService.updateStatus(
+          _game.team_1.team,
+          Status.Active,
           session,
         );
         await this.teamsService.updateGame(
