@@ -122,7 +122,7 @@ export class TeamsService {
   ): Promise<Team> {
     const team = await this.teamModel.findByIdAndUpdate(
       teamId,
-      { $inc: { incrementable } },
+      { $inc: incrementable },
       { new: true, session },
     );
 

@@ -34,7 +34,7 @@ export class Team extends Document {
   avatar: string;
 
   @Prop({ type: Number })
-  winds: number;
+  wins: number;
 
   @Prop({ type: Number })
   draws: number;
