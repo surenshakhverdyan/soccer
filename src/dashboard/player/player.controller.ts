@@ -54,7 +54,7 @@ export class PlayerController {
       }),
     )
     avatar?: Express.Multer.File,
-  ): Promise<Player> {
+  ): Promise<Team> {
     return this.playerService.updatePlayer(dto, avatar);
   }
 

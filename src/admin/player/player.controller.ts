@@ -3,6 +3,7 @@ import { Types } from 'mongoose';
 
 import { AdminGuard } from 'src/guards';
 import { PlayerService } from './player.service';
+import { Team } from 'src/schemas';
 
 @UseGuards(AdminGuard)
 @Controller('admin')
@@ -10,7 +11,7 @@ export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
   @Delete('delete-player')
-  deletePlayer(@Body('playerId') playerId: Types.ObjectId): Promise<boolean> {
+  deletePlayer(@Body('playerId') playerId: Types.ObjectId): Promise<Team> {
     return this.playerService.deletePlayer(playerId);
   }
 }

@@ -7,7 +7,7 @@ import { Request } from 'express';
 import { ImagesService } from 'src/images/images.service';
 import { PlayerCreateDto, PlayerUpdateDto } from 'src/players/dto';
 import { PlayersService } from 'src/players/players.service';
-import { Player, Team } from 'src/schemas';
+import { Team } from 'src/schemas';
 import { TeamsService } from 'src/teams/teams.service';
 import { TokenService } from 'src/token/token.service';
 import { UsersService } from 'src/users/users.service';
@@ -73,7 +73,7 @@ export class PlayerService {
   async updatePlayer(
     dto: PlayerUpdateDto,
     avatar?: Express.Multer.File,
-  ): Promise<Player> {
+  ): Promise<Team> {
     if (avatar !== undefined) {
       const _player = await this.playersService.getById(dto.playerId);
 
@@ -84,8 +84,9 @@ export class PlayerService {
     }
 
     const player = await this.playersService.update(dto);
+    const team = await this.teamsService.getById(player.team);
 
-    return player;
+    return team;
   }
 
   async deletePlayer(dto: PlayerUpdateDto): Promise<Team> {

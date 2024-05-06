@@ -42,11 +42,17 @@ export class TeamsService {
     playerId: Types.ObjectId,
     session?: ClientSession,
   ): Promise<Team> {
-    const team = await this.teamModel.findByIdAndUpdate(
-      teamId,
-      { $pull: { players: playerId } },
-      { new: true, session },
-    );
+    const team = await this.teamModel
+      .findByIdAndUpdate(
+        teamId,
+        { $pull: { players: playerId } },
+        { new: true, session },
+      )
+      .populate({
+        path: 'players',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      });
 
     if (team.players.length < 9) {
       team.status = Status.Inactive;
