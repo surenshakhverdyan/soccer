@@ -56,7 +56,7 @@ export class GameService {
         session,
       );
 
-      basket.teams.map(async (team) => {
+      for (const team of basket.teams) {
         const payload = {
           sub: `${team._id} ${game._id}`,
           role: Role.User,
@@ -74,7 +74,7 @@ export class GameService {
           subject: 'Game scheduler',
           html: template,
         });
-      });
+      }
 
       await this.leaguesService.addGame(dto.league, game._id, session);
 
