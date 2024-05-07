@@ -18,16 +18,17 @@ export class LeagueService {
 
   async createLeague(dto: LeagueCreateDto): Promise<League> {
     const session = await this.connection.startSession();
+
     try {
       session.startTransaction();
 
-      dto.teams.map(async (team) => {
+      for (const team of dto.teams) {
         await this.teamsService.updateStatus(
           team.team,
           Status.InLeague,
           session,
         );
-      });
+      }
 
       const league = await this.leaguesService.create(dto, session);
 

@@ -8,6 +8,7 @@ export class League extends Document {
   @Prop({
     type: String,
     required: true,
+    unique: true,
   })
   name: string;
 
