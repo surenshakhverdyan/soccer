@@ -19,6 +19,7 @@ export class ImagesService {
   }
 
   getImage(path: string): string {
+    console.log(path);
     if (path === undefined) return '';
 
     const imagePath = join(__dirname, '../..', 'uploads', path);
