@@ -20,7 +20,6 @@ export class ImagesService {
 
   getImage(path: string): string {
     if (path === undefined || !path) {
-      console.log(path);
       return '';
     }
 
