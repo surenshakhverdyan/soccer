@@ -54,7 +54,12 @@ export class SchedulesService {
       .populate({
         path: 'team',
         model: 'Team',
-        select: 'name',
+        select: 'name team',
+        populate: {
+          path: 'user',
+          model: 'User',
+          select: 'phone email',
+        },
       })
       .populate({
         path: 'players',
@@ -68,7 +73,7 @@ export class SchedulesService {
     gameId: Types.ObjectId,
     session?: ClientSession,
   ): Promise<boolean> {
-    await this.scheduleModel.deleteMany(gameId, session);
+    await this.scheduleModel.deleteMany({ game: gameId }, { session });
 
     return true;
   }

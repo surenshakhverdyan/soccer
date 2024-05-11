@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   ParseFilePipe,
   Post,
   Put,
@@ -16,11 +17,15 @@ import { GameService } from './game.service';
 import { GameCreateDto } from 'src/games/dto';
 import { Game } from 'src/schemas';
 import { GameMediaDto, GameSetDto, GameUpdateDto } from './dto';
+import { GamesService } from 'src/games/games.service';
 
 @UseGuards(AdminGuard)
 @Controller('admin')
 export class GameController {
-  constructor(private readonly gameService: GameService) {}
+  constructor(
+    private readonly gameService: GameService,
+    private readonly gamesService: GamesService,
+  ) {}
 
   @Post('create-game')
   createGame(@Body() dto: GameCreateDto): Promise<Game> {
@@ -50,5 +55,10 @@ export class GameController {
     images?: Express.Multer.File[],
   ): Promise<boolean> {
     return this.gameService.updateGameMedia(dto, images);
+  }
+
+  @Get('get-active-games')
+  getActiveGames(): Promise<Game[]> {
+    return this.gamesService.getActiveGames();
   }
 }

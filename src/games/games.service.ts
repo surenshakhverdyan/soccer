@@ -5,6 +5,7 @@ import { ClientSession, Model, Types } from 'mongoose';
 import { Game } from 'src/schemas';
 import { GameCreateDto, GameSetDto, GameUpdateDto } from './dto';
 import { GameMediaDto } from 'src/admin/game/dto';
+import { Status } from 'src/enums';
 
 @Injectable()
 export class GamesService {
@@ -102,6 +103,63 @@ export class GamesService {
     await game.save({ session });
 
     return game;
+  }
+
+  async getActiveGames(): Promise<Game[]> {
+    const games = await this.gameModel
+      .find({ status: Status.Active })
+      .populate({
+        path: 'team_1.team',
+        model: 'Team',
+        select: 'name avatar',
+      })
+      .populate({
+        path: 'team_1.players',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_1.goals.assist',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_1.goals.goal',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_1.cards.player',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_2.team',
+        model: 'Team',
+        select: 'name avatar',
+      })
+      .populate({
+        path: 'team_2.players',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_2.goals.assist',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_2.goals.goal',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_2.cards.player',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      });
+
+    return games;
   }
 
   async updateMedia(dto: GameMediaDto): Promise<boolean> {
