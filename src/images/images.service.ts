@@ -19,7 +19,7 @@ export class ImagesService {
   }
 
   getImage(path: string): string {
-    if (path === undefined || !path) {
+    if (path === undefined || !path || path === 'undefined') {
       return '';
     }
 
