@@ -8,9 +8,12 @@ export class ImageController {
   constructor(private readonly imagesService: ImagesService) {}
 
   @Get(':image')
-  getImage(@Param('image') path: string, @Res() res: Response): void | string {
+  getImage(
+    @Param('image') path: string,
+    @Res() res: Response,
+  ): void | Response {
     if (path === 'undefined' || !path || path === undefined) {
-      return '';
+      return res.status(404).json('Image not found');
     }
 
     return res.sendFile(this.imagesService.getImage(path));
