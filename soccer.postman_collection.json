@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "18a54814-74d8-4dc4-accd-dda445484c02",
+		"_postman_id": "ccbab4c6-157c-49d6-9cf4-4da5aa39f0c2",
 		"name": "soccer",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "28872600"
+		"_exporter_id": "32307856"
 	},
 	"item": [
 		{
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"password\": \"156354111\",\n    \"passwordConfirm\": \"156354111\"\n}",
+							"raw": "{\n    \"password\": \"156354111\",\n    \"passwordConfirmation\": \"156354111\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,13 +24,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/auth/password-reset/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWQyZWJkYzljMjM5YWI4ZDk0YmM5NzMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiRlBUIiwiaWF0IjoxNzA4MzIyMjIyLCJleHAiOjE3MDgzMjU4MjJ9.er85R1hq0F7d_7I3SMbnxVEdY-LChJcat0NWpW48vcs",
+							"raw": "{{BASE_URL}}/auth/reset-password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWQyZWJkYzljMjM5YWI4ZDk0YmM5NzMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiRlBUIiwiaWF0IjoxNzA4MzIyMjIyLCJleHAiOjE3MDgzMjU4MjJ9.er85R1hq0F7d_7I3SMbnxVEdY-LChJcat0NWpW48vcs",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"auth",
-								"password-reset",
+								"reset-password",
 								"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWQyZWJkYzljMjM5YWI4ZDk0YmM5NzMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiRlBUIiwiaWF0IjoxNzA4MzIyMjIyLCJleHAiOjE3MDgzMjU4MjJ9.er85R1hq0F7d_7I3SMbnxVEdY-LChJcat0NWpW48vcs"
 							]
 						}
@@ -389,7 +389,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"startDateTime\": \"2024-08-24 23:30\",\n    \"team_1\": \"663880b7eac4793c8720b464\", // schedule ids\n    \"team_2\": \"66388115eac4793c8720b468\"  // schedule ids\n}",
+									"raw": "{\n    \"startDateTime\": \"2024-08-24 23:30:00.000\",\n    \"team_1\": \"66384eb58ced0e1715971c4d\", // schedule ids\n    \"team_2\": \"66384f138ced0e1715971c51\"  // schedule ids\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -426,7 +426,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"league\": \"66387ec3c73e766d62762f97\",\n    \"basket\": \"66387f8c04afc03ee4daa55c\"\n}",
+									"raw": "{\n    \"league\": \"66384d9381e6fab64c19db65\",\n    \"basket\": \"66384dad81e6fab64c19db6f\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -466,23 +466,23 @@
 									"formdata": [
 										{
 											"key": "gameId",
-											"value": "6638801431086fef60ae89e6",
+											"value": "662a202f7d3487c17674e55a",
 											"type": "text"
 										},
 										{
 											"key": "image",
 											"type": "file",
-											"src": "/home/wppc-0021/Downloads/unnamed.jpg"
+											"src": "/home/wppc-0021/Pictures/Screenshots/Screenshot from 2024-03-13 18-13-27.png"
 										},
 										{
 											"key": "image",
 											"type": "file",
-											"src": "/home/wppc-0021/Downloads/unnamed.jpg"
+											"src": "/home/wppc-0021/Pictures/Screenshots/Screenshot from 2024-03-13 16-55-37.png"
 										},
 										{
 											"key": "image",
 											"type": "file",
-											"src": "/home/wppc-0021/Pictures/Screenshots/Screenshot from 2024-05-03 12-14-15.png"
+											"src": "/home/wppc-0021/Pictures/Screenshots/Screenshot from 2024-03-20 10-46-00.png"
 										},
 										{
 											"key": "url",
@@ -521,7 +521,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"gameId\": \"6638801431086fef60ae89e6\"\n}",
+									"raw": "{\n    \"gameId\": \"66384de681e6fab64c19db75\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -558,7 +558,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"gameId\": \"6638801431086fef60ae89e6\",\n    \"teamId\": \"662a0abf609947627c31c286\",\n    \"goals\": [\n        {\n            \"assist\": \"662a0abf609947627c31c289\",\n            \"goal\": \"662a0abf609947627c31c28c\"\n        },\n        {\n            \"goal\": \"662a0abf609947627c31c28f\"\n        },\n        {\n            \"goal\": \"662a0aad609947627c31c26f\"\n        },\n        {\n            \"goal\": \"662a0aad609947627c31c272\"\n        }\n    ],\n    \"cards\": [\n        {\n            \"player\": \"662a0abf609947627c31c292\",\n            \"yellow\": 1\n        },\n        {\n            \"player\": \"662a0abf609947627c31c295\",\n            \"red\": 1\n        }\n    ]\n}",
+									"raw": "{\n    \"gameId\": \"66384de681e6fab64c19db75\",\n    \"teamId\": \"662a0abf609947627c31c286\",\n    \"goals\": [\n        {\n            \"assist\": \"662a0abf609947627c31c289\",\n            \"goal\": \"662a0abf609947627c31c28c\"\n        },\n        {\n            \"goal\": \"662a0abf609947627c31c28c\"\n        },\n        {\n            \"goal\": \"662a0abf609947627c31c28f\"\n        }\n    ],\n    \"cards\": [\n        {\n            \"player\": \"662a0abf609947627c31c292\",\n            \"yellow\": 1\n        },\n        {\n            \"player\": \"662a0abf609947627c31c295\",\n            \"red\": 1\n        }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -573,6 +573,34 @@
 									"path": [
 										"admin",
 										"update-game"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get-active-games",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/admin/get-active-games",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"admin",
+										"get-active-games"
 									]
 								}
 							},
@@ -600,7 +628,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"league\": \"66387ec3c73e766d62762f97\",\n    \"teams\": [\n        \"662a0aad609947627c31c263\",\n        \"662a0abf609947627c31c286\",\n        \"662a0aca609947627c31c2a9\",\n        \"662a0ae3609947627c31c2cd\"\n    ]\n}",
+									"raw": "{\n    \"league\": \"662a1f15619b909b06792861\",\n    \"teams\": [\n        \"662a0aad609947627c31c263\",\n        \"662a0abf609947627c31c286\",\n        \"662a0aca609947627c31c2a9\",\n        \"662a0ae3609947627c31c2cd\"\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -745,7 +773,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"playerId\": \"662a0aad609947627c31c266\"\n}",
+									"raw": "{\n    \"playerId\": \"65d2f0539c239ab8d94bc99b\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -929,14 +957,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{BASE_URL}}/admin/schedule/6638801431086fef60ae89e6",
+									"raw": "{{BASE_URL}}/admin/schedule/66384de681e6fab64c19db75",
 									"host": [
 										"{{BASE_URL}}"
 									],
 									"path": [
 										"admin",
 										"schedule",
-										"6638801431086fef60ae89e6"
+										"66384de681e6fab64c19db75"
 									]
 								}
 							},
@@ -961,7 +989,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"currentPassword\": \"156354111\",\n    \"password\": \"156354111\",\n    \"passwordConfirm\": \"156354111\"\n}",
+							"raw": "{\n    \"password\": \"156354111\",\n    \"newPassword\": \"156354111\",\n    \"passwordConfirmation\": \"156354111\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -969,13 +997,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/admin/password-update",
+							"raw": "{{BASE_URL}}/admin/update-password",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"admin",
-								"password-update"
+								"update-password"
 							]
 						}
 					},
@@ -1041,14 +1069,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{BASE_URL}}/schedule/create-schedule/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFiZjYwOTk0NzYyN2MzMWMyODYgNjYzODgwMTQzMTA4NmZlZjYwYWU4OWU2Iiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0OTc4ODM2LCJleHAiOjE3MTU0MTA4MzZ9.GVNA0Bp23A1hlMzDcICIDoKX3pimFKi95DCzbwo8Fb8",
+									"raw": "{{BASE_URL}}/schedule/create-schedule/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFiZjYwOTk0NzYyN2MzMWMyODYgNjYzODRkZTY4MWU2ZmFiNjRjMTlkYjc1Iiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0OTY1OTkwLCJleHAiOjE3MTUzOTc5OTB9.MOeUyhCE_1_ajM8kKdV1Rx9A_R4rwbvMTY7VDSb3FDk",
 									"host": [
 										"{{BASE_URL}}"
 									],
 									"path": [
 										"schedule",
 										"create-schedule",
-										"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFiZjYwOTk0NzYyN2MzMWMyODYgNjYzODgwMTQzMTA4NmZlZjYwYWU4OWU2Iiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0OTc4ODM2LCJleHAiOjE3MTU0MTA4MzZ9.GVNA0Bp23A1hlMzDcICIDoKX3pimFKi95DCzbwo8Fb8"
+										"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFiZjYwOTk0NzYyN2MzMWMyODYgNjYzODRkZTY4MWU2ZmFiNjRjMTlkYjc1Iiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0OTY1OTkwLCJleHAiOjE3MTUzOTc5OTB9.MOeUyhCE_1_ajM8kKdV1Rx9A_R4rwbvMTY7VDSb3FDk"
 									]
 								}
 							},
@@ -1060,14 +1088,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{BASE_URL}}/schedule/get-players/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFiZjYwOTk0NzYyN2MzMWMyODYgNjYzODgwMTQzMTA4NmZlZjYwYWU4OWU2Iiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0OTc4ODM2LCJleHAiOjE3MTU0MTA4MzZ9.GVNA0Bp23A1hlMzDcICIDoKX3pimFKi95DCzbwo8Fb8",
+									"raw": "{{BASE_URL}}/schedule/get-players/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFiZjYwOTk0NzYyN2MzMWMyODYgNjYzODRkZTY4MWU2ZmFiNjRjMTlkYjc1Iiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0OTY1OTkwLCJleHAiOjE3MTUzOTc5OTB9.MOeUyhCE_1_ajM8kKdV1Rx9A_R4rwbvMTY7VDSb3FDk",
 									"host": [
 										"{{BASE_URL}}"
 									],
 									"path": [
 										"schedule",
 										"get-players",
-										"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFiZjYwOTk0NzYyN2MzMWMyODYgNjYzODgwMTQzMTA4NmZlZjYwYWU4OWU2Iiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0OTc4ODM2LCJleHAiOjE3MTU0MTA4MzZ9.GVNA0Bp23A1hlMzDcICIDoKX3pimFKi95DCzbwo8Fb8"
+										"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMGFiZjYwOTk0NzYyN2MzMWMyODYgNjYzODRkZTY4MWU2ZmFiNjRjMTlkYjc1Iiwicm9sZSI6InVzZXIiLCJ0eXBlIjoiR1NUIiwiaWF0IjoxNzE0OTY1OTkwLCJleHAiOjE3MTUzOTc5OTB9.MOeUyhCE_1_ajM8kKdV1Rx9A_R4rwbvMTY7VDSb3FDk"
 									]
 								}
 							},
@@ -1484,7 +1512,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"playerId\": \"662a0abf609947627c31c289\"\n}",
+									"raw": "{\n    \"playerId\": \"6628e180c939b907ceab43ad\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1529,7 +1557,7 @@
 										},
 										{
 											"key": "playerId",
-											"value": "662b674e18ccb07915f426ae",
+											"value": "662a0abf609947627c31c2a1",
 											"type": "text"
 										},
 										{
@@ -1539,20 +1567,20 @@
 										},
 										{
 											"key": "position",
-											"value": "Head Coach",
+											"value": "",
 											"type": "text"
 										},
 										{
 											"key": "number",
-											"value": "1",
+											"value": "9",
 											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{LIVE_URL}}/player/update-player",
+									"raw": "{{BASE_URL}}/player/update-player",
 									"host": [
-										"{{LIVE_URL}}"
+										"{{BASE_URL}}"
 									],
 									"path": [
 										"player",
