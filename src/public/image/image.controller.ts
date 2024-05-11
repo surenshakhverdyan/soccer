@@ -8,9 +8,9 @@ export class ImageController {
   constructor(private readonly imagesService: ImagesService) {}
 
   @Get(':image')
-  getImage(@Param('image') path: string, @Res() res: Response): void {
+  getImage(@Param('image') path: string, @Res() res: Response): void | string {
     if (path === 'undefined' || !path || path === undefined) {
-      return;
+      return '';
     }
 
     return res.sendFile(this.imagesService.getImage(path));
