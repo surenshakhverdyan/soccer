@@ -9,6 +9,10 @@ export class ImageController {
 
   @Get(':image')
   getImage(@Param('image') path: string, @Res() res: Response): void {
+    if (path === 'undefined' || !path || path === undefined) {
+      return;
+    }
+
     return res.sendFile(this.imagesService.getImage(path));
   }
 }
