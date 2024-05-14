@@ -18,7 +18,7 @@ export class TeamController {
   }
 
   @Get('game/:teamId')
-  getGameByTeamId(@Param('teamId') teamId: Types.ObjectId): Promise<Game> {
-    return this.gamesService.getGameByTeamId(teamId);
+  getGamesByTeamId(@Param('teamId') teamId: Types.ObjectId): Promise<Game[]> {
+    return this.gamesService.getGamesByTeamId(teamId);
   }
 }

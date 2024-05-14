@@ -35,9 +35,9 @@ export class GamesService {
     return game;
   }
 
-  async getGameByTeamId(teamId: Types.ObjectId): Promise<Game> {
+  async getGamesByTeamId(teamId: Types.ObjectId): Promise<Game[]> {
     const game = await this.gameModel
-      .findOne({
+      .find({
         $or: [{ 'team_1.team': teamId }, { 'team_2.team': teamId }],
       })
       .populate({
