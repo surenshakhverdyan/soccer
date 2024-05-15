@@ -18,6 +18,8 @@ import { CronsModule } from 'src/crons/crons.module';
 import { SchedulesModule } from 'src/schedules/schedules.module';
 import { ScheduleController } from './schedule/schedule.controller';
 import { ScheduleService } from './schedule/schedule.service';
+import { CronController } from './cron/cron.controller';
+import { CronService } from './cron/cron.service';
 
 @Module({
   imports: [
@@ -36,6 +38,7 @@ import { ScheduleService } from './schedule/schedule.service';
     UserController,
     TransferController,
     ScheduleController,
+    CronController,
   ],
   providers: [
     TeamService,
@@ -43,6 +46,7 @@ import { ScheduleService } from './schedule/schedule.service';
     UserService,
     TransferService,
     ScheduleService,
+    CronService,
   ],
 })
 export class DashboardModule {}
