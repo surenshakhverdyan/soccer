@@ -30,7 +30,58 @@ export class GamesService {
   }
 
   async getById(gameId: Types.ObjectId): Promise<Game> {
-    const game = await this.gameModel.findById(gameId);
+    const game = await this.gameModel
+      .findById(gameId)
+      .populate({
+        path: 'team_1.team',
+        model: 'Team',
+        select: 'name avatar',
+      })
+      .populate({
+        path: 'team_1.players',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_1.goals.assist',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_1.goals.goal',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_1.cards.player',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_2.team',
+        model: 'Team',
+        select: 'name avatar',
+      })
+      .populate({
+        path: 'team_2.players',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_2.goals.assist',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_2.goals.goal',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      })
+      .populate({
+        path: 'team_2.cards.player',
+        model: 'Player',
+        select: '-createdAt -updatedAt -__v',
+      });
 
     return game;
   }

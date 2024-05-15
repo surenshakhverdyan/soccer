@@ -11,6 +11,7 @@ import { TeamController } from './team/team.controller';
 import { PlayersModule } from 'src/players/players.module';
 import { PlayerController } from './player/player.controller';
 import { GamesModule } from 'src/games/games.module';
+import { GameController } from './game/game.controller';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { GamesModule } from 'src/games/games.module';
     LeagueController,
     TeamController,
     PlayerController,
+    GameController,
   ],
 })
 export class PublicModule {}
