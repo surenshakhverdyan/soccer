@@ -33,13 +33,43 @@ export class TransfersService {
   }
 
   async getAllPending(): Promise<Transfer[]> {
-    const transfers = await this.transferModel.find({ status: Status.Pending });
+    const transfers = await this.transferModel
+      .find({ status: Status.Pending })
+      .populate({
+        path: 'fromTeam',
+        model: 'Team',
+        select: 'name',
+      })
+      .populate({
+        path: 'toTeam',
+        model: 'Team',
+        select: 'name',
+      })
+      .populate({
+        path: 'player',
+        model: 'Player',
+      });
 
     return transfers;
   }
 
   async getAll(): Promise<Transfer[]> {
-    const transfers = await this.transferModel.find();
+    const transfers = await this.transferModel
+      .find()
+      .populate({
+        path: 'fromTeam',
+        model: 'Team',
+        select: 'name',
+      })
+      .populate({
+        path: 'toTeam',
+        model: 'Team',
+        select: 'name',
+      })
+      .populate({
+        path: 'player',
+        model: 'Player',
+      });
 
     return transfers;
   }
