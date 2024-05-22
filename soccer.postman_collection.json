@@ -70,8 +70,8 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "refresh",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWQyZWJkYzljMjM5YWI4ZDk0YmM5NzMiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiUlQiLCJpYXQiOjE3MDgzMjIxNDQsImV4cCI6MTcwODkyNjk0NH0.95GYnPuXRoFHg5l5fjTOXX-tojWQeIyPXxX4l5eUKpk",
+								"key": "refresh-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjJhMDcxOTYwOTk0NzYyN2MzMWMyNTgiLCJyb2xlIjoiYWRtaW4iLCJ0eXBlIjoiUlQiLCJpYXQiOjE3MTU5NDk5NzksImV4cCI6MTcxNjU1NDc3OX0.gNaAj84oI_mlwje_-TXTn7TpqLf7MKqEhyIcKEtyfCU",
 								"type": "text",
 								"uuid": "d0eed3ff-1eea-463d-aadf-970229ab7cb9"
 							}
@@ -1833,6 +1833,24 @@
 								"team",
 								"game",
 								"662a0aad609947627c31c263"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "game/gameId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/game/6638801431086fef60ae89e6",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"game",
+								"6638801431086fef60ae89e6"
 							]
 						}
 					},
