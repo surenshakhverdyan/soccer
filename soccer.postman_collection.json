@@ -1590,6 +1590,34 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "players-without-me",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USER2_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/player/players-without-me",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"player",
+										"players-without-me"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
