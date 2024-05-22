@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -12,9 +12,13 @@ export class JoinsService {
   ) {}
 
   async create(dto: JoinCreateDto): Promise<Join> {
-    const join = await this.joinModel.create(dto);
+    try {
+      const join = await this.joinModel.create(dto);
 
-    return join;
+      return join;
+    } catch (error: any) {
+      throw new HttpException(error.message, 403);
+    }
   }
 
   async update(dto: JoinUpdateDto): Promise<Join> {

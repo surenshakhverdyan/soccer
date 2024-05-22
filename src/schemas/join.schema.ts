@@ -8,10 +8,16 @@ export class Join extends Document {
   @Prop({ type: String })
   name: string;
 
-  @Prop({ type: String })
+  @Prop({
+    type: String,
+    unique: true,
+  })
   email: string;
 
-  @Prop({ type: String })
+  @Prop({
+    type: String,
+    unique: true,
+  })
   phone: string;
 
   @Prop({
