@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 
 import { CronsService } from 'src/crons/crons.service';
 import { AdminGuard } from 'src/guards';
@@ -12,5 +12,10 @@ export class CronController {
   @Post('set-cron')
   createOrUpdate(@Body('date') date: Date): Promise<Cron> {
     return this.cronsService.createOrUpdate(date);
+  }
+
+  @Get('end-transfers')
+  getDate(): Promise<Cron> {
+    return this.cronsService.get();
   }
 }
