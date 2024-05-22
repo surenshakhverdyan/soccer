@@ -834,6 +834,34 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "end-transfers",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{ADMIN_TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LIVE_URL}}/admin/end-transfers",
+									"host": [
+										"{{LIVE_URL}}"
+									],
+									"path": [
+										"admin",
+										"end-transfers"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
