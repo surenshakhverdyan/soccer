@@ -7,7 +7,7 @@ import { Request } from 'express';
 import { ImagesService } from 'src/images/images.service';
 import { PlayerCreateDto, PlayerUpdateDto } from 'src/players/dto';
 import { PlayersService } from 'src/players/players.service';
-import { Team } from 'src/schemas';
+import { Player, Team } from 'src/schemas';
 import { TeamsService } from 'src/teams/teams.service';
 import { TokenService } from 'src/token/token.service';
 import { UsersService } from 'src/users/users.service';
@@ -115,6 +115,19 @@ export class PlayerService {
       await session.abortTransaction();
       session.endSession();
 
+      throw new HttpException(error.message, 500);
+    }
+  }
+
+  async getPlayersWithoutMe(request: Request): Promise<Player[]> {
+    try {
+      const token = this.tokenService.extractToken(request);
+      const payload = this.tokenService.decode(token);
+      const { team } = await this.usersService.getById(payload.sub);
+      const players = await this.playersService.getWithoutMe(team);
+
+      return players;
+    } catch (error: any) {
       throw new HttpException(error.message, 500);
     }
   }

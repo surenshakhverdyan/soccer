@@ -34,6 +34,18 @@ export class PlayersService {
     return players;
   }
 
+  async getWithoutMe(teamId: Types.ObjectId): Promise<Player[]> {
+    const players = await this.playerModel
+      .find({ team: { $ne: teamId } })
+      .populate({
+        path: 'team',
+        model: 'Team',
+        select: 'name avatar',
+      });
+
+    return players;
+  }
+
   async update(dto: PlayerUpdateDto, session?: ClientSession): Promise<Player> {
     const player = await this.playerModel.findByIdAndUpdate(
       dto.playerId,

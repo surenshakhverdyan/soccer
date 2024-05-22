@@ -7,11 +7,13 @@ import {
   Param,
   ParseFilePipe,
   Put,
+  Req,
   UploadedFile,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Request } from 'express';
 import { Types } from 'mongoose';
 
 import { PlayerService } from './player.service';
@@ -66,5 +68,10 @@ export class PlayerController {
   @Get('team-players/:teamId')
   getTeamPlayers(@Param('teamId') teamId: Types.ObjectId): Promise<Player[]> {
     return this.playersService.getByTeamId(new Types.ObjectId(teamId));
+  }
+
+  @Get('players-without-me')
+  getPlayersWithoutMe(@Req() request: Request): Promise<Player[]> {
+    return this.playerService.getPlayersWithoutMe(request);
   }
 }
