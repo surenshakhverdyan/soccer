@@ -33,13 +33,22 @@ export class Team extends Document {
   @Prop({ type: String })
   avatar: string;
 
-  @Prop({ type: Number })
+  @Prop({
+    type: Number,
+    default: 0,
+  })
   wins: number;
 
-  @Prop({ type: Number })
+  @Prop({
+    type: Number,
+    default: 0,
+  })
   draws: number;
 
-  @Prop({ type: Number })
+  @Prop({
+    type: Number,
+    default: 0,
+  })
   losses: number;
 
   @Prop({
