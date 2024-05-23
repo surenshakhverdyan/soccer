@@ -51,10 +51,14 @@ export class League extends Document {
           type: Number,
           default: 0,
         },
+        games: {
+          type: Number,
+          default: 0,
+        },
       },
     ],
   })
-  teams: { team: Types.ObjectId; points: number }[];
+  teams: { team: Types.ObjectId; points: number; games: number }[];
 
   @Prop({
     type: [

@@ -230,6 +230,17 @@ export class GameService {
     try {
       session.startTransaction();
 
+      await this.leaguesService.updateGamesCount(
+        _game.league,
+        _game.team_1.team,
+        session,
+      );
+      await this.leaguesService.updateGamesCount(
+        _game.league,
+        _game.team_2.team,
+        session,
+      );
+
       if (_game.team_1.goals.length > _game.team_2.goals.length) {
         const data = {
           leagueId: _game.league,

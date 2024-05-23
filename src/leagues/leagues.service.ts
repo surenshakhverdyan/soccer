@@ -59,6 +59,20 @@ export class LeaguesService {
     return true;
   }
 
+  async updateGamesCount(
+    leagueId: Types.ObjectId,
+    teamId: Types.ObjectId,
+    session?: ClientSession,
+  ): Promise<boolean> {
+    await this.leagueModel.updateOne(
+      { _id: leagueId, 'teams.team': teamId },
+      { $inc: { 'teams.$.games': 1 } },
+      { new: true, session },
+    );
+
+    return true;
+  }
+
   async updateStatus(leagueId: Types.ObjectId): Promise<League> {
     const _league = await this.leagueModel.findById(leagueId);
 
