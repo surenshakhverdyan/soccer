@@ -11,10 +11,12 @@ import * as bcrypt from 'bcrypt';
 import { PayloadService } from 'src/token/payload.service';
 import { TokenService } from 'src/token/token.service';
 import { UsersService } from 'src/users/users.service';
-import { SignInDto } from './dto';
-import { TokenType } from 'src/enums';
+import { SignInDto, SignUpDto } from './dto';
+import { Role, Status, TokenType } from 'src/enums';
 import { passwordResetTemplate } from 'src/templates';
-import { UserUpdateDto } from 'src/users/dto';
+import { UserCreateDto, UserUpdateDto } from 'src/users/dto';
+import { IUser } from 'src/users/interfaces';
+import { JoinsService } from 'src/joins/joins.service';
 
 @Injectable()
 export class AuthService {
@@ -24,15 +26,44 @@ export class AuthService {
     private readonly payloadService: PayloadService,
     private readonly mailerService: MailerService,
     private readonly configService: ConfigService,
+    private readonly joinsService: JoinsService,
   ) {}
 
-  async signIn(dto: SignInDto) {
+  async signIn(dto: SignInDto): Promise<IUser> {
     const _user = await this.userService.getByEmail(dto.email);
 
     if (!_user) throw new HttpException('User not found', 404);
     if (!(await bcrypt.compare(dto.password, _user.password)))
       throw new UnauthorizedException();
 
+    const payload = this.payloadService.generatePayload(
+      _user,
+      TokenType.AuthToken,
+    );
+    const authToken = this.tokenService.signAuthToken(payload);
+    payload.type = TokenType.RefreshToken;
+    const refreshToken = this.tokenService.signRefreshToken(payload);
+    const user = this.userService.generateUserResponse(
+      _user,
+      authToken,
+      refreshToken,
+    );
+
+    return user;
+  }
+
+  async signUp(dto: SignUpDto): Promise<IUser> {
+    const join = await this.joinsService.getByEmail(dto.email);
+
+    if (!join) throw new HttpException('Access denied', 401);
+    if (join.status !== Status.Accepted)
+      throw new HttpException('Access denied', 401);
+
+    const hashedPassword = await bcrypt.hash(dto.password, 10);
+    dto.password = hashedPassword;
+    dto.role = Role.User;
+
+    const _user = await this.userService.create(dto as UserCreateDto);
     const payload = this.payloadService.generatePayload(
       _user,
       TokenType.AuthToken,

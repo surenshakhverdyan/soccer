@@ -36,4 +36,10 @@ export class JoinsService {
 
     return joins;
   }
+
+  async getByEmail(email: string): Promise<Join> {
+    const join = await this.joinModel.findOne({ email });
+
+    return join;
+  }
 }

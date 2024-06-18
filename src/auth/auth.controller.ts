@@ -12,7 +12,7 @@ import {
 import { Request } from 'express';
 
 import { AuthService } from './auth.service';
-import { SignInDto } from './dto';
+import { SignInDto, SignUpDto } from './dto';
 import { IUser } from 'src/users/interfaces';
 import { RefreshTokenGuard } from 'src/guards';
 import { UserUpdateDto } from 'src/users/dto';
@@ -25,6 +25,11 @@ export class AuthController {
   @Post('sign-in')
   signIn(@Body() dto: SignInDto): Promise<IUser> {
     return this.authService.signIn(dto);
+  }
+
+  @Post('sign-up')
+  signUp(@Body() dto: SignUpDto): Promise<IUser> {
+    return this.authService.signUp(dto);
   }
 
   @UseGuards(RefreshTokenGuard)
