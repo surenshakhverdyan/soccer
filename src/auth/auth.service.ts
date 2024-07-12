@@ -55,9 +55,9 @@ export class AuthService {
   async signUp(dto: SignUpDto): Promise<IUser> {
     const join = await this.joinsService.getByEmail(dto.email);
 
-    if (!join) throw new HttpException('Access denied', 401);
+    if (!join) throw new HttpException('Access denied', 403);
     if (join.status !== Status.Accepted)
-      throw new HttpException('Access denied', 401);
+      throw new HttpException('Access denied', 403);
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
     dto.password = hashedPassword;
