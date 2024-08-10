@@ -29,10 +29,10 @@ export class PlayerService {
     dto: PlayerCreateDto,
     avatar?: Express.Multer.File,
   ): Promise<Team> {
-    console.log('tesssssst');
     const token = this.tokenService.extractToken(this.request);
     const { sub } = this.tokenService.decode(token);
     const _user = await this.usersService.getById(sub);
+    console.log(_user);
     const images: Array<string> = [];
 
     const session = await this.connection.startSession();
@@ -45,7 +45,6 @@ export class PlayerService {
       }
 
       dto.teamId = _user.team; // to be roll back
-      console.log(dto.teamId);
 
       session.startTransaction();
 
