@@ -43,7 +43,7 @@ export class PlayerService {
         dto.avatar = image;
       }
 
-      dto.team = _user.team;
+      dto.teamId = _user.team; // to be roll back
 
       session.startTransaction();
 

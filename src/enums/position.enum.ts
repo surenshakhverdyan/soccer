@@ -1,7 +1,7 @@
 export enum Position {
   GK = 'Goalkeeper',
   CB = 'Center Defender',
-  RB = 'Right Defende',
+  RB = 'Right Defende', // to be roll back
   LB = 'Left Defender',
   CM = 'Center Midfielder',
   RM = 'Right Midfielder',

@@ -70,7 +70,7 @@ export class TeamService {
           element.avatar = avatar;
         }
 
-        element.team = _team._id;
+        element.teamId = _team._id; // to be roll back
 
         const player = await this.playersService.create(element, session);
         players.push(player._id);
