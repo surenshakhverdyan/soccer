@@ -20,5 +20,5 @@ export class PlayerCreateDto {
   avatar?: string;
 
   @IsOptional()
-  team?: Types.ObjectId;
+  teamId?: Types.ObjectId;
 }
