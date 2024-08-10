@@ -44,6 +44,7 @@ export class PlayerService {
       }
 
       dto.teamId = _user.team; // to be roll back
+      console.log(dto.teamId);
 
       session.startTransaction();
 
