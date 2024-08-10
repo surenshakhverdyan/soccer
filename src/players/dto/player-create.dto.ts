@@ -20,5 +20,5 @@ export class PlayerCreateDto {
   avatar?: string;
 
   @IsOptional()
-  teamId?: Types.ObjectId; // to be roll back
+  team?: Types.ObjectId;
 }

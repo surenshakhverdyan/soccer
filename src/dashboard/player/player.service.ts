@@ -32,7 +32,6 @@ export class PlayerService {
     const token = this.tokenService.extractToken(this.request);
     const { sub } = this.tokenService.decode(token);
     const _user = await this.usersService.getById(sub);
-    console.log(_user);
     const images: Array<string> = [];
 
     const session = await this.connection.startSession();
@@ -44,7 +43,7 @@ export class PlayerService {
         dto.avatar = image;
       }
 
-      dto.teamId = _user.team; // to be roll back
+      dto.team = _user.team;
 
       session.startTransaction();
 
