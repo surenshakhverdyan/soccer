@@ -42,6 +42,7 @@ export class PlayerController {
     )
     avatar?: Express.Multer.File,
   ) {
+    console.log('test');
     return this.playerService.addPlayer(dto, avatar);
   }
 
