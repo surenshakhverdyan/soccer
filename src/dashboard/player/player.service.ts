@@ -29,6 +29,7 @@ export class PlayerService {
     dto: PlayerCreateDto,
     avatar?: Express.Multer.File,
   ): Promise<Team> {
+    console.log('tesssssst');
     const token = this.tokenService.extractToken(this.request);
     const { sub } = this.tokenService.decode(token);
     const _user = await this.usersService.getById(sub);
