@@ -32,7 +32,7 @@ export class JoinsService {
   }
 
   async getAll(): Promise<Join[]> {
-    const joins = await this.joinModel.find();
+    const joins = await this.joinModel.find().sort({ createdAt: -1 });
 
     return joins;
   }
