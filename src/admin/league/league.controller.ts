@@ -30,7 +30,7 @@ export class LeagueController {
 
   @Patch('calculate-league')
   calculateLeague(@Body('leagueId') leagueId: Types.ObjectId): Promise<League> {
-    return this.leaguesService.updateStatus(leagueId);
+    return this.leagueService.calculateLeague(leagueId);
   }
 
   @Get('league/:leagueId')

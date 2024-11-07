@@ -73,7 +73,10 @@ export class LeaguesService {
     return true;
   }
 
-  async updateStatus(leagueId: Types.ObjectId): Promise<League> {
+  async updateStatus(
+    leagueId: Types.ObjectId,
+    session: ClientSession,
+  ): Promise<League> {
     const _league = await this.leagueModel.findById(leagueId);
 
     const teams = [];
@@ -102,7 +105,7 @@ export class LeaguesService {
     const league = await this.leagueModel.findByIdAndUpdate(
       leagueId,
       updateObject,
-      { new: true },
+      { new: true, session },
     );
 
     return league;
