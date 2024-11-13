@@ -245,9 +245,18 @@ export class GameService {
 
     const session = await this.connection.startSession();
 
+    _game.status = Status.Ended;
+    await _game.save({ session });
+    await this.basketsService.changeStatus(
+      _game.basket,
+      Status.Active,
+      session,
+    );
+
     try {
       session.startTransaction();
 
+      let game: Game;
       if (dto.teamId === _game.team_1.team) {
         const data = {
           leagueId: _game.league,
@@ -268,9 +277,7 @@ export class GameService {
         );
 
         const td = { 'team_1.technicalDefeat': true };
-        const game = this.gamesService.technicalDefeat(_game._id, td);
-
-        return game;
+        game = await this.gamesService.technicalDefeat(_game._id, td);
       } else {
         const data = {
           leagueId: _game.league,
@@ -291,10 +298,13 @@ export class GameService {
         );
 
         const td = { 'team_2.technicalDefeat': true };
-        const game = this.gamesService.technicalDefeat(_game._id, td);
-
-        return game;
+        game = await this.gamesService.technicalDefeat(_game._id, td);
       }
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return game;
     } catch (error: any) {
       await session.abortTransaction();
       session.endSession();
