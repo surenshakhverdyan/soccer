@@ -222,4 +222,12 @@ export class GamesService {
 
     return true;
   }
+
+  async technicalDefeat(gameId: Types.ObjectId, td: any): Promise<Game> {
+    const game = await this.gameModel
+      .findByIdAndUpdate(gameId, td, { new: true })
+      .exec();
+
+    return game;
+  }
 }

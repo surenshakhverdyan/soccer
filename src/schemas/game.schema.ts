@@ -31,6 +31,7 @@ export class Game extends Document {
           red: { type: Number },
         },
       ],
+      technicalDefeat: { type: Boolean, default: false },
     },
   })
   team_1: {
@@ -38,6 +39,7 @@ export class Game extends Document {
     players: Types.ObjectId[];
     goals: Array<{ assist: Types.ObjectId; goal: Types.ObjectId }>;
     cards: Array<{ player: Types.ObjectId; yellow: number; red: number }>;
+    technicalDefeat: boolean;
   };
 
   @Prop({
@@ -57,6 +59,7 @@ export class Game extends Document {
           red: { type: Number },
         },
       ],
+      technicalDefeat: { type: Boolean, default: false },
     },
   })
   team_2: {
@@ -64,6 +67,7 @@ export class Game extends Document {
     players: Types.ObjectId[];
     goals: Array<{ assist: Types.ObjectId; goal: Types.ObjectId }>;
     cards: Array<{ player: Types.ObjectId; yellow: number; red: number }>;
+    technicalDefeat: boolean;
   };
 
   @Prop({

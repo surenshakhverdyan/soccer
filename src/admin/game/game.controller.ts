@@ -16,7 +16,12 @@ import { AdminGuard } from 'src/guards';
 import { GameService } from './game.service';
 import { GameCreateDto } from 'src/games/dto';
 import { Game } from 'src/schemas';
-import { GameMediaDto, GameSetDto, GameUpdateDto } from './dto';
+import {
+  GameMediaDto,
+  GameSetDto,
+  GameUpdateDto,
+  setTechnicalDefeatDto,
+} from './dto';
 import { GamesService } from 'src/games/games.service';
 
 @UseGuards(AdminGuard)
@@ -45,6 +50,11 @@ export class GameController {
   @Put('calculate-game')
   calculateGame(@Body('gameId') gameId: Types.ObjectId): Promise<Game> {
     return this.gameService.calculateGame(gameId);
+  }
+
+  @Put('set-technical-defeat')
+  setTechnicalDefeat(@Body() dto: setTechnicalDefeatDto): Promise<Game> {
+    return this.gameService.setTechnicalDefeat(dto);
   }
 
   @Post('update-game-media')

@@ -12,7 +12,12 @@ import { LeaguesService } from 'src/leagues/leagues.service';
 import { Game } from 'src/schemas';
 import { gameDateTimeTemplate, scheduleGameTemplate } from 'src/templates';
 import { TokenService } from 'src/token/token.service';
-import { GameMediaDto, GameSetDto, GameUpdateDto } from './dto';
+import {
+  GameMediaDto,
+  GameSetDto,
+  GameUpdateDto,
+  setTechnicalDefeatDto,
+} from './dto';
 import { PlayersService } from 'src/players/players.service';
 import { SchedulesService } from 'src/schedules/schedules.service';
 import { ImagesService } from 'src/images/images.service';
@@ -232,6 +237,72 @@ export class GameService {
     }
   }
 
+  async setTechnicalDefeat(dto: setTechnicalDefeatDto): Promise<Game> {
+    const _game = await this.gamesService.getById(dto.gameId);
+
+    if (_game.status !== Status.Active)
+      throw new HttpException('The game is ended', 403);
+
+    const session = await this.connection.startSession();
+
+    try {
+      session.startTransaction();
+
+      if (dto.teamId === _game.team_1.team) {
+        const data = {
+          leagueId: _game.league,
+          teamId: _game.team_2.team,
+          value: 3,
+        };
+        await this.leaguesService.updatePoint(data, session);
+        await this.teamsService.updateGame(data.teamId, { wins: 1 }, session);
+        await this.basketsService.removeTeam(
+          _game.basket,
+          _game.team_1.team,
+          session,
+        ); // to be check
+        await this.teamsService.updateGame(
+          _game.team_1.team,
+          { losses: 1 },
+          session,
+        );
+
+        const td = { 'team_1.technicalDefeat': true };
+        const game = this.gamesService.technicalDefeat(_game._id, td);
+
+        return game;
+      } else {
+        const data = {
+          leagueId: _game.league,
+          teamId: _game.team_1.team,
+          value: 3,
+        };
+        await this.leaguesService.updatePoint(data, session);
+        await this.teamsService.updateGame(data.teamId, { wins: 1 }, session);
+        await this.basketsService.removeTeam(
+          _game.basket,
+          _game.team_2.team,
+          session,
+        ); // to be check
+        await this.teamsService.updateGame(
+          _game.team_2.team,
+          { losses: 1 },
+          session,
+        );
+
+        const td = { 'team_2.technicalDefeat': true };
+        const game = this.gamesService.technicalDefeat(_game._id, td);
+
+        return game;
+      }
+    } catch (error: any) {
+      await session.abortTransaction();
+      session.endSession();
+
+      throw new HttpException(error.message, 500);
+    }
+  }
+
   async calculateGame(gameId: Types.ObjectId): Promise<Game> {
     const _game = await this.gamesService.getById(gameId);
 
@@ -266,12 +337,12 @@ export class GameService {
           _game.basket,
           _game.team_2.team,
           session,
-        );
+        ); // to be check
         await this.teamsService.updateStatus(
           _game.team_2.team,
           Status.Active,
           session,
-        );
+        ); // to be check
         await this.teamsService.updateGame(
           _game.team_2.team,
           { losses: 1 },
