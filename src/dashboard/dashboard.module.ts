@@ -20,6 +20,7 @@ import { ScheduleController } from './schedule/schedule.controller';
 import { ScheduleService } from './schedule/schedule.service';
 import { CronController } from './cron/cron.controller';
 import { CronService } from './cron/cron.service';
+import { TimeLineModule } from 'src/time-line/time-line.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { CronService } from './cron/cron.service';
     TransfersModule,
     CronsModule,
     SchedulesModule,
+    TimeLineModule,
   ],
   controllers: [
     TeamController,

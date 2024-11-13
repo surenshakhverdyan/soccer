@@ -17,6 +17,7 @@ import { PlayersService } from 'src/players/players.service';
 import { SchedulesService } from 'src/schedules/schedules.service';
 import { ImagesService } from 'src/images/images.service';
 import { TeamsService } from 'src/teams/teams.service';
+import { TimeLineService } from 'src/time-line/time-line.service';
 
 @Injectable()
 export class GameService {
@@ -32,6 +33,7 @@ export class GameService {
     private readonly schedulesService: SchedulesService,
     private readonly imagesService: ImagesService,
     private readonly teamsService: TeamsService,
+    private readonly timeLineService: TimeLineService,
   ) {}
 
   async createGame(dto: GameCreateDto): Promise<Game> {
@@ -48,11 +50,22 @@ export class GameService {
       if (basket.status !== Status.Active)
         throw new HttpException('Wait for end game', 403);
 
-      const game = await this.gamesService.create(dto, session);
+      const game = await this.gamesService.create(
+        { basket: dto.basket, league: dto.league },
+        session,
+      );
 
       await this.basketsService.changeStatus(
         dto.basket,
         Status.Pending,
+        session,
+      );
+
+      await this.timeLineService.create(
+        {
+          gameId: game._id,
+          dates: dto.dates,
+        },
         session,
       );
 

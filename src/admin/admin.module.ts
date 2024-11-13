@@ -31,6 +31,7 @@ import { SchedulesModule } from 'src/schedules/schedules.module';
 import { ImagesModule } from 'src/images/images.module';
 import { ScheduleController } from './schedule/schedule.controller';
 import { LeagueService } from './league/league.service';
+import { TimeLineModule } from 'src/time-line/time-line.module';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { LeagueService } from './league/league.service';
     GamesModule,
     SchedulesModule,
     ImagesModule,
+    TimeLineModule,
   ],
   controllers: [
     UserController,

@@ -1,14 +1,11 @@
 import { IsArray, IsNotEmpty } from 'class-validator';
 import { Types } from 'mongoose';
 
-export class GameCreateDto {
+export class TimeLineCreateDto {
   @IsNotEmpty()
-  league: Types.ObjectId;
-
-  @IsNotEmpty()
-  basket: Types.ObjectId;
+  gameId: Types.ObjectId;
 
   @IsArray()
   @IsNotEmpty()
-  dates?: Date[];
+  dates: Date[];
 }
