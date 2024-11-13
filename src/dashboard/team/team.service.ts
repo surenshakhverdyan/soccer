@@ -97,21 +97,30 @@ export class TeamService {
     }
   }
 
-  async updateTeam(avatar: Express.Multer.File): Promise<Team> {
+  async updateTeam(
+    avatar?: Express.Multer.File,
+    teamName?: string,
+  ): Promise<Team> {
     const token = this.tokenService.extractToken(this.request);
     const { sub } = this.tokenService.decode(token);
     const _user = await this.usersService.getById(sub);
     const _team = await this.teamsService.getById(_user.team);
-    const image = await this.imagesService.upload(avatar);
+    let image: any;
+    if (avatar) {
+      image = await this.imagesService.upload(avatar);
+    } else {
+      image = false;
+    }
 
     try {
-      if (_team.avatar) await this.imagesService.delete(_team.avatar);
+      if (_team.avatar && avatar !== undefined)
+        await this.imagesService.delete(_team.avatar);
 
-      const team = await this.teamsService.update(image, _user.team);
+      const team = await this.teamsService.update(_user.team, image, teamName);
 
       return team;
     } catch (error: any) {
-      await this.imagesService.delete(image);
+      if (avatar !== undefined) await this.imagesService.delete(image);
 
       throw new HttpException(error.message, 500);
     }

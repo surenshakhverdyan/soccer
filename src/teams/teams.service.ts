@@ -86,9 +86,22 @@ export class TeamsService {
     return teams;
   }
 
-  async update(avatar: string, teamId: Types.ObjectId): Promise<Team> {
+  async update(
+    teamId: Types.ObjectId,
+    avatar?: string,
+    teamName?: string,
+  ): Promise<Team> {
+    const dto: { avatar?: string; name?: string } = {};
+    if (avatar && teamName !== undefined) {
+      dto.avatar = avatar;
+      dto.name = teamName;
+    } else if (avatar && !teamName) {
+      dto.avatar = avatar;
+    } else if (teamName && !avatar) {
+      dto.name = teamName;
+    }
     const team = await this.teamModel
-      .findByIdAndUpdate(teamId, { $set: { avatar } }, { new: true })
+      .findByIdAndUpdate(teamId, { $set: dto }, { new: true })
       .populate({
         path: 'players',
         model: 'Player',

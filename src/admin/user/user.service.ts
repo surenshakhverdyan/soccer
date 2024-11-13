@@ -46,8 +46,8 @@ export class UserService {
     try {
       session.startTransaction();
 
-      const _user = await this.usersService.delete(userId);
-      await this.teamsService.delete(_user.team);
+      const _user = await this.usersService.delete(userId, session);
+      await this.teamsService.delete(_user.team, session);
       await this.playersService.deleteMany(_user.team, session);
 
       await session.commitTransaction();

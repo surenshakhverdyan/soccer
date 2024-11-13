@@ -53,11 +53,12 @@ export class TeamController {
     @UploadedFile(
       new ParseFilePipe({
         validators: [new FileTypeValidator({ fileType: 'jpg|jpeg|png' })],
-        fileIsRequired: true,
+        fileIsRequired: false,
       }),
     )
-    avatar: Express.Multer.File,
+    avatar?: Express.Multer.File,
+    @Body('team') team?: string,
   ): Promise<Team> {
-    return this.teamService.updateTeam(avatar);
+    return this.teamService.updateTeam(avatar, team);
   }
 }
