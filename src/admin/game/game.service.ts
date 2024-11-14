@@ -277,7 +277,7 @@ export class GameService {
         );
 
         const td = { 'team_1.technicalDefeat': true };
-        game = await this.gamesService.technicalDefeat(_game._id, td);
+        game = await this.gamesService.technicalDefeat(_game._id, td, session);
       } else {
         const data = {
           leagueId: _game.league,
@@ -298,7 +298,7 @@ export class GameService {
         );
 
         const td = { 'team_2.technicalDefeat': true };
-        game = await this.gamesService.technicalDefeat(_game._id, td);
+        game = await this.gamesService.technicalDefeat(_game._id, td, session);
       }
 
       await session.commitTransaction();
@@ -401,7 +401,7 @@ export class GameService {
         _game.basket,
         Status.Active,
         session,
-      );
+      ); // to be check
 
       await session.commitTransaction();
       session.endSession();
