@@ -1,4 +1,5 @@
 import { Body, Controller, Patch, Put, UseGuards } from '@nestjs/common';
+import { ApiBody, ApiBearerAuth } from '@nestjs/swagger';
 
 import { AdminGuard } from 'src/guards';
 import { ProfileService } from './profile.service';
@@ -11,11 +12,31 @@ export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
   @Put('update-profile')
+  @ApiBearerAuth()
+  @ApiBody({
+    schema: {
+      properties: {
+        name: { type: 'string' },
+        email: { type: 'string' },
+        phone: { type: 'string' },
+      },
+    },
+  })
   updateProfile(@Body() dto: UserUpdateDto): Promise<IUser> {
     return this.profileService.updateProfile(dto);
   }
 
   @Patch('password-update')
+  @ApiBearerAuth()
+  @ApiBody({
+    schema: {
+      properties: {
+        currentPassword: { type: 'string' },
+        password: { type: 'string' },
+        passwordConfirm: { type: 'string' },
+      },
+    },
+  })
   passwordUpdate(@Body() dto: UserUpdateDto): Promise<boolean> {
     return this.profileService.passwordUpdate(dto);
   }

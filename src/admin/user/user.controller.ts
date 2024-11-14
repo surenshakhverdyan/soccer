@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Post, UseGuards } from '@nestjs/common';
+import { ApiBody, ApiBearerAuth } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
 import { AdminGuard } from 'src/guards';
@@ -16,16 +17,26 @@ export class UserController {
   ) {}
 
   @Post('create-user')
+  @ApiBearerAuth()
   createUser(@Body() dto: UserCreateDto): Promise<boolean> {
     return this.userService.createUser(dto);
   }
 
   @Delete('delete-user')
+  @ApiBearerAuth()
+  @ApiBody({
+    schema: {
+      properties: {
+        userId: { type: 'string' },
+      },
+    },
+  })
   deleteUser(@Body('userId') userId: Types.ObjectId): Promise<boolean> {
     return this.userService.deleteUser(userId);
   }
 
   @Get('get-users')
+  @ApiBearerAuth()
   getUsers(): Promise<User[]> {
     return this.usersService.getAll();
   }

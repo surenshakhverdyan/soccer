@@ -7,6 +7,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiParam } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
 import { AdminGuard } from 'src/guards';
@@ -24,16 +25,27 @@ export class LeagueController {
   ) {}
 
   @Post('create-league')
+  @ApiBearerAuth()
   createLeague(@Body() dto: LeagueCreateDto): Promise<League> {
     return this.leagueService.createLeague(dto);
   }
 
   @Patch('calculate-league')
+  @ApiBearerAuth()
+  @ApiBody({
+    schema: {
+      properties: {
+        leagueId: { type: 'string' },
+      },
+    },
+  })
   calculateLeague(@Body('leagueId') leagueId: Types.ObjectId): Promise<League> {
     return this.leagueService.calculateLeague(leagueId);
   }
 
   @Get('league/:leagueId')
+  @ApiBearerAuth()
+  @ApiParam({ name: 'leagueId', type: 'string', required: true })
   getLeagueById(@Param('leagueId') leagueId: Types.ObjectId): Promise<League> {
     return this.leaguesService.getById(leagueId);
   }

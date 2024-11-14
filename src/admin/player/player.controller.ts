@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, UseGuards } from '@nestjs/common';
+import { ApiBody, ApiBearerAuth } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
 import { AdminGuard } from 'src/guards';
@@ -11,6 +12,14 @@ export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
   @Delete('delete-player')
+  @ApiBearerAuth()
+  @ApiBody({
+    schema: {
+      properties: {
+        playerId: { type: 'string' },
+      },
+    },
+  })
   deletePlayer(@Body('playerId') playerId: Types.ObjectId): Promise<Team> {
     return this.playerService.deletePlayer(playerId);
   }

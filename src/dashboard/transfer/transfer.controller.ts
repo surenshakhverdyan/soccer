@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { ApiBody, ApiBearerAuth } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
 import { AuthGuard } from 'src/guards';
@@ -11,6 +12,14 @@ export class TransferController {
   constructor(private readonly transferService: TransferService) {}
 
   @Post('create-transfer')
+  @ApiBearerAuth()
+  @ApiBody({
+    schema: {
+      properties: {
+        playerId: { type: 'string' },
+      },
+    },
+  })
   createTransfer(
     @Body('playerId') playerId: Types.ObjectId,
   ): Promise<Transfer> {
@@ -18,6 +27,7 @@ export class TransferController {
   }
 
   @Get('my-transfers')
+  @ApiBearerAuth()
   getMyTransfers(): Promise<Transfer[]> {
     return this.transferService.getMyTransfers();
   }

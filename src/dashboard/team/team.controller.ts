@@ -14,11 +14,13 @@ import {
   FileFieldsInterceptor,
   FileInterceptor,
 } from '@nestjs/platform-express';
+import { ApiBody, ApiConsumes, ApiBearerAuth } from '@nestjs/swagger';
 
 import { AuthGuard } from 'src/guards';
 import { TeamService } from './team.service';
 import { TeamCreateDto } from './dto';
 import { Team } from 'src/schemas';
+import { Position } from 'src/enums';
 
 @UseGuards(AuthGuard)
 @Controller('team')
@@ -35,6 +37,34 @@ export class TeamController {
       })),
     ]),
   )
+  @ApiBearerAuth()
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        avatar: {
+          type: 'string',
+          format: 'binary',
+        },
+        'players[0][name]': { type: 'string' },
+        'players[0][number]': { type: 'integer' },
+        'players[0][position]': {
+          type: 'string',
+          enum: Object.values(Position),
+        },
+        'players[0][avatar]': { type: 'string', format: 'binary' },
+        'players[1][name]': { type: 'string' },
+        'players[1][number]': { type: 'integer' },
+        'players[1][position]': {
+          type: 'string',
+          enum: Object.values(Position),
+        },
+        'players[1][avatar]': { type: 'string', format: 'binary' },
+      },
+    },
+  })
   createTeam(
     @Body() dto: TeamCreateDto,
     @UploadedFiles(
@@ -49,6 +79,20 @@ export class TeamController {
 
   @Patch('update-team')
   @UseInterceptors(FileInterceptor('avatar'))
+  @ApiBearerAuth()
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        avatar: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   updateTeam(
     @UploadedFile(
       new ParseFilePipe({

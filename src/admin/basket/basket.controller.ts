@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
 import { BasketCreateDto } from 'src/baskets/dto';
@@ -16,11 +17,14 @@ export class BasketController {
   ) {}
 
   @Post('create-basket')
+  @ApiBearerAuth()
   createBasket(@Body() dto: BasketCreateDto): Promise<Basket> {
     return this.basketService.createBasket(dto);
   }
 
   @Get('league-baskets/:leagueId')
+  @ApiBearerAuth()
+  @ApiParam({ name: 'leagueId', type: 'string', required: true })
   getLeagueBaskets(
     @Param('leagueId') leagueId: Types.ObjectId,
   ): Promise<Basket[]> {

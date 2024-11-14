@@ -4,12 +4,24 @@ import { ScheduleService } from './schedule.service';
 import { ScheduleCreateDto } from 'src/schedules/dto';
 import { Player, Schedule } from 'src/schemas';
 import { Timeline } from 'src/schemas/game-timeline.schema';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('schedule')
 export class ScheduleController {
   constructor(private readonly scheduleService: ScheduleService) {}
 
   @Post('create-schedule/:token')
+  @ApiBody({
+    schema: {
+      properties: {
+        players: {
+          type: 'array',
+          items: { type: 'string' },
+        },
+        date: { type: 'string', format: 'date-time' },
+      },
+    },
+  })
   createSchedule(
     @Body() dto: ScheduleCreateDto,
     @Param('token') token: string,

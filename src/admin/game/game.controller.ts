@@ -10,6 +10,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
+import { ApiBearerAuth, ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
 import { AdminGuard } from 'src/guards';
@@ -33,32 +34,62 @@ export class GameController {
   ) {}
 
   @Post('create-game')
+  @ApiBearerAuth()
   createGame(@Body() dto: GameCreateDto): Promise<Game> {
     return this.gameService.createGame(dto);
   }
 
   @Put('set-game')
+  @ApiBearerAuth()
   setGame(@Body() dto: GameSetDto): Promise<Game> {
     return this.gameService.setGame(dto);
   }
 
   @Put('update-game')
+  @ApiBearerAuth()
   updateGame(@Body() dto: GameUpdateDto): Promise<Game> {
     return this.gameService.updateGame(dto);
   }
 
   @Put('calculate-game')
+  @ApiBearerAuth()
+  @ApiBody({
+    schema: {
+      properties: {
+        gameId: { type: 'string' },
+      },
+    },
+  })
   calculateGame(@Body('gameId') gameId: Types.ObjectId): Promise<Game> {
     return this.gameService.calculateGame(gameId);
   }
 
   @Put('set-technical-defeat')
+  @ApiBearerAuth()
   setTechnicalDefeat(@Body() dto: setTechnicalDefeatDto): Promise<Game> {
     return this.gameService.setTechnicalDefeat(dto);
   }
 
   @Post('update-game-media')
   @UseInterceptors(FilesInterceptor('image'))
+  @ApiConsumes('multipart/form-data')
+  @ApiBearerAuth()
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        images: {
+          type: 'array',
+          items: {
+            type: 'string',
+            format: 'binary',
+          },
+        },
+        gameId: { type: 'string' },
+        url: { type: 'string' },
+      },
+    },
+  })
   updateGameMedia(
     @Body() dto: GameMediaDto,
     @UploadedFiles(new ParseFilePipe({ fileIsRequired: false }))
@@ -68,6 +99,7 @@ export class GameController {
   }
 
   @Get('get-active-games')
+  @ApiBearerAuth()
   getActiveGames(): Promise<Game[]> {
     return this.gamesService.getActiveGames();
   }

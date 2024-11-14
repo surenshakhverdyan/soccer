@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Patch, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 import { AdminGuard } from 'src/guards';
 import { JoinService } from './join.service';
@@ -15,11 +16,13 @@ export class JoinController {
   ) {}
 
   @Get('join')
+  @ApiBearerAuth()
   getAll(): Promise<Join[]> {
     return this.joinsService.getAll();
   }
 
   @Patch('update-join')
+  @ApiBearerAuth()
   updateJoin(@Body() dto: JoinUpdateDto): Promise<boolean> {
     return this.joinService.updateJoin(dto);
   }

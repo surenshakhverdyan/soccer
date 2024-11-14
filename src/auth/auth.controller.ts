@@ -9,6 +9,7 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
+import { ApiBody, ApiHeader } from '@nestjs/swagger';
 import { Request } from 'express';
 
 import { AuthService } from './auth.service';
@@ -28,12 +29,26 @@ export class AuthController {
   }
 
   @Post('sign-up')
+  @ApiBody({
+    schema: {
+      properties: {
+        name: { type: 'string' },
+        email: { type: 'string' },
+        phone: { type: 'string' },
+        password: { type: 'string' },
+      },
+    },
+  })
   signUp(@Body() dto: SignUpDto): Promise<IUser> {
     return this.authService.signUp(dto);
   }
 
   @UseGuards(RefreshTokenGuard)
   @HttpCode(HttpStatus.OK)
+  @ApiHeader({
+    name: 'refresh-token',
+    required: true,
+  })
   @Post('refresh-token')
   refreshToken(@Req() request: Request): string {
     return this.authService.refreshToken(request);
@@ -41,11 +56,26 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('forgot-password')
+  @ApiBody({
+    schema: {
+      properties: {
+        email: { type: 'string' },
+      },
+    },
+  })
   forgotPassword(@Body('email') email: string): Promise<boolean> {
     return this.authService.forgotPassword(email);
   }
 
   @Patch('password-reset/:token')
+  @ApiBody({
+    schema: {
+      properties: {
+        password: { type: 'string' },
+        passwordConfirm: { type: 'string' },
+      },
+    },
+  })
   passwordReset(
     @Body() dto: UserUpdateDto,
     @Param('token') token: string,
