@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as basicAuth from 'express-basic-auth';
 
 import { AppModule } from './app.module';
 
@@ -10,6 +11,17 @@ async function bootstrap() {
   const configService = app.get<ConfigService>(ConfigService);
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors({ origin: configService.get<string>('BASE_URL') });
+
+  app.use(
+    '/rest-api*',
+    basicAuth({
+      challenge: true,
+      users: {
+        [configService.get<string>('SWAGGER_USER')]:
+          configService.get<string>('SWAGGER_PASS'),
+      },
+    }),
+  );
 
   const swaggerConfig = new DocumentBuilder()
     .addBearerAuth()
@@ -21,7 +33,7 @@ async function bootstrap() {
   const documentFactory = () =>
     SwaggerModule.createDocument(app, swaggerConfig);
 
-  SwaggerModule.setup('rest', app, documentFactory, {
+  SwaggerModule.setup('rest-api', app, documentFactory, {
     swaggerOptions: { defaultModelsExpandDepth: -1 },
   });
 
