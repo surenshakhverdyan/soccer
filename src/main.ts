@@ -9,9 +9,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get<ConfigService>(ConfigService);
   app.useGlobalPipes(new ValidationPipe());
-  app.enableCors({
-    origin: [configService.get<string>('BASE_URL'), 'http://localhost:5173'],
-  });
+  app.enableCors({ origin: configService.get<string>('BASE_URL') });
 
   const swaggerConfig = new DocumentBuilder()
     .addBearerAuth()
