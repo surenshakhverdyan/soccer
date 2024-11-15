@@ -86,6 +86,7 @@ export class AuthService {
 
     delete payload.exp;
     delete payload.iat;
+    payload.type = TokenType.AuthToken;
 
     const authToken = this.tokenService.signAuthToken(payload);
 
