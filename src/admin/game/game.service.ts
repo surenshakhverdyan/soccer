@@ -64,7 +64,7 @@ export class GameService {
         dto.basket,
         Status.Pending,
         session,
-      );
+      ); // to be check
 
       await this.timeLineService.create(
         {
