@@ -7,12 +7,12 @@ import { TransferService } from './transfer.service';
 import { Transfer } from 'src/schemas';
 
 @UseGuards(AuthGuard)
+@ApiBearerAuth()
 @Controller('transfer')
 export class TransferController {
   constructor(private readonly transferService: TransferService) {}
 
   @Post('create-transfer')
-  @ApiBearerAuth()
   @ApiBody({
     schema: {
       properties: {
@@ -27,7 +27,6 @@ export class TransferController {
   }
 
   @Get('my-transfers')
-  @ApiBearerAuth()
   getMyTransfers(): Promise<Transfer[]> {
     return this.transferService.getMyTransfers();
   }

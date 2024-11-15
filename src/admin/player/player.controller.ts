@@ -7,12 +7,12 @@ import { PlayerService } from './player.service';
 import { Team } from 'src/schemas';
 
 @UseGuards(AdminGuard)
+@ApiBearerAuth()
 @Controller('admin')
 export class PlayerController {
   constructor(private readonly playerService: PlayerService) {}
 
   @Delete('delete-player')
-  @ApiBearerAuth()
   @ApiBody({
     schema: {
       properties: {

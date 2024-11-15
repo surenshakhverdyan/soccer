@@ -7,18 +7,17 @@ import { TeamsService } from 'src/teams/teams.service';
 import { Status } from 'src/enums';
 
 @UseGuards(AdminGuard)
+@ApiBearerAuth()
 @Controller('admin')
 export class TeamController {
   constructor(private readonly teamsService: TeamsService) {}
 
   @Get('get-teams')
-  @ApiBearerAuth()
   getTeams(): Promise<Team[]> {
     return this.teamsService.getAll();
   }
 
   @Get('get-teams-by-status')
-  @ApiBearerAuth()
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {

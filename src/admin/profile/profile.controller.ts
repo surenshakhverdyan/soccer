@@ -7,12 +7,12 @@ import { UserUpdateDto } from 'src/users/dto';
 import { IUser } from 'src/users/interfaces';
 
 @UseGuards(AdminGuard)
+@ApiBearerAuth()
 @Controller('admin')
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
   @Put('update-profile')
-  @ApiBearerAuth()
   @ApiBody({
     schema: {
       properties: {
@@ -27,7 +27,6 @@ export class ProfileController {
   }
 
   @Patch('password-update')
-  @ApiBearerAuth()
   @ApiBody({
     schema: {
       properties: {

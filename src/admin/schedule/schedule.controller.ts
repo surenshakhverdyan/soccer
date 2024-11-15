@@ -1,11 +1,12 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ApiParam } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiParam } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
 import { SchedulesService } from 'src/schedules/schedules.service';
 import { Schedule } from 'src/schemas';
 
 @Controller('admin')
+@ApiBearerAuth()
 export class ScheduleController {
   constructor(private readonly schedulesService: SchedulesService) {}
 

@@ -8,6 +8,7 @@ import { JoinsService } from 'src/joins/joins.service';
 import { JoinUpdateDto } from './dto';
 
 @UseGuards(AdminGuard)
+@ApiBearerAuth()
 @Controller('admin')
 export class JoinController {
   constructor(
@@ -16,13 +17,11 @@ export class JoinController {
   ) {}
 
   @Get('join')
-  @ApiBearerAuth()
   getAll(): Promise<Join[]> {
     return this.joinsService.getAll();
   }
 
   @Patch('update-join')
-  @ApiBearerAuth()
   updateJoin(@Body() dto: JoinUpdateDto): Promise<boolean> {
     return this.joinService.updateJoin(dto);
   }

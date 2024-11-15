@@ -26,6 +26,7 @@ import {
 import { GamesService } from 'src/games/games.service';
 
 @UseGuards(AdminGuard)
+@ApiBearerAuth()
 @Controller('admin')
 export class GameController {
   constructor(
@@ -34,25 +35,21 @@ export class GameController {
   ) {}
 
   @Post('create-game')
-  @ApiBearerAuth()
   createGame(@Body() dto: GameCreateDto): Promise<Game> {
     return this.gameService.createGame(dto);
   }
 
   @Put('set-game')
-  @ApiBearerAuth()
   setGame(@Body() dto: GameSetDto): Promise<Game> {
     return this.gameService.setGame(dto);
   }
 
   @Put('update-game')
-  @ApiBearerAuth()
   updateGame(@Body() dto: GameUpdateDto): Promise<Game> {
     return this.gameService.updateGame(dto);
   }
 
   @Put('calculate-game')
-  @ApiBearerAuth()
   @ApiBody({
     schema: {
       properties: {
@@ -65,7 +62,6 @@ export class GameController {
   }
 
   @Put('set-technical-defeat')
-  @ApiBearerAuth()
   setTechnicalDefeat(@Body() dto: setTechnicalDefeatDto): Promise<Game> {
     return this.gameService.setTechnicalDefeat(dto);
   }
@@ -73,7 +69,6 @@ export class GameController {
   @Post('update-game-media')
   @UseInterceptors(FilesInterceptor('image'))
   @ApiConsumes('multipart/form-data')
-  @ApiBearerAuth()
   @ApiBody({
     schema: {
       type: 'object',
@@ -99,7 +94,6 @@ export class GameController {
   }
 
   @Get('get-active-games')
-  @ApiBearerAuth()
   getActiveGames(): Promise<Game[]> {
     return this.gamesService.getActiveGames();
   }

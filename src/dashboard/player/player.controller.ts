@@ -25,6 +25,7 @@ import { PlayersService } from 'src/players/players.service';
 import { Position } from 'src/enums';
 
 @UseGuards(AuthGuard)
+@ApiBearerAuth()
 @Controller('player')
 export class PlayerController {
   constructor(
@@ -34,7 +35,6 @@ export class PlayerController {
 
   @Put('add-player')
   @UseInterceptors(FileInterceptor('avatar'))
-  @ApiBearerAuth()
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -63,7 +63,6 @@ export class PlayerController {
 
   @Put('update-player')
   @UseInterceptors(FileInterceptor('avatar'))
-  @ApiBearerAuth()
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -90,7 +89,6 @@ export class PlayerController {
   }
 
   @Delete('delete-player')
-  @ApiBearerAuth()
   @ApiBody({
     schema: {
       properties: {
@@ -103,14 +101,12 @@ export class PlayerController {
   }
 
   @Get('team-players/:teamId')
-  @ApiBearerAuth()
   @ApiParam({ name: 'teamId', type: 'string', required: true })
   getTeamPlayers(@Param('teamId') teamId: Types.ObjectId): Promise<Player[]> {
     return this.playersService.getByTeamId(new Types.ObjectId(teamId));
   }
 
   @Get('players-without-me')
-  @ApiBearerAuth()
   getPlayersWithoutMe(@Req() request: Request): Promise<Player[]> {
     return this.playerService.getPlayersWithoutMe(request);
   }

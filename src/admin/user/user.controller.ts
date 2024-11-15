@@ -9,6 +9,7 @@ import { User } from 'src/schemas';
 import { UsersService } from 'src/users/users.service';
 
 @UseGuards(AdminGuard)
+@ApiBearerAuth()
 @Controller('admin')
 export class UserController {
   constructor(
@@ -17,13 +18,11 @@ export class UserController {
   ) {}
 
   @Post('create-user')
-  @ApiBearerAuth()
   createUser(@Body() dto: UserCreateDto): Promise<boolean> {
     return this.userService.createUser(dto);
   }
 
   @Delete('delete-user')
-  @ApiBearerAuth()
   @ApiBody({
     schema: {
       properties: {
@@ -36,7 +35,6 @@ export class UserController {
   }
 
   @Get('get-users')
-  @ApiBearerAuth()
   getUsers(): Promise<User[]> {
     return this.usersService.getAll();
   }

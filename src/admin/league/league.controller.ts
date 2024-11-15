@@ -17,6 +17,7 @@ import { League } from 'src/schemas';
 import { LeagueService } from './league.service';
 
 @UseGuards(AdminGuard)
+@ApiBearerAuth()
 @Controller('admin')
 export class LeagueController {
   constructor(
@@ -25,13 +26,11 @@ export class LeagueController {
   ) {}
 
   @Post('create-league')
-  @ApiBearerAuth()
   createLeague(@Body() dto: LeagueCreateDto): Promise<League> {
     return this.leagueService.createLeague(dto);
   }
 
   @Patch('calculate-league')
-  @ApiBearerAuth()
   @ApiBody({
     schema: {
       properties: {
@@ -44,7 +43,6 @@ export class LeagueController {
   }
 
   @Get('league/:leagueId')
-  @ApiBearerAuth()
   @ApiParam({ name: 'leagueId', type: 'string', required: true })
   getLeagueById(@Param('leagueId') leagueId: Types.ObjectId): Promise<League> {
     return this.leaguesService.getById(leagueId);

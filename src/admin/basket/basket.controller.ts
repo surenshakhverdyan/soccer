@@ -9,6 +9,7 @@ import { BasketService } from './basket.service';
 import { BasketsService } from 'src/baskets/baskets.service';
 
 @UseGuards(AdminGuard)
+@ApiBearerAuth()
 @Controller('admin')
 export class BasketController {
   constructor(
@@ -17,13 +18,11 @@ export class BasketController {
   ) {}
 
   @Post('create-basket')
-  @ApiBearerAuth()
   createBasket(@Body() dto: BasketCreateDto): Promise<Basket> {
     return this.basketService.createBasket(dto);
   }
 
   @Get('league-baskets/:leagueId')
-  @ApiBearerAuth()
   @ApiParam({ name: 'leagueId', type: 'string', required: true })
   getLeagueBaskets(
     @Param('leagueId') leagueId: Types.ObjectId,

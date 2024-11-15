@@ -23,6 +23,7 @@ import { Team } from 'src/schemas';
 import { Position } from 'src/enums';
 
 @UseGuards(AuthGuard)
+@ApiBearerAuth()
 @Controller('team')
 export class TeamController {
   constructor(private readonly teamService: TeamService) {}
@@ -37,7 +38,6 @@ export class TeamController {
       })),
     ]),
   )
-  @ApiBearerAuth()
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {
@@ -79,7 +79,6 @@ export class TeamController {
 
   @Patch('update-team')
   @UseInterceptors(FileInterceptor('avatar'))
-  @ApiBearerAuth()
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     schema: {

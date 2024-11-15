@@ -6,12 +6,12 @@ import { AdminGuard } from 'src/guards';
 import { Cron } from 'src/schemas';
 
 @UseGuards(AdminGuard)
+@ApiBearerAuth()
 @Controller('admin')
 export class CronController {
   constructor(private readonly cronsService: CronsService) {}
 
   @Post('set-cron')
-  @ApiBearerAuth()
   @ApiBody({
     schema: {
       properties: {
@@ -24,7 +24,6 @@ export class CronController {
   }
 
   @Get('end-transfers')
-  @ApiBearerAuth()
   getDate(): Promise<Cron> {
     return this.cronsService.get();
   }
