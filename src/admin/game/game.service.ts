@@ -348,11 +348,11 @@ export class GameService {
           _game.team_2.team,
           session,
         ); // to be check
-        await this.teamsService.updateStatus(
-          _game.team_2.team,
-          Status.Active,
-          session,
-        ); // to be check
+        // await this.teamsService.updateStatus(
+        //   _game.team_2.team,
+        //   Status.Active,
+        //   session,
+        // ); // to be check
         await this.teamsService.updateGame(
           _game.team_2.team,
           { losses: 1 },
@@ -370,12 +370,12 @@ export class GameService {
           _game.basket,
           _game.team_1.team,
           session,
-        );
-        await this.teamsService.updateStatus(
-          _game.team_1.team,
-          Status.Active,
-          session,
-        );
+        ); // to be check
+        // await this.teamsService.updateStatus(
+        //   _game.team_1.team,
+        //   Status.Active,
+        //   session,
+        // ); // to be check
         await this.teamsService.updateGame(
           _game.team_1.team,
           { losses: 1 },
