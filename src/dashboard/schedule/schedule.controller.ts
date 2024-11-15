@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { ApiBody } from '@nestjs/swagger';
 
 import { ScheduleService } from './schedule.service';
 import { ScheduleCreateDto } from 'src/schedules/dto';
 import { Player, Schedule } from 'src/schemas';
 import { Timeline } from 'src/schemas/game-timeline.schema';
-import { ApiBody } from '@nestjs/swagger';
 
 @Controller('schedule')
 export class ScheduleController {
