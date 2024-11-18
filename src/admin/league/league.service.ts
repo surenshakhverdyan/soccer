@@ -92,7 +92,11 @@ export class LeagueService {
       });
 
       for (let i = 0; i < teams.length; i++) {
-        await this.teamsService.updateStatus(teams[i], Status.Active, session);
+        await this.teamsService.updateStatus(
+          teams[i].team,
+          Status.Active,
+          session,
+        );
       }
 
       await session.commitTransaction();
