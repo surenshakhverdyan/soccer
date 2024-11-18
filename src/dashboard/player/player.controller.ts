@@ -45,7 +45,7 @@ export class PlayerController {
         position: { type: 'string', enum: Object.values(Position) },
         avatar: { type: 'string', format: 'binary' },
       },
-      required: ['name', 'number', 'position'],
+      required: ['name', 'position'],
     },
   })
   addPlayer(
