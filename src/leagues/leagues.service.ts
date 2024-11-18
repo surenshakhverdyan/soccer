@@ -171,4 +171,25 @@ export class LeaguesService {
 
     return leagues;
   }
+
+  async getEndedLeagues(): Promise<League[]> {
+    const leagues = await this.leagueModel
+      .find({ status: Status.Ended })
+      .populate({
+        path: 'teams.team',
+        model: 'Team',
+        select: '-createdAt -updatedAt -__v',
+        populate: {
+          path: 'players',
+          model: 'Player',
+          select: '-createdAt -updatedAt -__v',
+        },
+      })
+      .populate({
+        path: 'games',
+        model: 'Game',
+      });
+
+    return leagues;
+  }
 }

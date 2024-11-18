@@ -14,6 +14,11 @@ export class LeagueController {
     return this.leaguesService.getActiveLeagues();
   }
 
+  @Get('ended')
+  getEndedLeagues(): Promise<League[]> {
+    return this.leaguesService.getEndedLeagues();
+  }
+
   @Get(':leagueId')
   @ApiParam({ name: 'leagueId', type: 'string', required: true })
   getLeague(@Param('leagueId') leagueId: Types.ObjectId): Promise<League> {
