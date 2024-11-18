@@ -5,13 +5,14 @@ import {
   Param,
   Patch,
   Post,
+  Put,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiParam } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
 import { AdminGuard } from 'src/guards';
-import { LeagueCreateDto } from 'src/leagues/dto';
+import { AddTeamDto, LeagueCreateDto } from 'src/leagues/dto';
 import { LeaguesService } from 'src/leagues/leagues.service';
 import { League } from 'src/schemas';
 import { LeagueService } from './league.service';
@@ -28,6 +29,19 @@ export class LeagueController {
   @Post('create-league')
   createLeague(@Body() dto: LeagueCreateDto): Promise<League> {
     return this.leagueService.createLeague(dto);
+  }
+
+  @Put('add-team')
+  @ApiBody({
+    schema: {
+      properties: {
+        leagueId: { type: 'string' },
+        teamId: { type: 'string' },
+      },
+    },
+  })
+  addTeam(@Body() dto: AddTeamDto): Promise<League> {
+    return this.leagueService.addTeam(dto);
   }
 
   @Patch('calculate-league')

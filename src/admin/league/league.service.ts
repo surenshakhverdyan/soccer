@@ -3,7 +3,7 @@ import { InjectConnection } from '@nestjs/mongoose';
 import { Connection, Types } from 'mongoose';
 
 import { Status } from 'src/enums';
-import { LeagueCreateDto } from 'src/leagues/dto';
+import { AddTeamDto, LeagueCreateDto } from 'src/leagues/dto';
 import { LeaguesService } from 'src/leagues/leagues.service';
 import { League } from 'src/schemas';
 import { TeamsService } from 'src/teams/teams.service';
@@ -31,6 +31,40 @@ export class LeagueService {
       }
 
       const league = await this.leaguesService.create(dto, session);
+
+      await session.commitTransaction();
+      session.endSession();
+
+      return league;
+    } catch (error: any) {
+      await session.abortTransaction();
+      session.endSession();
+
+      throw new HttpException(error.message, 500);
+    }
+  }
+
+  async addTeam(dto: AddTeamDto): Promise<League> {
+    const team = await this.teamsService.getById(dto.teamId);
+    if (team.status !== Status.Active)
+      throw new HttpException('The team is not active', 403);
+
+    const session = await this.connection.startSession();
+
+    try {
+      session.startTransaction();
+
+      await this.teamsService.updateStatus(
+        dto.teamId,
+        Status.InLeague,
+        session,
+      );
+
+      const league = await this.leaguesService.addTeam(
+        dto.leagueId,
+        dto.teamId,
+        session,
+      );
 
       await session.commitTransaction();
       session.endSession();
