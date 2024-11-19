@@ -167,6 +167,11 @@ export class LeaguesService {
       .populate({
         path: 'games',
         model: 'Game',
+        populate: {
+          path: 'team_1.team team_2.team',
+          model: 'Team',
+          select: 'name',
+        },
       });
 
     return leagues;
@@ -188,6 +193,11 @@ export class LeaguesService {
       .populate({
         path: 'games',
         model: 'Game',
+        populate: {
+          path: 'team_1.team team_2.team',
+          model: 'Team',
+          select: 'name',
+        },
       });
 
     return leagues;
