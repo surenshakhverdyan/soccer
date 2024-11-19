@@ -23,6 +23,7 @@ import { SchedulesService } from 'src/schedules/schedules.service';
 import { ImagesService } from 'src/images/images.service';
 import { TeamsService } from 'src/teams/teams.service';
 import { TimeLineService } from 'src/time-line/time-line.service';
+import { UpdateTeamStatistics } from 'src/leagues/dto';
 
 @Injectable()
 export class GameService {
@@ -264,6 +265,22 @@ export class GameService {
           value: 3,
         };
         await this.leaguesService.updatePoint(data, session);
+        const updateTeamStatistics: UpdateTeamStatistics = {
+          leagueId: _game.league,
+          teamId: _game.team_2.team,
+          wins: 1,
+        };
+        await this.leaguesService.updateTeamStatistics(
+          updateTeamStatistics,
+          session,
+        );
+        delete updateTeamStatistics.wins;
+        updateTeamStatistics.losses = 1;
+        updateTeamStatistics.teamId = _game.team_1.team;
+        await this.leaguesService.updateTeamStatistics(
+          updateTeamStatistics,
+          session,
+        );
         await this.teamsService.updateGame(data.teamId, { wins: 1 }, session);
         await this.basketsService.removeTeam(
           _game.basket,
@@ -285,6 +302,22 @@ export class GameService {
           value: 3,
         };
         await this.leaguesService.updatePoint(data, session);
+        const updateTeamStatistics: UpdateTeamStatistics = {
+          leagueId: _game.league,
+          teamId: _game.team_1.team,
+          wins: 1,
+        };
+        await this.leaguesService.updateTeamStatistics(
+          updateTeamStatistics,
+          session,
+        );
+        delete updateTeamStatistics.wins;
+        updateTeamStatistics.losses = 1;
+        updateTeamStatistics.teamId = _game.team_2.team;
+        await this.leaguesService.updateTeamStatistics(
+          updateTeamStatistics,
+          session,
+        );
         await this.teamsService.updateGame(data.teamId, { wins: 1 }, session);
         await this.basketsService.removeTeam(
           _game.basket,
@@ -342,6 +375,22 @@ export class GameService {
           value: 3,
         };
         await this.leaguesService.updatePoint(data, session);
+        const updateTeamStatistics: UpdateTeamStatistics = {
+          leagueId: _game.league,
+          teamId: _game.team_1.team,
+          wins: 1,
+        };
+        await this.leaguesService.updateTeamStatistics(
+          updateTeamStatistics,
+          session,
+        );
+        delete updateTeamStatistics.wins;
+        updateTeamStatistics.losses = 1;
+        updateTeamStatistics.teamId = _game.team_2.team;
+        await this.leaguesService.updateTeamStatistics(
+          updateTeamStatistics,
+          session,
+        );
         await this.teamsService.updateGame(data.teamId, { wins: 1 }, session);
         await this.basketsService.removeTeam(
           _game.basket,
@@ -365,6 +414,22 @@ export class GameService {
           value: 3,
         };
         await this.leaguesService.updatePoint(data, session);
+        const updateTeamStatistics: UpdateTeamStatistics = {
+          leagueId: _game.league,
+          teamId: _game.team_2.team,
+          wins: 1,
+        };
+        await this.leaguesService.updateTeamStatistics(
+          updateTeamStatistics,
+          session,
+        );
+        delete updateTeamStatistics.wins;
+        updateTeamStatistics.losses = 1;
+        updateTeamStatistics.teamId = _game.team_1.team;
+        await this.leaguesService.updateTeamStatistics(
+          updateTeamStatistics,
+          session,
+        );
         await this.teamsService.updateGame(data.teamId, { wins: 1 }, session);
         await this.basketsService.removeTeam(
           _game.basket,
@@ -388,10 +453,24 @@ export class GameService {
           value: 1,
         };
         await this.leaguesService.updatePoint(data, session);
+        const updateTeamStatistics: UpdateTeamStatistics = {
+          leagueId: _game.league,
+          teamId: _game.team_1.team,
+          draws: 1,
+        };
+        await this.leaguesService.updateTeamStatistics(
+          updateTeamStatistics,
+          session,
+        );
         await this.teamsService.updateGame(data.teamId, { draws: 1 }, session);
 
         data.teamId = _game.team_2.team;
         await this.leaguesService.updatePoint(data, session);
+        updateTeamStatistics.teamId = _game.team_2.team;
+        await this.leaguesService.updateTeamStatistics(
+          updateTeamStatistics,
+          session,
+        );
         await this.teamsService.updateGame(data.teamId, { draws: 1 }, session);
       }
 

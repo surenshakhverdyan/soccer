@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ClientSession, Model, Types } from 'mongoose';
 
 import { League } from 'src/schemas';
-import { LeagueCreateDto, PointsUpdateDto } from './dto';
+import { LeagueCreateDto, PointsUpdateDto, UpdateTeamStatistics } from './dto';
 import { Status } from 'src/enums';
 
 @Injectable()
@@ -87,6 +87,25 @@ export class LeaguesService {
     return true;
   }
 
+  async updateTeamStatistics(
+    dto: UpdateTeamStatistics,
+    session?: ClientSession,
+  ): Promise<boolean> {
+    const incrementFields: Record<string, number> = {};
+
+    if (dto.wins !== undefined) incrementFields['teams.$.wins'] = dto.wins;
+    if (dto.losses !== undefined)
+      incrementFields['teams.$.losses'] = dto.losses;
+    if (dto.draws !== undefined) incrementFields['teams.$.draws'] = dto.draws;
+
+    await this.leagueModel.updateOne(
+      { _id: dto.leagueId, 'teams.team': dto.teamId },
+      { $inc: incrementFields },
+      { new: true, session },
+    );
+    return true;
+  }
+
   async updateStatus(
     leagueId: Types.ObjectId,
     session: ClientSession,
@@ -131,11 +150,21 @@ export class LeaguesService {
       .populate({
         path: 'teams.team',
         model: 'Team',
-        select: 'name',
+        select: '-createdAt -updatedAt -__v',
+        populate: {
+          path: 'players',
+          model: 'Player',
+          select: '-createdAt -updatedAt -__v',
+        },
       })
       .populate({
         path: 'games',
         model: 'Game',
+        populate: {
+          path: 'team_1.team team_2.team',
+          model: 'Team',
+          select: 'name',
+        },
       })
       .populate({
         path: 'baskets',
