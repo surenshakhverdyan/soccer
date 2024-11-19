@@ -8,7 +8,7 @@ export class PlayerCreateDto {
   @IsNotEmpty()
   name: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   number: number;
 
   @IsEnum(Position)

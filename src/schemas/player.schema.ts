@@ -20,7 +20,6 @@ export class Player extends Document {
 
   @Prop({
     type: Number,
-    required: true,
     validate: {
       validator: async function (number: number) {
         const existingPlayer = await (
