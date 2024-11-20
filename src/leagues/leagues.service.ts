@@ -3,7 +3,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ClientSession, Model, Types } from 'mongoose';
 
 import { League } from 'src/schemas';
-import { LeagueCreateDto, PointsUpdateDto, UpdateTeamStatistics } from './dto';
+import {
+  ChangeNameDto,
+  LeagueCreateDto,
+  PointsUpdateDto,
+  UpdateTeamStatistics,
+} from './dto';
 import { Status } from 'src/enums';
 
 @Injectable()
@@ -203,6 +208,12 @@ export class LeaguesService {
         },
       });
 
+    leagues.forEach((league) => {
+      if (Array.isArray(league.teams)) {
+        league.teams.sort((a, b) => b.points - a.points);
+      }
+    });
+
     return leagues;
   }
 
@@ -219,6 +230,7 @@ export class LeaguesService {
           select: '-createdAt -updatedAt -__v',
         },
       })
+      .sort('teams.points')
       .populate({
         path: 'games',
         model: 'Game',
@@ -229,6 +241,22 @@ export class LeaguesService {
         },
       });
 
+    leagues.forEach((league) => {
+      if (Array.isArray(league.teams)) {
+        league.teams.sort((a, b) => b.points - a.points);
+      }
+    });
+
     return leagues;
+  }
+
+  async changeName(dto: ChangeNameDto): Promise<League> {
+    const league = await this.leagueModel.findByIdAndUpdate(
+      dto.leagueId,
+      { $set: { name: dto.name } },
+      { new: true },
+    );
+
+    return league;
   }
 }

@@ -12,7 +12,7 @@ import { ApiBearerAuth, ApiBody, ApiParam } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
 import { AdminGuard } from 'src/guards';
-import { AddTeamDto, LeagueCreateDto } from 'src/leagues/dto';
+import { AddTeamDto, ChangeNameDto, LeagueCreateDto } from 'src/leagues/dto';
 import { LeaguesService } from 'src/leagues/leagues.service';
 import { League } from 'src/schemas';
 import { LeagueService } from './league.service';
@@ -60,5 +60,18 @@ export class LeagueController {
   @ApiParam({ name: 'leagueId', type: 'string', required: true })
   getLeagueById(@Param('leagueId') leagueId: Types.ObjectId): Promise<League> {
     return this.leaguesService.getById(leagueId);
+  }
+
+  @Patch('change-league-name')
+  @ApiBody({
+    schema: {
+      properties: {
+        leagueId: { type: 'string' },
+        name: { type: 'string' },
+      },
+    },
+  })
+  changeLeagueName(@Body() dto: ChangeNameDto): Promise<League> {
+    return this.leaguesService.changeName(dto);
   }
 }
