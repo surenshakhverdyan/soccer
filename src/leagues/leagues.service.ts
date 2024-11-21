@@ -168,7 +168,7 @@ export class LeaguesService {
         populate: {
           path: 'team_1.team team_2.team',
           model: 'Team',
-          select: 'name',
+          select: 'name avatar',
         },
       })
       .populate({
@@ -204,7 +204,7 @@ export class LeaguesService {
         populate: {
           path: 'team_1.team team_2.team',
           model: 'Team',
-          select: 'name',
+          select: 'name avatar',
         },
       });
 
@@ -237,7 +237,7 @@ export class LeaguesService {
         populate: {
           path: 'team_1.team team_2.team',
           model: 'Team',
-          select: 'name',
+          select: 'name avatar',
         },
       });
 
