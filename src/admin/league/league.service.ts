@@ -23,6 +23,15 @@ export class LeagueService {
       session.startTransaction();
 
       for (const team of dto.teams) {
+        const { status } = await this.teamsService.getById(team.team);
+        if (status !== Status.Active) {
+          session.endSession();
+
+          throw new HttpException(
+            'Team status issue, check statuses of selected teams',
+            403,
+          );
+        }
         await this.teamsService.updateStatus(
           team.team,
           Status.InLeague,
