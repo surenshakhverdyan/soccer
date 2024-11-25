@@ -258,7 +258,7 @@ export class GameService {
       session.startTransaction();
 
       let game: Game;
-      if (dto.teamId === _game.team_1.team) {
+      if (dto.teamId.toString() === _game.team_1.team._id.toString()) {
         const data = {
           leagueId: _game.league,
           teamId: _game.team_2.team,
