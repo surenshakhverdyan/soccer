@@ -8,7 +8,10 @@ export class LeagueCreateDto {
   @IsNotEmpty()
   name: string;
 
-  @ApiProperty()
+  @ApiProperty({
+    example:
+      '[{ "team": "ObjectId" }, { "team": "ObjectId" }, { "team": "ObjectId" }]',
+  })
   @IsArray()
   @ArrayMinSize(2)
   teams: { team: Types.ObjectId }[];
