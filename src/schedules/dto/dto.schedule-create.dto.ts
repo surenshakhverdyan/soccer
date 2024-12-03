@@ -1,6 +1,11 @@
 import { IsArray, IsDateString, IsNotEmpty, IsOptional } from 'class-validator';
 import { Types } from 'mongoose';
 
+class DateString {
+  @IsDateString()
+  date: Date;
+}
+
 export class ScheduleCreateDto {
   @IsOptional()
   game?: Types.ObjectId;
@@ -12,6 +17,6 @@ export class ScheduleCreateDto {
   @IsNotEmpty()
   players: Types.ObjectId[];
 
-  @IsDateString()
-  date: Date;
+  @IsArray()
+  date: DateString[];
 }

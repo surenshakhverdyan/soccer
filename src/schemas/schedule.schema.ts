@@ -25,8 +25,10 @@ export class Schedule extends Document {
   })
   players: Types.ObjectId[];
 
-  @Prop({ type: Date })
-  date: Date;
+  @Prop({
+    type: [{ type: Date }],
+  })
+  date: Date[];
 }
 
 export const ScheduleSchema = SchemaFactory.createForClass(Schedule);

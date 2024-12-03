@@ -12,5 +12,5 @@ export interface ISchedule {
     };
   };
   players: Types.ObjectId[];
-  date: Date;
+  date: Date[];
 }
