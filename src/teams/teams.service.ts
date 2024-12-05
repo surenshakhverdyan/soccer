@@ -54,7 +54,7 @@ export class TeamsService {
         select: '-createdAt -updatedAt -__v',
       });
 
-    if (team.players.length < 9) {
+    if (team.players.length < 9 && team.status !== Status.InLeague) {
       team.status = Status.Inactive;
       await team.save({ session });
     }
