@@ -29,7 +29,7 @@ export class TeamsService {
       { new: true, session },
     );
 
-    if (team.players.length > 8) {
+    if (team.players.length > 8 && team.status === Status.Inactive) {
       team.status = Status.Active;
       await team.save({ session });
     }
